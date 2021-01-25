@@ -109,6 +109,14 @@ export function newtrack(file) {
   }]);
 }
 
+export function duplicateTrack(track) {
+  track.setDuplicationNumber(track.duplicationNumber++);
+  this.load([{
+    src: track.src,
+    name: track.name
+  }]);
+}
+
 export function trim() {
   const track = this.getActiveTrack();
   const timeSelection = this.getTimeSelection();

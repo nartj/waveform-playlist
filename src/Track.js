@@ -35,6 +35,12 @@ export default class {
     this.startTime = 0;
     this.endTime = 0;
     this.stereoPan = 0;
+    this.src = undefined;
+    this.duplicationNumber = 0;
+  }
+
+  setSrc(src) {
+    this.src = src;
   }
 
   setEventEmitter(ee) {
@@ -43,6 +49,7 @@ export default class {
 
   setName(name) {
     this.name = name;
+    if (this.duplicationNumber !== undefined && this.duplicationNumber !== 0) this.name = this.name + "#" + this.duplicationNumber;
   }
 
   setCustomClass(className) {
@@ -74,14 +81,26 @@ export default class {
 
     if ((trackStart <= start && trackEnd >= start) ||
       (trackStart <= end && trackEnd >= end)) {
-      const cueIn = (start < trackStart) ? trackStart : start;
-      const cueOut = (end > trackEnd) ? trackEnd : end;
+      let cueIn = (start < trackStart) ? trackStart : start;
+      let cueOut = (end > trackEnd) ? trackEnd : end;
 
       this.setCues(cueIn + offset, cueOut + offset);
       if (start > trackStart) {
         this.setStartTime(start);
       }
+      let cut = true;
+
+      cueIn = trackStart;
+      cueOut = start;
+      ee.emit("duplicateTrack", this, trackStart, start, cut, cueIn + offset, cueOut + offset);
+
+      cueIn = end;
+      cueOut = trackEnd;
+      ee.emit("duplicateTrack", this, end, trackEnd, cut, cueIn + offset, cueOut + offset);
+
     }
+
+
   }
 
   setStartTime(start) {
@@ -607,5 +626,9 @@ export default class {
     }
 
     return info;
+  }
+
+  setDuplicationNumber(duplicationNumber) {
+    this.duplicationNumber = duplicationNumber;
   }
 }

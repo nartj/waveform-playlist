@@ -281,6 +281,29 @@ export default class {
       }]);
     });
 
+    ee.on('duplicateTrack', (track, start, end, cut, cueIn, cueOut) => {
+      track.setDuplicationNumber(track.duplicationNumber++);
+      this.load([{
+        src: track.src,
+        name: track.name,
+        start: start,
+        end: end,
+        cut: cut,
+        states: track.states,
+        cueIn: cueIn,
+        cueOut: cueOut,
+        gain: track.gain,
+        muted: track.muted,
+        soloed: track.soloed,
+        selection: track.selection,
+        peaks: track.peaks,
+        customClass: track.customClass,
+        waveOutlineColor: track.waveOutlineColor,
+        stereoPan: track.stereoPan,
+        duplicationNumber: track.duplicationNumber,
+      }]);
+    });
+
     ee.on('trim', () => {
       const track = this.getActiveTrack();
       const timeSelection = this.getTimeSelection();
@@ -323,6 +346,7 @@ export default class {
   }
 
   load(trackList) {
+    let audioBufferSlice = require('audiobuffer-slice');
     const loadPromises = trackList.map((trackInfo) => {
       const loader = LoaderFactory.createLoader(trackInfo.src, this.ac, this.ee);
       return loader.load();
@@ -333,13 +357,15 @@ export default class {
 
       const tracks = audioBuffers.map((audioBuffer, index) => {
         const info = trackList[index];
+        const cut = info.cut || false;
         const name = info.name || 'Untitled';
         const start = info.start || 0;
+        const end = info.end || audioBuffer.duration;
         const states = info.states || {};
         const fadeIn = info.fadeIn;
         const fadeOut = info.fadeOut;
-        const cueIn = info.cuein || 0;
-        const cueOut = info.cueout || audioBuffer.duration;
+        const cueIn = info.cueIn || 0;
+        const cueOut = info.cueOut || audioBuffer.duration;
         const gain = info.gain || 1;
         const muted = info.muted || false;
         const soloed = info.soloed || false;
@@ -348,13 +374,24 @@ export default class {
         const customClass = info.customClass || undefined;
         const waveOutlineColor = info.waveOutlineColor || undefined;
         const stereoPan = info.stereoPan || 0;
+        const duplicationNumber = info.duplicationNumber;
 
         // webaudio specific playout for now.
         const playout = new Playout(this.ac, audioBuffer);
 
         const track = new Track();
-        track.src = info.src;
+        track.setSrc(info.src);
+        if (cut) {
+          audioBufferSlice(audioBuffer, start * 1000, end * 1000, function(error, slicedAudioBuffer) {
+            if (error) {
+              console.error(error);
+            } else {
+              audioBuffer = slicedAudioBuffer;
+            }
+          });
+        }
         track.setBuffer(audioBuffer);
+        track.setDuplicationNumber(duplicationNumber);
         track.setName(name);
         track.setEventEmitter(this.ee);
         track.setEnabledStates(states);

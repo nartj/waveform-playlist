@@ -66,7 +66,7 @@
   },
   "scripts": {
     "clean": "rd /s /q \"dist\"  && rd /s /q \"lib\" && rd /s /q \"styles\"",
-    "styles": "",
+    "styles": "if not exist styles mkdir styles && copy /y ghpages\\_sass\\_playlist.scss styles\\playlist.scss",
     "compile": "babel src --out-dir lib",
     "jekyll": "jekyll build -s ghpages -d dist/waveform-playlist",
     "jekyll:dev": "jekyll build -s ghpages -d dist/waveform-playlist --watch &",

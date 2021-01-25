@@ -1,7 +1,7 @@
 // Karma configuration
 // Generated on Fri Nov 27 2015 15:02:29 GMT-0800 (PST)
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -15,14 +15,14 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'test-main.js',
-      {pattern: 'test/index.test.js', included: false},
-      {pattern: 'test/media/**', watched: false, included: false, served: true}
+      { pattern: 'test/index.test.js', included: false },
+      { pattern: 'test/media/**', watched: false, included: false, served: true },
     ],
 
 
     // list of files to exclude
     exclude: [
-      '**/*.swp'
+      '**/*.swp',
     ],
 
 
@@ -30,14 +30,14 @@ module.exports = function(config) {
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
       'src/**/*.js': ['webpack', 'coverage', 'sourcemap'],
-      'test/index.test.js': ['webpack', 'sourcemap']
+      'test/index.test.js': ['webpack', 'sourcemap'],
     },
 
     webpack: {
       output: {
-        path: __dirname + "/dist",
-        filename: "[name].bundle.js",
-        chunkFilename: "[id].bundle.js"
+        path: `${__dirname}/dist`,
+        filename: '[name].bundle.js',
+        chunkFilename: '[id].bundle.js',
       },
       module: {
         loaders: [
@@ -47,16 +47,16 @@ module.exports = function(config) {
             loader: 'babel',
             query: {
               presets: ['es2015'],
-              cacheDirectory: true
-            }
-          }
-        ]
+              cacheDirectory: true,
+            },
+          },
+        ],
       },
-      watch: true
+      watch: true,
     },
 
     webpackMiddleware: {
-      noInfo: true
+      noInfo: true,
     },
 
 
@@ -68,8 +68,8 @@ module.exports = function(config) {
     coverageReporter: {
       reporters: [
         { type: 'text' },
-        { type: 'lcov', subdir: 'report-lcov' }
-      ]
+        { type: 'lcov', subdir: 'report-lcov' },
+      ],
     },
 
     // web server port
@@ -91,7 +91,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    //browsers: ['Chrome', 'Firefox'],
+    // browsers: ['Chrome', 'Firefox'],
     browsers: ['Chrome'],
 
 
@@ -101,6 +101,6 @@ module.exports = function(config) {
 
     // Concurrency level
     // how many browser should be started simultanous
-    concurrency: Infinity
+    concurrency: Infinity,
   });
-}
+};

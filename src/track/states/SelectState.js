@@ -59,8 +59,8 @@ export default class {
   touchstart(e) {
     e.preventDefault();
     this.active = true;
-    let rect = e.target.getBoundingClientRect();
-    let bodyRect = document.body.getBoundingClientRect();
+    const rect = e.target.getBoundingClientRect();
+    const bodyRect = document.body.getBoundingClientRect();
     this.startX = e.targetTouches[0].clientX - (rect.left - bodyRect.left);
     const startTime = pixelsToSeconds(this.startX, this.samplesPerPixel, this.sampleRate);
 
@@ -70,8 +70,8 @@ export default class {
   touchmove(e) {
     if (this.active) {
       e.preventDefault();
-      let rect = e.target.getBoundingClientRect();
-      let bodyRect = document.body.getBoundingClientRect();
+      const rect = e.target.getBoundingClientRect();
+      const bodyRect = document.body.getBoundingClientRect();
       this.emitSelection(e.targetTouches[0].clientX - (rect.left - bodyRect.left));
     }
   }
@@ -79,8 +79,8 @@ export default class {
   touchend(e) {
     if (this.active) {
       e.preventDefault();
-      let rect = e.target.getBoundingClientRect();
-      let bodyRect = document.body.getBoundingClientRect();
+      const rect = e.target.getBoundingClientRect();
+      const bodyRect = document.body.getBoundingClientRect();
       this.complete(e.targetTouches[0].clientX - (rect.left - bodyRect.left));
     }
   }
@@ -88,8 +88,8 @@ export default class {
   touchcancel(e) {
     if (this.active) {
       e.preventDefault();
-      let rect = e.target.getBoundingClientRect();
-      let bodyRect = document.body.getBoundingClientRect();
+      const rect = e.target.getBoundingClientRect();
+      const bodyRect = document.body.getBoundingClientRect();
       this.complete(e.targetTouches[0].clientX - (rect.left - bodyRect.left));
     }
   }

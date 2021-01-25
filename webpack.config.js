@@ -1,18 +1,18 @@
 module.exports = {
-  entry: __dirname + "/src/app.js",
+  entry: `${__dirname}/src/app.js`,
   output: {
-    path:  __dirname + "/dist/waveform-playlist/js",
-    publicPath: "/waveform-playlist/js/",
+    path: `${__dirname}/dist/waveform-playlist/js`,
+    publicPath: '/waveform-playlist/js/',
     filename: 'waveform-playlist.var.js',
     library: 'WaveformPlaylist',
-    libraryTarget: 'var'
+    libraryTarget: 'var',
   },
-  devtool: "#source-map",
+  devtool: '#source-map',
   module: {
     loaders: [{
       test: /\.js?$/,
       exclude: /node_modules/,
-      loader: 'babel-loader'
-    }]
-  }
+      loader: 'babel-loader',
+    }],
+  },
 };

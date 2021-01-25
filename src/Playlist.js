@@ -286,12 +286,12 @@ export default class {
       this.load([{
         src: track.src,
         name: track.name,
-        start: start,
-        end: end,
-        cut: cut,
+        start,
+        end,
+        cut,
         states: track.states,
-        cueIn: cueIn,
-        cueOut: cueOut,
+        cueIn,
+        cueOut,
         gain: track.gain,
         muted: track.muted,
         soloed: track.soloed,
@@ -346,7 +346,7 @@ export default class {
   }
 
   load(trackList) {
-    let audioBufferSlice = require('audiobuffer-slice');
+    const audioBufferSlice = require('audiobuffer-slice');
     const loadPromises = trackList.map((trackInfo) => {
       const loader = LoaderFactory.createLoader(trackInfo.src, this.ac, this.ee);
       return loader.load();
@@ -382,7 +382,7 @@ export default class {
         const track = new Track();
         track.setSrc(info.src);
         if (cut) {
-          audioBufferSlice(audioBuffer, start * 1000, end * 1000, function(error, slicedAudioBuffer) {
+          audioBufferSlice(audioBuffer, start * 1000, end * 1000, (error, slicedAudioBuffer) => {
             if (error) {
               console.error(error);
             } else {

@@ -49,7 +49,7 @@ export default class {
 
   setName(name) {
     this.name = name;
-    if (this.duplicationNumber !== undefined && this.duplicationNumber !== 0) this.name = this.name + "#" + this.duplicationNumber;
+    if (this.duplicationNumber !== undefined && this.duplicationNumber !== 0) this.name = `${this.name}#${this.duplicationNumber}`;
   }
 
   setCustomClass(className) {
@@ -88,19 +88,16 @@ export default class {
       if (start > trackStart) {
         this.setStartTime(start);
       }
-      let cut = true;
+      const cut = true;
 
       cueIn = trackStart;
       cueOut = start;
-      ee.emit("duplicateTrack", this, trackStart, start, cut, cueIn + offset, cueOut + offset);
+      ee.emit('duplicateTrack', this, trackStart, start, cut, cueIn + offset, cueOut + offset);
 
       cueIn = end;
       cueOut = trackEnd;
-      ee.emit("duplicateTrack", this, end, trackEnd, cut, cueIn + offset, cueOut + offset);
-
+      ee.emit('duplicateTrack', this, end, trackEnd, cut, cueIn + offset, cueOut + offset);
     }
-
-
   }
 
   setStartTime(start) {

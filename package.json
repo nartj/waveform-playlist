@@ -14,7 +14,6 @@
   },
   "devDependencies": {
     "@mohayonao/web-audio-api-shim": "^0.3.0",
-    "audiobuffer-slice": "0.0.7",
     "babel-cli": "^6.6.5",
     "babel-core": "^6.2.1",
     "babel-install": "2.1.0",
@@ -53,6 +52,7 @@
     "css": "styles"
   },
   "dependencies": {
+    "audiobuffer-slice": "0.0.7",
     "event-emitter": "^0.3.4",
     "fade-curves": "^1.0.2",
     "fade-maker": "^1.0.3",

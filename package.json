@@ -76,7 +76,7 @@
     "version": "npm run build && git add -A dist",
     "postversion": "git push && git push --tags",
     "prepare": "npm run compile && npm run styles",
-    "webpack:server": "node node_modules/webpack-dev-server/bin/webpack-dev-server.js --content-base dist/ --colors --host 0.0.0.0 --inline",
+    "webpack:server": "node node_modules/webpack-dev-server/bin/webpack-dev-server.js --config webpack.config.js",
     "start": "npm run webpack:server",
     "dev": "npm run jekyll:dev && npm run webpack:server",
     "test": "node_modules/karma/bin/karma start --browsers Firefox --single-run",

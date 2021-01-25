@@ -1,5 +1,6 @@
 /node_modules
 /coverage
+/.idea*
 
 # compiled files
 /lib
@@ -9,3 +10,5 @@
 .DS_Store
 test/.DS_Store
 ghpages/.jekyll-cache/
+
+

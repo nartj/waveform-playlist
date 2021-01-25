@@ -43,7 +43,15 @@ var WaveformPlaylist =
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ function(module, exports, __webpack_require__) {
+
+	__webpack_require__(1);
+	(function webpackMissingModule() { throw new Error("Cannot find module \"serve\""); }());
+
+
+/***/ },
+/* 1 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -59,19 +67,19 @@ var WaveformPlaylist =
 	  return init(options, ee);
 	};
 	
-	var _lodash = __webpack_require__(1);
+	var _lodash = __webpack_require__(2);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _createElement = __webpack_require__(2);
+	var _createElement = __webpack_require__(3);
 	
 	var _createElement2 = _interopRequireDefault(_createElement);
 	
-	var _eventEmitter = __webpack_require__(15);
+	var _eventEmitter = __webpack_require__(16);
 	
 	var _eventEmitter2 = _interopRequireDefault(_eventEmitter);
 	
-	var _Playlist = __webpack_require__(36);
+	var _Playlist = __webpack_require__(37);
 	
 	var _Playlist2 = _interopRequireDefault(_Playlist);
 	
@@ -161,9 +169,9 @@ var WaveformPlaylist =
 	  return playlist;
 	}
 
-/***/ }),
-/* 1 */
-/***/ (function(module, exports) {
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
 
 	/**
 	 * lodash (Custom Build) <https://lodash.com/>
@@ -804,27 +812,27 @@ var WaveformPlaylist =
 	module.exports = assign;
 
 
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
 
-	var createElement = __webpack_require__(3)
+	var createElement = __webpack_require__(4)
 	
 	module.exports = createElement
 
 
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
 
-	var document = __webpack_require__(4)
+	var document = __webpack_require__(5)
 	
-	var applyProperties = __webpack_require__(6)
+	var applyProperties = __webpack_require__(7)
 	
-	var isVNode = __webpack_require__(9)
-	var isVText = __webpack_require__(11)
-	var isWidget = __webpack_require__(12)
-	var handleThunk = __webpack_require__(13)
+	var isVNode = __webpack_require__(10)
+	var isVText = __webpack_require__(12)
+	var isWidget = __webpack_require__(13)
+	var handleThunk = __webpack_require__(14)
 	
 	module.exports = createElement
 	
@@ -865,13 +873,13 @@ var WaveformPlaylist =
 	}
 
 
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {var topLevel = typeof global !== 'undefined' ? global :
 	    typeof window !== 'undefined' ? window : {}
-	var minDoc = __webpack_require__(5);
+	var minDoc = __webpack_require__(6);
 	
 	var doccy;
 	
@@ -889,18 +897,18 @@ var WaveformPlaylist =
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
-/***/ }),
-/* 5 */
-/***/ (function(module, exports) {
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
 
 	/* (ignored) */
 
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(7)
-	var isHook = __webpack_require__(8)
+	var isObject = __webpack_require__(8)
+	var isHook = __webpack_require__(9)
 	
 	module.exports = applyProperties
 	
@@ -998,9 +1006,9 @@ var WaveformPlaylist =
 	}
 
 
-/***/ }),
-/* 7 */
-/***/ (function(module, exports) {
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
 
 	"use strict";
 	
@@ -1009,9 +1017,9 @@ var WaveformPlaylist =
 	};
 
 
-/***/ }),
-/* 8 */
-/***/ (function(module, exports) {
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
 
 	module.exports = isHook
 	
@@ -1022,11 +1030,11 @@ var WaveformPlaylist =
 	}
 
 
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
 
-	var version = __webpack_require__(10)
+	var version = __webpack_require__(11)
 	
 	module.exports = isVirtualNode
 	
@@ -1035,18 +1043,18 @@ var WaveformPlaylist =
 	}
 
 
-/***/ }),
-/* 10 */
-/***/ (function(module, exports) {
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
 
 	module.exports = "2"
 
 
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
 
-	var version = __webpack_require__(10)
+	var version = __webpack_require__(11)
 	
 	module.exports = isVirtualText
 	
@@ -1055,9 +1063,9 @@ var WaveformPlaylist =
 	}
 
 
-/***/ }),
-/* 12 */
-/***/ (function(module, exports) {
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
 
 	module.exports = isWidget
 	
@@ -1066,14 +1074,14 @@ var WaveformPlaylist =
 	}
 
 
-/***/ }),
-/* 13 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
 
-	var isVNode = __webpack_require__(9)
-	var isVText = __webpack_require__(11)
-	var isWidget = __webpack_require__(12)
-	var isThunk = __webpack_require__(14)
+	var isVNode = __webpack_require__(10)
+	var isVText = __webpack_require__(12)
+	var isWidget = __webpack_require__(13)
+	var isThunk = __webpack_require__(15)
 	
 	module.exports = handleThunk
 	
@@ -1112,9 +1120,9 @@ var WaveformPlaylist =
 	}
 
 
-/***/ }),
-/* 14 */
-/***/ (function(module, exports) {
+/***/ },
+/* 15 */
+/***/ function(module, exports) {
 
 	module.exports = isThunk
 	
@@ -1123,14 +1131,14 @@ var WaveformPlaylist =
 	}
 
 
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var d        = __webpack_require__(16)
-	  , callable = __webpack_require__(35)
+	var d        = __webpack_require__(17)
+	  , callable = __webpack_require__(36)
 	
 	  , apply = Function.prototype.apply, call = Function.prototype.call
 	  , create = Object.create, defineProperty = Object.defineProperty
@@ -1261,17 +1269,17 @@ var WaveformPlaylist =
 	exports.methods = methods;
 
 
-/***/ }),
-/* 16 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
-	var isValue         = __webpack_require__(17)
-	  , isPlainFunction = __webpack_require__(18)
-	  , assign          = __webpack_require__(22)
-	  , normalizeOpts   = __webpack_require__(31)
-	  , contains        = __webpack_require__(32);
+	var isValue         = __webpack_require__(18)
+	  , isPlainFunction = __webpack_require__(19)
+	  , assign          = __webpack_require__(23)
+	  , normalizeOpts   = __webpack_require__(32)
+	  , contains        = __webpack_require__(33);
 	
 	var d = (module.exports = function (dscr, value/*, options*/) {
 		var c, e, w, options, desc;
@@ -1329,9 +1337,9 @@ var WaveformPlaylist =
 	};
 
 
-/***/ }),
-/* 17 */
-/***/ (function(module, exports) {
+/***/ },
+/* 18 */
+/***/ function(module, exports) {
 
 	"use strict";
 	
@@ -1341,13 +1349,13 @@ var WaveformPlaylist =
 	module.exports = function (value) { return value !== _undefined && value !== null; };
 
 
-/***/ }),
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
-	var isFunction = __webpack_require__(19);
+	var isFunction = __webpack_require__(20);
 	
 	var classRe = /^\s*class[\s{/}]/, functionToString = Function.prototype.toString;
 	
@@ -1358,13 +1366,13 @@ var WaveformPlaylist =
 	};
 
 
-/***/ }),
-/* 19 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 20 */
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
-	var isPrototype = __webpack_require__(20);
+	var isPrototype = __webpack_require__(21);
 	
 	module.exports = function (value) {
 		if (typeof value !== "function") return false;
@@ -1383,13 +1391,13 @@ var WaveformPlaylist =
 	};
 
 
-/***/ }),
-/* 20 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
-	var isObject = __webpack_require__(21);
+	var isObject = __webpack_require__(22);
 	
 	module.exports = function (value) {
 		if (!isObject(value)) return false;
@@ -1402,13 +1410,13 @@ var WaveformPlaylist =
 	};
 
 
-/***/ }),
-/* 21 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
-	var isValue = __webpack_require__(17);
+	var isValue = __webpack_require__(18);
 	
 	// prettier-ignore
 	var possibleTypes = { "object": true, "function": true, "undefined": true /* document.all */ };
@@ -1419,18 +1427,18 @@ var WaveformPlaylist =
 	};
 
 
-/***/ }),
-/* 22 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 23 */
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
-	module.exports = __webpack_require__(23)() ? Object.assign : __webpack_require__(24);
+	module.exports = __webpack_require__(24)() ? Object.assign : __webpack_require__(25);
 
 
-/***/ }),
-/* 23 */
-/***/ (function(module, exports) {
+/***/ },
+/* 24 */
+/***/ function(module, exports) {
 
 	"use strict";
 	
@@ -1443,14 +1451,14 @@ var WaveformPlaylist =
 	};
 
 
-/***/ }),
-/* 24 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 25 */
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
-	var keys  = __webpack_require__(25)
-	  , value = __webpack_require__(30)
+	var keys  = __webpack_require__(26)
+	  , value = __webpack_require__(31)
 	  , max   = Math.max;
 	
 	module.exports = function (dest, src/*, …srcn*/) {
@@ -1472,18 +1480,18 @@ var WaveformPlaylist =
 	};
 
 
-/***/ }),
-/* 25 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 26 */
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
-	module.exports = __webpack_require__(26)() ? Object.keys : __webpack_require__(27);
+	module.exports = __webpack_require__(27)() ? Object.keys : __webpack_require__(28);
 
 
-/***/ }),
-/* 26 */
-/***/ (function(module, exports) {
+/***/ },
+/* 27 */
+/***/ function(module, exports) {
 
 	"use strict";
 	
@@ -1497,33 +1505,33 @@ var WaveformPlaylist =
 	};
 
 
-/***/ }),
-/* 27 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 28 */
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
-	var isValue = __webpack_require__(28);
+	var isValue = __webpack_require__(29);
 	
 	var keys = Object.keys;
 	
 	module.exports = function (object) { return keys(isValue(object) ? Object(object) : object); };
 
 
-/***/ }),
-/* 28 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 29 */
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
-	var _undefined = __webpack_require__(29)(); // Support ES3 engines
+	var _undefined = __webpack_require__(30)(); // Support ES3 engines
 	
 	module.exports = function (val) { return val !== _undefined && val !== null; };
 
 
-/***/ }),
-/* 29 */
-/***/ (function(module, exports) {
+/***/ },
+/* 30 */
+/***/ function(module, exports) {
 
 	"use strict";
 	
@@ -1531,13 +1539,13 @@ var WaveformPlaylist =
 	module.exports = function () {};
 
 
-/***/ }),
-/* 30 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 31 */
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
-	var isValue = __webpack_require__(28);
+	var isValue = __webpack_require__(29);
 	
 	module.exports = function (value) {
 		if (!isValue(value)) throw new TypeError("Cannot use null or undefined");
@@ -1545,13 +1553,13 @@ var WaveformPlaylist =
 	};
 
 
-/***/ }),
-/* 31 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 32 */
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
-	var isValue = __webpack_require__(28);
+	var isValue = __webpack_require__(29);
 	
 	var forEach = Array.prototype.forEach, create = Object.create;
 	
@@ -1571,18 +1579,18 @@ var WaveformPlaylist =
 	};
 
 
-/***/ }),
-/* 32 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 33 */
+/***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
-	module.exports = __webpack_require__(33)() ? String.prototype.contains : __webpack_require__(34);
+	module.exports = __webpack_require__(34)() ? String.prototype.contains : __webpack_require__(35);
 
 
-/***/ }),
-/* 33 */
-/***/ (function(module, exports) {
+/***/ },
+/* 34 */
+/***/ function(module, exports) {
 
 	"use strict";
 	
@@ -1594,9 +1602,9 @@ var WaveformPlaylist =
 	};
 
 
-/***/ }),
-/* 34 */
-/***/ (function(module, exports) {
+/***/ },
+/* 35 */
+/***/ function(module, exports) {
 
 	"use strict";
 	
@@ -1607,9 +1615,9 @@ var WaveformPlaylist =
 	};
 
 
-/***/ }),
-/* 35 */
-/***/ (function(module, exports) {
+/***/ },
+/* 36 */
+/***/ function(module, exports) {
 
 	"use strict";
 	
@@ -1619,9 +1627,9 @@ var WaveformPlaylist =
 	};
 
 
-/***/ }),
-/* 36 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 37 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -1631,57 +1639,57 @@ var WaveformPlaylist =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _lodash = __webpack_require__(37);
+	var _lodash = __webpack_require__(38);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _h = __webpack_require__(38);
+	var _h = __webpack_require__(39);
 	
 	var _h2 = _interopRequireDefault(_h);
 	
-	var _diff = __webpack_require__(50);
+	var _diff = __webpack_require__(51);
 	
 	var _diff2 = _interopRequireDefault(_diff);
 	
-	var _patch = __webpack_require__(54);
+	var _patch = __webpack_require__(55);
 	
 	var _patch2 = _interopRequireDefault(_patch);
 	
-	var _inlineWorker = __webpack_require__(59);
+	var _inlineWorker = __webpack_require__(60);
 	
 	var _inlineWorker2 = _interopRequireDefault(_inlineWorker);
 	
-	var _conversions = __webpack_require__(60);
+	var _conversions = __webpack_require__(61);
 	
-	var _LoaderFactory = __webpack_require__(61);
+	var _LoaderFactory = __webpack_require__(62);
 	
 	var _LoaderFactory2 = _interopRequireDefault(_LoaderFactory);
 	
-	var _ScrollHook = __webpack_require__(65);
+	var _ScrollHook = __webpack_require__(66);
 	
 	var _ScrollHook2 = _interopRequireDefault(_ScrollHook);
 	
-	var _TimeScale = __webpack_require__(66);
+	var _TimeScale = __webpack_require__(67);
 	
 	var _TimeScale2 = _interopRequireDefault(_TimeScale);
 	
-	var _Track = __webpack_require__(68);
+	var _Track = __webpack_require__(69);
 	
 	var _Track2 = _interopRequireDefault(_Track);
 	
-	var _Playout = __webpack_require__(84);
+	var _Playout = __webpack_require__(85);
 	
 	var _Playout2 = _interopRequireDefault(_Playout);
 	
-	var _AnnotationList = __webpack_require__(85);
+	var _AnnotationList = __webpack_require__(86);
 	
 	var _AnnotationList2 = _interopRequireDefault(_AnnotationList);
 	
-	var _recorderWorker = __webpack_require__(91);
+	var _recorderWorker = __webpack_require__(92);
 	
 	var _recorderWorker2 = _interopRequireDefault(_recorderWorker);
 	
-	var _exportWavWorker = __webpack_require__(92);
+	var _exportWavWorker = __webpack_require__(93);
 	
 	var _exportWavWorker2 = _interopRequireDefault(_exportWavWorker);
 	
@@ -2690,9 +2698,9 @@ var WaveformPlaylist =
 
 	exports.default = _class;
 
-/***/ }),
-/* 37 */
-/***/ (function(module, exports) {
+/***/ },
+/* 38 */
+/***/ function(module, exports) {
 
 	/**
 	 * lodash (Custom Build) <https://lodash.com/>
@@ -3364,34 +3372,34 @@ var WaveformPlaylist =
 	module.exports = defaults;
 
 
-/***/ }),
-/* 38 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 39 */
+/***/ function(module, exports, __webpack_require__) {
 
-	var h = __webpack_require__(39)
+	var h = __webpack_require__(40)
 	
 	module.exports = h
 
 
-/***/ }),
-/* 39 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 40 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var isArray = __webpack_require__(40);
+	var isArray = __webpack_require__(41);
 	
-	var VNode = __webpack_require__(41);
-	var VText = __webpack_require__(42);
-	var isVNode = __webpack_require__(9);
-	var isVText = __webpack_require__(11);
-	var isWidget = __webpack_require__(12);
-	var isHook = __webpack_require__(8);
-	var isVThunk = __webpack_require__(14);
+	var VNode = __webpack_require__(42);
+	var VText = __webpack_require__(43);
+	var isVNode = __webpack_require__(10);
+	var isVText = __webpack_require__(12);
+	var isWidget = __webpack_require__(13);
+	var isHook = __webpack_require__(9);
+	var isVThunk = __webpack_require__(15);
 	
-	var parseTag = __webpack_require__(43);
-	var softSetHook = __webpack_require__(45);
-	var evHook = __webpack_require__(46);
+	var parseTag = __webpack_require__(44);
+	var softSetHook = __webpack_require__(46);
+	var evHook = __webpack_require__(47);
 	
 	module.exports = h;
 	
@@ -3516,9 +3524,9 @@ var WaveformPlaylist =
 	}
 
 
-/***/ }),
-/* 40 */
-/***/ (function(module, exports) {
+/***/ },
+/* 41 */
+/***/ function(module, exports) {
 
 	var nativeIsArray = Array.isArray
 	var toString = Object.prototype.toString
@@ -3530,15 +3538,15 @@ var WaveformPlaylist =
 	}
 
 
-/***/ }),
-/* 41 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 42 */
+/***/ function(module, exports, __webpack_require__) {
 
-	var version = __webpack_require__(10)
-	var isVNode = __webpack_require__(9)
-	var isWidget = __webpack_require__(12)
-	var isThunk = __webpack_require__(14)
-	var isVHook = __webpack_require__(8)
+	var version = __webpack_require__(11)
+	var isVNode = __webpack_require__(10)
+	var isWidget = __webpack_require__(13)
+	var isThunk = __webpack_require__(15)
+	var isVHook = __webpack_require__(9)
 	
 	module.exports = VirtualNode
 	
@@ -3608,11 +3616,11 @@ var WaveformPlaylist =
 	VirtualNode.prototype.type = "VirtualNode"
 
 
-/***/ }),
-/* 42 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 43 */
+/***/ function(module, exports, __webpack_require__) {
 
-	var version = __webpack_require__(10)
+	var version = __webpack_require__(11)
 	
 	module.exports = VirtualText
 	
@@ -3624,13 +3632,13 @@ var WaveformPlaylist =
 	VirtualText.prototype.type = "VirtualText"
 
 
-/***/ }),
-/* 43 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 44 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var split = __webpack_require__(44);
+	var split = __webpack_require__(45);
 	
 	var classIdSplit = /([\.#]?[a-zA-Z0-9\u007F-\uFFFF_:-]+)/;
 	var notClassId = /^\.|#/;
@@ -3684,9 +3692,9 @@ var WaveformPlaylist =
 	}
 
 
-/***/ }),
-/* 44 */
-/***/ (function(module, exports) {
+/***/ },
+/* 45 */
+/***/ function(module, exports) {
 
 	/*!
 	 * Cross-Browser Split 1.1.1
@@ -3796,9 +3804,9 @@ var WaveformPlaylist =
 	})();
 
 
-/***/ }),
-/* 45 */
-/***/ (function(module, exports) {
+/***/ },
+/* 46 */
+/***/ function(module, exports) {
 
 	'use strict';
 	
@@ -3819,13 +3827,13 @@ var WaveformPlaylist =
 	};
 
 
-/***/ }),
-/* 46 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 47 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var EvStore = __webpack_require__(47);
+	var EvStore = __webpack_require__(48);
 	
 	module.exports = EvHook;
 	
@@ -3852,13 +3860,13 @@ var WaveformPlaylist =
 	};
 
 
-/***/ }),
-/* 47 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 48 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var OneVersionConstraint = __webpack_require__(48);
+	var OneVersionConstraint = __webpack_require__(49);
 	
 	var MY_VERSION = '7';
 	OneVersionConstraint('ev-store', MY_VERSION);
@@ -3878,13 +3886,13 @@ var WaveformPlaylist =
 	}
 
 
-/***/ }),
-/* 48 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 49 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var Individual = __webpack_require__(49);
+	var Individual = __webpack_require__(50);
 	
 	module.exports = OneVersion;
 	
@@ -3906,9 +3914,9 @@ var WaveformPlaylist =
 	}
 
 
-/***/ }),
-/* 49 */
-/***/ (function(module, exports) {
+/***/ },
+/* 50 */
+/***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
 	
@@ -3932,29 +3940,29 @@ var WaveformPlaylist =
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
-/***/ }),
-/* 50 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 51 */
+/***/ function(module, exports, __webpack_require__) {
 
-	var diff = __webpack_require__(51)
+	var diff = __webpack_require__(52)
 	
 	module.exports = diff
 
 
-/***/ }),
-/* 51 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 52 */
+/***/ function(module, exports, __webpack_require__) {
 
-	var isArray = __webpack_require__(40)
+	var isArray = __webpack_require__(41)
 	
-	var VPatch = __webpack_require__(52)
-	var isVNode = __webpack_require__(9)
-	var isVText = __webpack_require__(11)
-	var isWidget = __webpack_require__(12)
-	var isThunk = __webpack_require__(14)
-	var handleThunk = __webpack_require__(13)
+	var VPatch = __webpack_require__(53)
+	var isVNode = __webpack_require__(10)
+	var isVText = __webpack_require__(12)
+	var isWidget = __webpack_require__(13)
+	var isThunk = __webpack_require__(15)
+	var handleThunk = __webpack_require__(14)
 	
-	var diffProps = __webpack_require__(53)
+	var diffProps = __webpack_require__(54)
 	
 	module.exports = diff
 	
@@ -4374,11 +4382,11 @@ var WaveformPlaylist =
 	}
 
 
-/***/ }),
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 53 */
+/***/ function(module, exports, __webpack_require__) {
 
-	var version = __webpack_require__(10)
+	var version = __webpack_require__(11)
 	
 	VirtualPatch.NONE = 0
 	VirtualPatch.VTEXT = 1
@@ -4402,12 +4410,12 @@ var WaveformPlaylist =
 	VirtualPatch.prototype.type = "VirtualPatch"
 
 
-/***/ }),
-/* 53 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 54 */
+/***/ function(module, exports, __webpack_require__) {
 
-	var isObject = __webpack_require__(7)
-	var isHook = __webpack_require__(8)
+	var isObject = __webpack_require__(8)
+	var isHook = __webpack_require__(9)
 	
 	module.exports = diffProps
 	
@@ -4466,25 +4474,25 @@ var WaveformPlaylist =
 	}
 
 
-/***/ }),
-/* 54 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 55 */
+/***/ function(module, exports, __webpack_require__) {
 
-	var patch = __webpack_require__(55)
+	var patch = __webpack_require__(56)
 	
 	module.exports = patch
 
 
-/***/ }),
-/* 55 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 56 */
+/***/ function(module, exports, __webpack_require__) {
 
-	var document = __webpack_require__(4)
-	var isArray = __webpack_require__(40)
+	var document = __webpack_require__(5)
+	var isArray = __webpack_require__(41)
 	
-	var render = __webpack_require__(3)
-	var domIndex = __webpack_require__(56)
-	var patchOp = __webpack_require__(57)
+	var render = __webpack_require__(4)
+	var domIndex = __webpack_require__(57)
+	var patchOp = __webpack_require__(58)
 	module.exports = patch
 	
 	function patch(rootNode, patches, renderOptions) {
@@ -4561,9 +4569,9 @@ var WaveformPlaylist =
 	}
 
 
-/***/ }),
-/* 56 */
-/***/ (function(module, exports) {
+/***/ },
+/* 57 */
+/***/ function(module, exports) {
 
 	// Maps a virtual DOM tree onto a real DOM tree in an efficient manner.
 	// We don't want to read all of the DOM nodes in the tree so we use
@@ -4652,16 +4660,16 @@ var WaveformPlaylist =
 	}
 
 
-/***/ }),
-/* 57 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 58 */
+/***/ function(module, exports, __webpack_require__) {
 
-	var applyProperties = __webpack_require__(6)
+	var applyProperties = __webpack_require__(7)
 	
-	var isWidget = __webpack_require__(12)
-	var VPatch = __webpack_require__(52)
+	var isWidget = __webpack_require__(13)
+	var VPatch = __webpack_require__(53)
 	
-	var updateWidget = __webpack_require__(58)
+	var updateWidget = __webpack_require__(59)
 	
 	module.exports = applyPatch
 	
@@ -4809,11 +4817,11 @@ var WaveformPlaylist =
 	}
 
 
-/***/ }),
-/* 58 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 59 */
+/***/ function(module, exports, __webpack_require__) {
 
-	var isWidget = __webpack_require__(12)
+	var isWidget = __webpack_require__(13)
 	
 	module.exports = updateWidget
 	
@@ -4830,9 +4838,9 @@ var WaveformPlaylist =
 	}
 
 
-/***/ }),
-/* 59 */
-/***/ (function(module, exports) {
+/***/ },
+/* 60 */
+/***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {var WORKER_ENABLED = !!(global === global.window && global.URL && global.Blob && global.Worker);
 	
@@ -4876,9 +4884,9 @@ var WaveformPlaylist =
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
-/***/ }),
-/* 60 */
-/***/ (function(module, exports) {
+/***/ },
+/* 61 */
+/***/ function(module, exports) {
 
 	"use strict";
 	
@@ -4915,9 +4923,9 @@ var WaveformPlaylist =
 	  return Math.ceil(seconds * sampleRate / resolution);
 	}
 
-/***/ }),
-/* 61 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 62 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -4927,11 +4935,11 @@ var WaveformPlaylist =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _BlobLoader = __webpack_require__(62);
+	var _BlobLoader = __webpack_require__(63);
 	
 	var _BlobLoader2 = _interopRequireDefault(_BlobLoader);
 	
-	var _XHRLoader = __webpack_require__(64);
+	var _XHRLoader = __webpack_require__(65);
 	
 	var _XHRLoader2 = _interopRequireDefault(_XHRLoader);
 	
@@ -4962,9 +4970,9 @@ var WaveformPlaylist =
 
 	exports.default = _class;
 
-/***/ }),
-/* 62 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 63 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -4976,7 +4984,7 @@ var WaveformPlaylist =
 	
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 	
-	var _Loader2 = __webpack_require__(63);
+	var _Loader2 = __webpack_require__(64);
 	
 	var _Loader3 = _interopRequireDefault(_Loader2);
 	
@@ -5040,9 +5048,9 @@ var WaveformPlaylist =
 	
 	exports.default = _class;
 
-/***/ }),
-/* 63 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 64 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -5053,7 +5061,7 @@ var WaveformPlaylist =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _eventEmitter = __webpack_require__(15);
+	var _eventEmitter = __webpack_require__(16);
 	
 	var _eventEmitter2 = _interopRequireDefault(_eventEmitter);
 	
@@ -5131,9 +5139,9 @@ var WaveformPlaylist =
 
 	exports.default = _class;
 
-/***/ }),
-/* 64 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 65 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -5145,7 +5153,7 @@ var WaveformPlaylist =
 	
 	var _get = function get(object, property, receiver) { if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { return get(parent, property, receiver); } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } };
 	
-	var _Loader2 = __webpack_require__(63);
+	var _Loader2 = __webpack_require__(64);
 	
 	var _Loader3 = _interopRequireDefault(_Loader2);
 	
@@ -5207,9 +5215,9 @@ var WaveformPlaylist =
 	
 	exports.default = _class;
 
-/***/ }),
-/* 65 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 66 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -5219,7 +5227,7 @@ var WaveformPlaylist =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _conversions = __webpack_require__(60);
+	var _conversions = __webpack_require__(61);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -5263,9 +5271,9 @@ var WaveformPlaylist =
 
 	exports.default = _class;
 
-/***/ }),
-/* 66 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 67 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -5275,13 +5283,13 @@ var WaveformPlaylist =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _h = __webpack_require__(38);
+	var _h = __webpack_require__(39);
 	
 	var _h2 = _interopRequireDefault(_h);
 	
-	var _conversions = __webpack_require__(60);
+	var _conversions = __webpack_require__(61);
 	
-	var _TimeScaleHook = __webpack_require__(67);
+	var _TimeScaleHook = __webpack_require__(68);
 	
 	var _TimeScaleHook2 = _interopRequireDefault(_TimeScaleHook);
 	
@@ -5443,9 +5451,9 @@ var WaveformPlaylist =
 	
 	exports.default = TimeScale;
 
-/***/ }),
-/* 67 */
-/***/ (function(module, exports) {
+/***/ },
+/* 68 */
+/***/ function(module, exports) {
 
 	'use strict';
 	
@@ -5501,9 +5509,9 @@ var WaveformPlaylist =
 
 	exports.default = _class;
 
-/***/ }),
-/* 68 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 69 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -5513,43 +5521,43 @@ var WaveformPlaylist =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _lodash = __webpack_require__(1);
+	var _lodash = __webpack_require__(2);
 	
 	var _lodash2 = _interopRequireDefault(_lodash);
 	
-	var _lodash3 = __webpack_require__(69);
+	var _lodash3 = __webpack_require__(70);
 	
 	var _lodash4 = _interopRequireDefault(_lodash3);
 	
-	var _uuid = __webpack_require__(70);
+	var _uuid = __webpack_require__(71);
 	
 	var _uuid2 = _interopRequireDefault(_uuid);
 	
-	var _h = __webpack_require__(38);
+	var _h = __webpack_require__(39);
 	
 	var _h2 = _interopRequireDefault(_h);
 	
-	var _webaudioPeaks = __webpack_require__(72);
+	var _webaudioPeaks = __webpack_require__(73);
 	
 	var _webaudioPeaks2 = _interopRequireDefault(_webaudioPeaks);
 	
-	var _fadeMaker = __webpack_require__(73);
+	var _fadeMaker = __webpack_require__(74);
 	
-	var _conversions = __webpack_require__(60);
+	var _conversions = __webpack_require__(61);
 	
-	var _states = __webpack_require__(75);
+	var _states = __webpack_require__(76);
 	
 	var _states2 = _interopRequireDefault(_states);
 	
-	var _CanvasHook = __webpack_require__(81);
+	var _CanvasHook = __webpack_require__(82);
 	
 	var _CanvasHook2 = _interopRequireDefault(_CanvasHook);
 	
-	var _FadeCanvasHook = __webpack_require__(82);
+	var _FadeCanvasHook = __webpack_require__(83);
 	
 	var _FadeCanvasHook2 = _interopRequireDefault(_FadeCanvasHook);
 	
-	var _VolumeSliderHook = __webpack_require__(83);
+	var _VolumeSliderHook = __webpack_require__(84);
 	
 	var _VolumeSliderHook2 = _interopRequireDefault(_VolumeSliderHook);
 	
@@ -5810,7 +5818,7 @@ var WaveformPlaylist =
 	    /*
 	      startTime, endTime in seconds (float).
 	      segment is for a highlighted section in the UI.
-	       returns a Promise that will resolve when the AudioBufferSource
+	        returns a Promise that will resolve when the AudioBufferSource
 	      is either stopped or plays out naturally.
 	    */
 	
@@ -6157,9 +6165,9 @@ var WaveformPlaylist =
 
 	exports.default = _class;
 
-/***/ }),
-/* 69 */
-/***/ (function(module, exports) {
+/***/ },
+/* 70 */
+/***/ function(module, exports) {
 
 	/**
 	 * lodash (Custom Build) <https://lodash.com/>
@@ -6665,9 +6673,9 @@ var WaveformPlaylist =
 	module.exports = forOwn;
 
 
-/***/ }),
-/* 70 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 71 */
+/***/ function(module, exports, __webpack_require__) {
 
 	//     uuid.js
 	//
@@ -6677,7 +6685,7 @@ var WaveformPlaylist =
 	// Unique ID creation requires a high quality random # generator.  We feature
 	// detect to determine the best RNG source, normalizing to a function that
 	// returns 128-bits of randomness, since that's what's usually required
-	var _rng = __webpack_require__(71);
+	var _rng = __webpack_require__(72);
 	
 	// Maps for number <-> hex string conversion
 	var _byteToHex = [];
@@ -6854,9 +6862,9 @@ var WaveformPlaylist =
 	module.exports = uuid;
 
 
-/***/ }),
-/* 71 */
-/***/ (function(module, exports) {
+/***/ },
+/* 72 */
+/***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {
 	var rng;
@@ -6893,9 +6901,9 @@ var WaveformPlaylist =
 	
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
-/***/ }),
-/* 72 */
-/***/ (function(module, exports) {
+/***/ },
+/* 73 */
+/***/ function(module, exports) {
 
 	'use strict';
 	
@@ -7052,9 +7060,9 @@ var WaveformPlaylist =
 	    };
 	};
 
-/***/ }),
-/* 73 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 74 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -7065,7 +7073,7 @@ var WaveformPlaylist =
 	exports.createFadeIn = createFadeIn;
 	exports.createFadeOut = createFadeOut;
 	
-	var _fadeCurves = __webpack_require__(74);
+	var _fadeCurves = __webpack_require__(75);
 	
 	var SCURVE = exports.SCURVE = "sCurve";
 	var LINEAR = exports.LINEAR = "linear";
@@ -7154,9 +7162,9 @@ var WaveformPlaylist =
 	}
 
 
-/***/ }),
-/* 74 */
-/***/ (function(module, exports) {
+/***/ },
+/* 75 */
+/***/ function(module, exports) {
 
 	'use strict';
 	
@@ -7234,9 +7242,9 @@ var WaveformPlaylist =
 	}
 
 
-/***/ }),
-/* 75 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 76 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -7244,23 +7252,23 @@ var WaveformPlaylist =
 	  value: true
 	});
 	
-	var _CursorState = __webpack_require__(76);
+	var _CursorState = __webpack_require__(77);
 	
 	var _CursorState2 = _interopRequireDefault(_CursorState);
 	
-	var _SelectState = __webpack_require__(77);
+	var _SelectState = __webpack_require__(78);
 	
 	var _SelectState2 = _interopRequireDefault(_SelectState);
 	
-	var _ShiftState = __webpack_require__(78);
+	var _ShiftState = __webpack_require__(79);
 	
 	var _ShiftState2 = _interopRequireDefault(_ShiftState);
 	
-	var _FadeInState = __webpack_require__(79);
+	var _FadeInState = __webpack_require__(80);
 	
 	var _FadeInState2 = _interopRequireDefault(_FadeInState);
 	
-	var _FadeOutState = __webpack_require__(80);
+	var _FadeOutState = __webpack_require__(81);
 	
 	var _FadeOutState2 = _interopRequireDefault(_FadeOutState);
 	
@@ -7274,9 +7282,9 @@ var WaveformPlaylist =
 	  fadeout: _FadeOutState2.default
 	};
 
-/***/ }),
-/* 76 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 77 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -7286,7 +7294,7 @@ var WaveformPlaylist =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _conversions = __webpack_require__(60);
+	var _conversions = __webpack_require__(61);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -7330,9 +7338,9 @@ var WaveformPlaylist =
 
 	exports.default = _class;
 
-/***/ }),
-/* 77 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 78 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -7342,7 +7350,7 @@ var WaveformPlaylist =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _conversions = __webpack_require__(60);
+	var _conversions = __webpack_require__(61);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -7428,9 +7436,9 @@ var WaveformPlaylist =
 
 	exports.default = _class;
 
-/***/ }),
-/* 78 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 79 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -7440,7 +7448,7 @@ var WaveformPlaylist =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _conversions = __webpack_require__(60);
+	var _conversions = __webpack_require__(61);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -7522,9 +7530,9 @@ var WaveformPlaylist =
 
 	exports.default = _class;
 
-/***/ }),
-/* 79 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 80 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -7534,7 +7542,7 @@ var WaveformPlaylist =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _conversions = __webpack_require__(60);
+	var _conversions = __webpack_require__(61);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -7578,9 +7586,9 @@ var WaveformPlaylist =
 
 	exports.default = _class;
 
-/***/ }),
-/* 80 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 81 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -7590,7 +7598,7 @@ var WaveformPlaylist =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _conversions = __webpack_require__(60);
+	var _conversions = __webpack_require__(61);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -7634,9 +7642,9 @@ var WaveformPlaylist =
 
 	exports.default = _class;
 
-/***/ }),
-/* 81 */
-/***/ (function(module, exports) {
+/***/ },
+/* 82 */
+/***/ function(module, exports) {
 
 	'use strict';
 	
@@ -7705,9 +7713,9 @@ var WaveformPlaylist =
 	
 	exports.default = CanvasHook;
 
-/***/ }),
-/* 82 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 83 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -7717,9 +7725,9 @@ var WaveformPlaylist =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _fadeMaker = __webpack_require__(73);
+	var _fadeMaker = __webpack_require__(74);
 	
-	var _fadeCurves = __webpack_require__(74);
+	var _fadeCurves = __webpack_require__(75);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -7820,9 +7828,9 @@ var WaveformPlaylist =
 	
 	exports.default = FadeCanvasHook;
 
-/***/ }),
-/* 83 */
-/***/ (function(module, exports) {
+/***/ },
+/* 84 */
+/***/ function(module, exports) {
 
 	'use strict';
 	
@@ -7856,9 +7864,9 @@ var WaveformPlaylist =
 
 	exports.default = _class;
 
-/***/ }),
-/* 84 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 85 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -7868,7 +7876,7 @@ var WaveformPlaylist =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _fadeMaker = __webpack_require__(73);
+	var _fadeMaker = __webpack_require__(74);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -8038,9 +8046,9 @@ var WaveformPlaylist =
 
 	exports.default = _class;
 
-/***/ }),
-/* 85 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 86 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -8050,29 +8058,29 @@ var WaveformPlaylist =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _h = __webpack_require__(38);
+	var _h = __webpack_require__(39);
 	
 	var _h2 = _interopRequireDefault(_h);
 	
-	var _aeneas = __webpack_require__(86);
+	var _aeneas = __webpack_require__(87);
 	
 	var _aeneas2 = _interopRequireDefault(_aeneas);
 	
-	var _aeneas3 = __webpack_require__(87);
+	var _aeneas3 = __webpack_require__(88);
 	
 	var _aeneas4 = _interopRequireDefault(_aeneas3);
 	
-	var _conversions = __webpack_require__(60);
+	var _conversions = __webpack_require__(61);
 	
-	var _DragInteraction = __webpack_require__(88);
+	var _DragInteraction = __webpack_require__(89);
 	
 	var _DragInteraction2 = _interopRequireDefault(_DragInteraction);
 	
-	var _ScrollTopHook = __webpack_require__(89);
+	var _ScrollTopHook = __webpack_require__(90);
 	
 	var _ScrollTopHook2 = _interopRequireDefault(_ScrollTopHook);
 	
-	var _timeformat = __webpack_require__(90);
+	var _timeformat = __webpack_require__(91);
 	
 	var _timeformat2 = _interopRequireDefault(_timeformat);
 	
@@ -8340,9 +8348,9 @@ var WaveformPlaylist =
 	
 	exports.default = AnnotationList;
 
-/***/ }),
-/* 86 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 87 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -8362,15 +8370,15 @@ var WaveformPlaylist =
 	  return annotation;
 	};
 	
-	var _uuid = __webpack_require__(70);
+	var _uuid = __webpack_require__(71);
 	
 	var _uuid2 = _interopRequireDefault(_uuid);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/***/ }),
-/* 87 */
-/***/ (function(module, exports) {
+/***/ },
+/* 88 */
+/***/ function(module, exports) {
 
 	"use strict";
 	
@@ -8388,9 +8396,9 @@ var WaveformPlaylist =
 	  };
 	};
 
-/***/ }),
-/* 88 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ },
+/* 89 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -8400,7 +8408,7 @@ var WaveformPlaylist =
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
-	var _conversions = __webpack_require__(60);
+	var _conversions = __webpack_require__(61);
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
@@ -8479,9 +8487,9 @@ var WaveformPlaylist =
 
 	exports.default = _class;
 
-/***/ }),
-/* 89 */
-/***/ (function(module, exports) {
+/***/ },
+/* 90 */
+/***/ function(module, exports) {
 
 	'use strict';
 	
@@ -8505,9 +8513,9 @@ var WaveformPlaylist =
 	
 	exports.default = Hook;
 
-/***/ }),
-/* 90 */
-/***/ (function(module, exports) {
+/***/ },
+/* 91 */
+/***/ function(module, exports) {
 
 	'use strict';
 	
@@ -8553,9 +8561,9 @@ var WaveformPlaylist =
 	  return formats[format];
 	};
 
-/***/ }),
-/* 91 */
-/***/ (function(module, exports) {
+/***/ },
+/* 92 */
+/***/ function(module, exports) {
 
 	'use strict';
 	
@@ -8668,9 +8676,9 @@ var WaveformPlaylist =
 	  };
 	};
 
-/***/ }),
-/* 92 */
-/***/ (function(module, exports) {
+/***/ },
+/* 93 */
+/***/ function(module, exports) {
 
 	'use strict';
 	
@@ -8819,6 +8827,6 @@ var WaveformPlaylist =
 	  };
 	};
 
-/***/ })
+/***/ }
 /******/ ]);
 //# sourceMappingURL=waveform-playlist.var.js.map

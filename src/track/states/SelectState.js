@@ -56,11 +56,49 @@ export default class {
     }
   }
 
+  touchstart(e) {
+    e.preventDefault();
+    this.active = true;
+    let rect = e.target.getBoundingClientRect();
+    let bodyRect = document.body.getBoundingClientRect();
+    this.startX = e.targetTouches[0].clientX - (rect.left - bodyRect.left);
+    const startTime = pixelsToSeconds(this.startX, this.samplesPerPixel, this.sampleRate);
+
+    this.track.ee.emit('select', startTime, startTime, this.track);
+  }
+
+  touchmove(e) {
+    if (this.active) {
+      e.preventDefault();
+      let rect = e.target.getBoundingClientRect();
+      let bodyRect = document.body.getBoundingClientRect();
+      this.emitSelection(e.targetTouches[0].clientX - (rect.left - bodyRect.left));
+    }
+  }
+
+  touchend(e) {
+    if (this.active) {
+      e.preventDefault();
+      let rect = e.target.getBoundingClientRect();
+      let bodyRect = document.body.getBoundingClientRect();
+      this.complete(e.targetTouches[0].clientX - (rect.left - bodyRect.left));
+    }
+  }
+
+  touchcancel(e) {
+    if (this.active) {
+      e.preventDefault();
+      let rect = e.target.getBoundingClientRect();
+      let bodyRect = document.body.getBoundingClientRect();
+      this.complete(e.targetTouches[0].clientX - (rect.left - bodyRect.left));
+    }
+  }
+
   static getClass() {
     return '.state-select';
   }
 
   static getEvents() {
-    return ['mousedown', 'mousemove', 'mouseup', 'mouseleave'];
+    return ['mousedown', 'mousemove', 'mouseup', 'mouseleave', 'touchstart', 'touchend', 'touchmove', 'touchcancel'];
   }
 }

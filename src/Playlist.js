@@ -281,14 +281,12 @@ export default class {
       }]);
     });
 
-    ee.on('duplicateTrack', (track, start, end, cut, cueIn, cueOut) => {
-      track.setDuplicationNumber(track.duplicationNumber++);
+    ee.on('duplicateTrack', (track, start, cueIn, cueOut) => {
+      track.setDuplicationNumber(track.duplicationNumber + 1);
       this.load([{
         src: track.src,
         name: track.name,
         start: start,
-        end: end,
-        cut: cut,
         states: track.states,
         cueIn: cueIn,
         cueOut: cueOut,
@@ -346,7 +344,6 @@ export default class {
   }
 
   load(trackList) {
-    let audioBufferSlice = require('audiobuffer-slice');
     const loadPromises = trackList.map((trackInfo) => {
       const loader = LoaderFactory.createLoader(trackInfo.src, this.ac, this.ee);
       return loader.load();
@@ -357,10 +354,8 @@ export default class {
 
       const tracks = audioBuffers.map((audioBuffer, index) => {
         const info = trackList[index];
-        const cut = info.cut || false;
         const name = info.name || 'Untitled';
         const start = info.start || 0;
-        const end = info.end || audioBuffer.duration;
         const states = info.states || {};
         const fadeIn = info.fadeIn;
         const fadeOut = info.fadeOut;
@@ -380,16 +375,8 @@ export default class {
         const playout = new Playout(this.ac, audioBuffer);
 
         const track = new Track();
+
         track.setSrc(info.src);
-        if (cut) {
-          audioBufferSlice(audioBuffer, start * 1000, end * 1000, function(error, slicedAudioBuffer) {
-            if (error) {
-              console.error(error);
-            } else {
-              audioBuffer = slicedAudioBuffer;
-            }
-          });
-        }
         track.setBuffer(audioBuffer);
         track.setDuplicationNumber(duplicationNumber);
         track.setName(name);

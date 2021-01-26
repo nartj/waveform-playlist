@@ -88,16 +88,18 @@ export default class {
       if (start > trackStart) {
         this.setStartTime(start);
       }
-      let cut = true;
 
-      cueIn = trackStart;
-      cueOut = start;
-      ee.emit("duplicateTrack", this, trackStart, start, cut, cueIn + offset, cueOut + offset);
+      if (start > trackStart) {
+        cueIn = trackStart;
+        cueOut = start;
+        ee.emit("duplicateTrack", this, trackStart, cueIn + offset, cueOut + offset);
+      }
 
-      cueIn = end;
-      cueOut = trackEnd;
-      ee.emit("duplicateTrack", this, end, trackEnd, cut, cueIn + offset, cueOut + offset);
-
+      if (end < trackEnd) {
+        cueIn = end;
+        cueOut = trackEnd;
+        ee.emit("duplicateTrack", this, end, cueIn + offset, cueOut + offset);
+      }
     }
 
 
@@ -603,8 +605,8 @@ export default class {
       end: this.endTime,
       name: this.name,
       customClass: this.customClass,
-      cuein: this.cueIn,
-      cueout: this.cueOut,
+      cueIn: this.cueIn,
+      cueOut: this.cueOut,
     };
 
     if (this.fadeIn) {
@@ -629,6 +631,9 @@ export default class {
   }
 
   setDuplicationNumber(duplicationNumber) {
+    if (duplicationNumber === undefined) {
+      duplicationNumber = 0;
+    }
     this.duplicationNumber = duplicationNumber;
   }
 }

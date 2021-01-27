@@ -113,7 +113,7 @@ export function duplicateTrack(track) {
   track.setDuplicationNumber(track.duplicationNumber++);
   this.load([{
     src: track.src,
-    name: track.name
+    name: track.name,
   }]);
 }
 

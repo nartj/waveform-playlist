@@ -1975,6 +1975,29 @@ var WaveformPlaylist =
 	        }]);
 	      });
 	
+	      ee.on('duplicateTrack', function (track, start, end, cut, cueIn, cueOut) {
+	        track.setDuplicationNumber(track.duplicationNumber++);
+	        _this2.load([{
+	          src: track.src,
+	          name: track.name,
+	          start: start,
+	          end: end,
+	          cut: cut,
+	          states: track.states,
+	          cueIn: cueIn,
+	          cueOut: cueOut,
+	          gain: track.gain,
+	          muted: track.muted,
+	          soloed: track.soloed,
+	          selection: track.selection,
+	          peaks: track.peaks,
+	          customClass: track.customClass,
+	          waveOutlineColor: track.waveOutlineColor,
+	          stereoPan: track.stereoPan,
+	          duplicationNumber: track.duplicationNumber
+	        }]);
+	      });
+	
 	      ee.on('trim', function () {
 	        var track = _this2.getActiveTrack();
 	        var timeSelection = _this2.getTimeSelection();
@@ -2020,6 +2043,7 @@ var WaveformPlaylist =
 	    value: function load(trackList) {
 	      var _this3 = this;
 	
+	      var audioBufferSlice = __webpack_require__(93);
 	      var loadPromises = trackList.map(function (trackInfo) {
 	        var loader = _LoaderFactory2.default.createLoader(trackInfo.src, _this3.ac, _this3.ee);
 	        return loader.load();
@@ -2030,13 +2054,15 @@ var WaveformPlaylist =
 	
 	        var tracks = audioBuffers.map(function (audioBuffer, index) {
 	          var info = trackList[index];
+	          var cut = info.cut || false;
 	          var name = info.name || 'Untitled';
 	          var start = info.start || 0;
+	          var end = info.end || audioBuffer.duration;
 	          var states = info.states || {};
 	          var fadeIn = info.fadeIn;
 	          var fadeOut = info.fadeOut;
-	          var cueIn = info.cuein || 0;
-	          var cueOut = info.cueout || audioBuffer.duration;
+	          var cueIn = info.cueIn || 0;
+	          var cueOut = info.cueOut || audioBuffer.duration;
 	          var gain = info.gain || 1;
 	          var muted = info.muted || false;
 	          var soloed = info.soloed || false;
@@ -2045,13 +2071,24 @@ var WaveformPlaylist =
 	          var customClass = info.customClass || undefined;
 	          var waveOutlineColor = info.waveOutlineColor || undefined;
 	          var stereoPan = info.stereoPan || 0;
+	          var duplicationNumber = info.duplicationNumber;
 	
 	          // webaudio specific playout for now.
 	          var playout = new _Playout2.default(_this3.ac, audioBuffer);
 	
 	          var track = new _Track2.default();
-	          track.src = info.src;
+	          track.setSrc(info.src);
+	          if (cut) {
+	            audioBufferSlice(audioBuffer, start * 1000, end * 1000, function (error, slicedAudioBuffer) {
+	              if (error) {
+	                console.error(error);
+	              } else {
+	                audioBuffer = slicedAudioBuffer;
+	              }
+	            });
+	          }
 	          track.setBuffer(audioBuffer);
+	          track.setDuplicationNumber(duplicationNumber);
 	          track.setName(name);
 	          track.setEventEmitter(_this3.ee);
 	          track.setEnabledStates(states);
@@ -5579,9 +5616,16 @@ var WaveformPlaylist =
 	    this.startTime = 0;
 	    this.endTime = 0;
 	    this.stereoPan = 0;
+	    this.src = undefined;
+	    this.duplicationNumber = 0;
 	  }
 	
 	  _createClass(_class, [{
+	    key: 'setSrc',
+	    value: function setSrc(src) {
+	      this.src = src;
+	    }
+	  }, {
 	    key: 'setEventEmitter',
 	    value: function setEventEmitter(ee) {
 	      this.ee = ee;
@@ -5590,6 +5634,7 @@ var WaveformPlaylist =
 	    key: 'setName',
 	    value: function setName(name) {
 	      this.name = name;
+	      if (this.duplicationNumber !== undefined && this.duplicationNumber !== 0) this.name = this.name + "#" + this.duplicationNumber;
 	    }
 	  }, {
 	    key: 'setCustomClass',
@@ -5633,6 +5678,15 @@ var WaveformPlaylist =
 	        if (start > trackStart) {
 	          this.setStartTime(start);
 	        }
+	        var cut = true;
+	
+	        cueIn = trackStart;
+	        cueOut = start;
+	        ee.emit("duplicateTrack", this, trackStart, start, cut, cueIn + offset, cueOut + offset);
+	
+	        cueIn = end;
+	        cueOut = trackEnd;
+	        ee.emit("duplicateTrack", this, end, trackEnd, cut, cueIn + offset, cueOut + offset);
 	      }
 	    }
 	  }, {
@@ -5810,7 +5864,7 @@ var WaveformPlaylist =
 	    /*
 	      startTime, endTime in seconds (float).
 	      segment is for a highlighted section in the UI.
-	       returns a Promise that will resolve when the AudioBufferSource
+	        returns a Promise that will resolve when the AudioBufferSource
 	      is either stopped or plays out naturally.
 	    */
 	
@@ -6149,6 +6203,11 @@ var WaveformPlaylist =
 	      }
 	
 	      return info;
+	    }
+	  }, {
+	    key: 'setDuplicationNumber',
+	    value: function setDuplicationNumber(duplicationNumber) {
+	      this.duplicationNumber = duplicationNumber;
 	    }
 	  }]);
 
@@ -8860,6 +8919,83 @@ var WaveformPlaylist =
 	    }
 	  };
 	};
+
+/***/ },
+/* 93 */
+/***/ function(module, exports, __webpack_require__) {
+
+	(function(root) {
+	  'use strict';
+	
+	  var audioContext = new (window.AudioContext || window.webkitAudioContext);
+	
+	  function audioBufferSlice(buffer, begin, end, callback) {
+	    if (!(this instanceof audioBufferSlice)) {
+	      return new audioBufferSlice(buffer, begin, end, callback);
+	    }
+	
+	    var error = null;
+	
+	    var duration = buffer.duration;
+	    var channels = buffer.numberOfChannels;
+	    var rate = buffer.sampleRate;
+	
+	    if (typeof end === 'function') {
+	      callback = end;
+	      end = duration;
+	    }
+	
+	    // milliseconds to seconds
+	    begin = begin/1000;
+	    end = end/1000;
+	
+	    if (begin < 0) {
+	      error = new RangeError('begin time must be greater than 0');
+	    }
+	
+	    if (end > duration) {
+	      error = new RangeError('end time must be less than or equal to ' + duration);
+	    }
+	
+	    if (typeof callback !== 'function') {
+	      error = new TypeError('callback must be a function');
+	    }
+	
+	    var startOffset = rate * begin;
+	    var endOffset = rate * end;
+	    var frameCount = endOffset - startOffset;
+	    var newArrayBuffer;
+	
+	    try {
+	      newArrayBuffer = audioContext.createBuffer(channels, endOffset - startOffset, rate);
+	      var anotherArray = new Float32Array(frameCount);
+	      var offset = 0;
+	
+	      for (var channel = 0; channel < channels; channel++) {
+	        buffer.copyFromChannel(anotherArray, channel, startOffset);
+	        newArrayBuffer.copyToChannel(anotherArray, channel, offset);
+	      }
+	    } catch(e) {
+	      error = e;
+	    }
+	
+	    callback(error, newArrayBuffer);
+	  }
+	
+	  if (true) {
+	    if (typeof module !== 'undefined' && module.exports) {
+	      exports = module.exports = audioBufferSlice;
+	    }
+	    exports.audioBufferSlice = audioBufferSlice;
+	  } else if (typeof define === 'function' && define.amd) {
+	    define([], function() {
+	      return audioBufferSlice;
+	    });
+	  } else {
+	    root.audioBufferSlice = audioBufferSlice;
+	  }
+	})(this);
+
 
 /***/ }
 /******/ ]);

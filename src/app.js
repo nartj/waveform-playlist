@@ -3,7 +3,6 @@ import createElement from 'virtual-dom/create-element';
 import EventEmitter from 'event-emitter';
 import Playlist from './Playlist';
 
-
 export function init(options = {}, ee = EventEmitter()) {
   if (options.container === undefined) {
     throw new Error('DOM element container must be given.');

@@ -97,17 +97,18 @@ export default class {
 
     if ((trackStart <= start && trackEnd >= start) ||
       (trackStart <= end && trackEnd >= end)) {
-      let cueIn = (start < trackStart) ? trackStart : start;
-      let cueOut = (end > trackEnd) ? trackEnd : end;
+      let cueIn = trackStart;
+      let cueOut = start;
 
       this.setCues(cueIn + offset, cueOut + offset);
       if (start > trackStart) {
-        this.setStartTime(start);
+        this.setStartTime(trackStart);
       }
+
       if (start > trackStart) {
-        cueIn = trackStart;
-        cueOut = start;
-        ee.emit("duplicateTrack", this, trackStart, cueIn + offset, cueOut + offset, 1);
+        cueIn = (start < trackStart) ? trackStart : start;
+        cueOut = (end > trackEnd) ? trackEnd : end;
+        ee.emit("duplicateTrack", this, start, cueIn + offset, cueOut + offset, 1);
       }
 
       if (end < trackEnd) {

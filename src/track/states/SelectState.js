@@ -4,6 +4,7 @@ export default class {
   constructor(track) {
     this.track = track;
     this.active = false;
+    this.lastOffsetX = 0;
   }
 
   setup(samplesPerPixel, sampleRate) {
@@ -72,7 +73,8 @@ export default class {
       e.preventDefault();
       const rect = e.target.getBoundingClientRect();
       const bodyRect = document.body.getBoundingClientRect();
-      this.emitSelection(e.targetTouches[0].clientX - (rect.left - bodyRect.left));
+      this.lastOffsetX = e.targetTouches[0].clientX - (rect.left - bodyRect.left);
+      this.emitSelection(this.lastOffsetX);
     }
   }
 
@@ -81,7 +83,8 @@ export default class {
       e.preventDefault();
       const rect = e.target.getBoundingClientRect();
       const bodyRect = document.body.getBoundingClientRect();
-      this.complete(e.targetTouches[0].clientX - (rect.left - bodyRect.left));
+      this.lastOffsetX = e.targetTouches[0].clientX - (rect.left - bodyRect.left);
+      this.complete(this.lastOffsetX);
     }
   }
 
@@ -90,7 +93,8 @@ export default class {
       e.preventDefault();
       const rect = e.target.getBoundingClientRect();
       const bodyRect = document.body.getBoundingClientRect();
-      this.complete(e.targetTouches[0].clientX - (rect.left - bodyRect.left));
+      this.lastOffsetX = e.targetTouches[0].clientX - (rect.left - bodyRect.left);
+      this.complete(this.lastOffsetX);
     }
   }
 

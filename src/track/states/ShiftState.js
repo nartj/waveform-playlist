@@ -4,6 +4,7 @@ export default class {
   constructor(track) {
     this.track = track;
     this.active = false;
+    this.lastOffsetX = 0;
   }
 
   setup(samplesPerPixel, sampleRate) {
@@ -60,7 +61,8 @@ export default class {
     this.el = e.target;
     const rect = e.target.getBoundingClientRect();
     const bodyRect = document.body.getBoundingClientRect();
-    this.prevX = e.targetTouches[0].clientX - (rect.left - bodyRect.left);
+    this.lastOffsetX = e.targetTouches[0].clientX - (rect.left - bodyRect.left);
+    this.prevX = this.lastOffsetX;
   }
 
   touchmove(e) {
@@ -68,6 +70,7 @@ export default class {
       e.preventDefault();
       const rect = e.target.getBoundingClientRect();
       const bodyRect = document.body.getBoundingClientRect();
+      this.lastOffsetX = e.targetTouches[0].clientX - (rect.left - bodyRect.left);
       this.emitShift(e.targetTouches[0].clientX - (rect.left - bodyRect.left));
     }
   }
@@ -75,9 +78,7 @@ export default class {
   touchend(e) {
     if (this.active) {
       e.preventDefault();
-      const rect = e.target.getBoundingClientRect();
-      const bodyRect = document.body.getBoundingClientRect();
-      this.complete(e.targetTouches[0].clientX - (rect.left - bodyRect.left));
+      this.complete(this.lastOffsetX);
     }
   }
 
@@ -86,7 +87,8 @@ export default class {
       e.preventDefault();
       const rect = e.target.getBoundingClientRect();
       const bodyRect = document.body.getBoundingClientRect();
-      this.complete(e.targetTouches[0].clientX - (rect.left - bodyRect.left));
+      this.lastOffsetX = e.targetTouches[0].clientX - (rect.left - bodyRect.left);
+      this.complete(this.lastOffsetX);
     }
   }
 

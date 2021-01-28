@@ -94,11 +94,12 @@ export default class {
     const trackStart = this.getStartTime();
     const trackEnd = this.getEndTime();
     const offset = this.cueIn - trackStart;
+    let trackOffset = 0;
 
     if ((trackStart <= start && trackEnd >= start) ||
       (trackStart <= end && trackEnd >= end)) {
       let cueIn = trackStart;
-      let cueOut = start;
+      let cueOut = (start < trackStart) ? end : start;
 
       this.setCues(cueIn + offset, cueOut + offset);
       if (start > trackStart) {
@@ -108,13 +109,13 @@ export default class {
       if (start > trackStart) {
         cueIn = (start < trackStart) ? trackStart : start;
         cueOut = (end > trackEnd) ? trackEnd : end;
-        ee.emit("duplicateTrack", this, start, cueIn + offset, cueOut + offset, 1);
+        ee.emit("duplicateTrack", this, start, cueIn + offset, cueOut + offset, ++trackOffset);
       }
 
       if (end < trackEnd) {
         cueIn = end;
         cueOut = trackEnd;
-        ee.emit("duplicateTrack", this, end, cueIn + offset, cueOut + offset, 2);
+        ee.emit("duplicateTrack", this, end, cueIn + offset, cueOut + offset, ++trackOffset);
       }
     }
   }

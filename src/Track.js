@@ -20,6 +20,7 @@ export default class {
 
   constructor() {
     this.name = 'Untitled';
+    this.taggedName = this.name;
     this.customClass = undefined;
     this.waveOutlineColor = undefined;
     this.gain = 1;
@@ -37,10 +38,25 @@ export default class {
     this.stereoPan = 0;
     this.src = undefined;
     this.duplicationNumber = 0;
+    this.srcTrack = undefined;
   }
 
   setSrc(src) {
     this.src = src;
+  }
+
+  setSrcTrack(track) {
+    if (this.srcTrack === undefined) {
+      this.srcTrack = track;
+    }
+  }
+
+  setTaggedName() {
+    if (this.duplicationNumber !== undefined && this.duplicationNumber !== 0) {
+      this.taggedName = this.name + '#' + this.duplicationNumber;
+    } else {
+      this.taggedName = this.name;
+    }
   }
 
   setEventEmitter(ee) {
@@ -49,7 +65,7 @@ export default class {
 
   setName(name) {
     this.name = name;
-    if (this.duplicationNumber !== undefined && this.duplicationNumber !== 0) this.name = `${this.name}#${this.duplicationNumber}`;
+    this.setTaggedName();
   }
 
   setCustomClass(className) {
@@ -91,13 +107,13 @@ export default class {
       if (start > trackStart) {
         cueIn = trackStart;
         cueOut = start;
-        ee.emit("duplicateTrack", this, trackStart, cueIn + offset, cueOut + offset);
+        ee.emit("duplicateTrack", this, trackStart, cueIn + offset, cueOut + offset, 1);
       }
 
       if (end < trackEnd) {
         cueIn = end;
         cueOut = trackEnd;
-        ee.emit("duplicateTrack", this, end, cueIn + offset, cueOut + offset);
+        ee.emit("duplicateTrack", this, end, cueIn + offset, cueOut + offset, 2);
       }
     }
   }
@@ -385,7 +401,7 @@ export default class {
           style: `height: ${numChan * data.height}px; width: ${data.controls.width}px; position: absolute; left: 0; z-index: 10;`,
         },
       }, [
-        h('header', [this.name]),
+        h('header', [this.taggedName]),
         h('div.btn-group', [
           h(`span.btn.btn-default.btn-xs.btn-mute${muteClass}`, {
             onclick: () => {
@@ -630,6 +646,9 @@ export default class {
   setDuplicationNumber(duplicationNumber) {
     if (duplicationNumber === undefined) {
       duplicationNumber = 0;
+    }
+    if (this.srcTrack !== undefined) {
+      this.srcTrack.setDuplicationNumber(duplicationNumber);
     }
     this.duplicationNumber = duplicationNumber;
   }

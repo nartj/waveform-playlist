@@ -281,9 +281,10 @@ export default class {
       }]);
     });
 
-    ee.on('duplicateTrack', (track, start, cueIn, cueOut) => {
-      track.setDuplicationNumber(track.duplicationNumber + 1);
+    ee.on('duplicateTrack', (track, start, cueIn, cueOut, trackOffset) => {
+      //track.setDuplicationNumber(track.duplicationNumber + 1);
       this.load([{
+        track: track,
         src: track.src,
         name: track.name,
         start: start,
@@ -299,6 +300,7 @@ export default class {
         waveOutlineColor: track.waveOutlineColor,
         stereoPan: track.stereoPan,
         duplicationNumber: track.duplicationNumber,
+        trackOffset: trackOffset
       }]);
     });
 
@@ -348,12 +350,17 @@ export default class {
       const loader = LoaderFactory.createLoader(trackInfo.src, this.ac, this.ee);
       return loader.load();
     });
+    let newTrack = undefined;
+    let trackOffset = undefined;
+    let isTrackDuplication = false;
 
     return Promise.all(loadPromises).then((audioBuffers) => {
       this.ee.emit('audiosourcesloaded');
 
       const tracks = audioBuffers.map((audioBuffer, index) => {
         const info = trackList[index];
+        const trck = info.track || undefined;
+        isTrackDuplication = trck !== undefined;
         const name = info.name || 'Untitled';
         const start = info.start || 0;
         const states = info.states || {};
@@ -369,7 +376,8 @@ export default class {
         const customClass = info.customClass || undefined;
         const waveOutlineColor = info.waveOutlineColor || undefined;
         const stereoPan = info.stereoPan || 0;
-        const duplicationNumber = info.duplicationNumber;
+        const duplicationNumber = info.duplicationNumber || 0;
+        trackOffset = info.trackOffset || 0;
 
         // webaudio specific playout for now.
         const playout = new Playout(this.ac, audioBuffer);
@@ -378,7 +386,10 @@ export default class {
 
         track.setSrc(info.src);
         track.setBuffer(audioBuffer);
-        track.setDuplicationNumber(duplicationNumber);
+        track.setSrcTrack(trck);
+        track.setDuplicationNumber(trck === undefined ?
+            duplicationNumber : trck.srcTrack === undefined ?
+                trck.duplicationNumber + 1 : trck.srcTrack.duplicationNumber + 1);
         track.setName(name);
         track.setEventEmitter(this.ee);
         track.setEnabledStates(states);
@@ -420,11 +431,17 @@ export default class {
 
         // extract peaks with AudioContext for now.
         track.calculatePeaks(this.samplesPerPixel, this.sampleRate);
+        newTrack = track;
 
         return track;
       });
+      if (tracks.length > 1) {
+        this.tracks = this.tracks.concat(tracks);
+      } else if (isTrackDuplication) {
+        this.tracks.splice(this.tracks.indexOf(this.getActiveTrack())
+            + this.getActiveTrack().duplicationNumber - newTrack.duplicationNumber + trackOffset, 0, newTrack);
+      }
 
-      this.tracks = this.tracks.concat(tracks);
       this.adjustDuration();
       this.draw(this.render());
 

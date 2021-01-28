@@ -34,6 +34,7 @@ export default class {
   mousemove(e) {
     if (this.active) {
       e.preventDefault();
+      console.log(e.offsetX);
       this.emitShift(e.offsetX);
     }
   }
@@ -52,11 +53,48 @@ export default class {
     }
   }
 
+  touchstart(e) {
+    e.preventDefault();
+
+    this.active = true;
+    this.el = e.target;
+    const rect = e.target.getBoundingClientRect();
+    const bodyRect = document.body.getBoundingClientRect();
+    this.prevX = e.targetTouches[0].clientX - (rect.left - bodyRect.left);
+  }
+
+  touchmove(e) {
+    if (this.active) {
+      e.preventDefault();
+      const rect = e.target.getBoundingClientRect();
+      const bodyRect = document.body.getBoundingClientRect();
+      this.emitShift(e.targetTouches[0].clientX - (rect.left - bodyRect.left));
+    }
+  }
+
+  touchend(e) {
+    if (this.active) {
+      e.preventDefault();
+      const rect = e.target.getBoundingClientRect();
+      const bodyRect = document.body.getBoundingClientRect();
+      this.complete(e.targetTouches[0].clientX - (rect.left - bodyRect.left));
+    }
+  }
+
+  touchcancel(e) {
+    if (this.active) {
+      e.preventDefault();
+      const rect = e.target.getBoundingClientRect();
+      const bodyRect = document.body.getBoundingClientRect();
+      this.complete(e.targetTouches[0].clientX - (rect.left - bodyRect.left));
+    }
+  }
+
   static getClass() {
     return '.state-shift';
   }
 
   static getEvents() {
-    return ['mousedown', 'mousemove', 'mouseup', 'mouseleave'];
+    return ['mousedown', 'mousemove', 'mouseup', 'mouseleave', 'touchstart', 'touchmove', 'touchend', 'touchcancel'];
   }
 }

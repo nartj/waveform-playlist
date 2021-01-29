@@ -1,9 +1,9 @@
 const path = require('path');
 
 module.exports = {
-  entry: `${__dirname}/src/app.js`,
+  entry: path.join(__dirname, '/src/app.js'),
   output: {
-    path: `${__dirname}/dist/waveform-playlist/js`,
+    path: path.join(__dirname, '/dist/waveform-playlist/js'),
     publicPath: '/waveform-playlist/js/',
     filename: 'waveform-playlist.var.js',
     library: 'WaveformPlaylist',
@@ -19,8 +19,7 @@ module.exports = {
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist/'),
-    publicPath: '/',
-    hot: true,
+    publicPath: '/waveform-playlist/js/',
     inline: true,
     colors: true,
     headers: {

@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: path.join(__dirname, '/src/app.js'),
+  entry: ['babel-polyfill', path.join(__dirname, '/src/app.js')],
   output: {
     path: path.join(__dirname, '/dist/waveform-playlist/js'),
     publicPath: '/waveform-playlist/js/',

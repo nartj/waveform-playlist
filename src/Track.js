@@ -2,6 +2,7 @@ import _assign from 'lodash.assign';
 import _forOwn from 'lodash.forown';
 
 import uuid from 'uuid';
+import cloneDeep from 'lodash.clonedeep';
 import h from 'virtual-dom/h';
 
 import extractPeaks from 'webaudio-peaks';
@@ -90,14 +91,18 @@ export default class {
   /*
   *   start, end in seconds relative to the entire playlist.
   */
-  trim(start, end) {
+  async trim(start, end) {
     const trackStart = this.getStartTime();
     const trackEnd = this.getEndTime();
     const offset = this.cueIn - trackStart;
-    let trackOffset = 0;
+    const self = this;
+    const middleTrackOffset = 1;
+    const endTrackOffset = 2;
+    let middleTrack = null;
+    let endTrack = null;
 
     if ((trackStart <= start && trackEnd >= start) ||
-      (trackStart <= end && trackEnd >= end)) {
+        (trackStart <= end && trackEnd >= end)) {
       let cueIn = trackStart;
       let cueOut = (start < trackStart) ? end : start;
 
@@ -109,15 +114,48 @@ export default class {
       if (start > trackStart) {
         cueIn = (start < trackStart) ? trackStart : start;
         cueOut = (end > trackEnd) ? trackEnd : end;
-        ee.emit("duplicateTrack", this, start, cueIn + offset, cueOut + offset, ++trackOffset);
+        middleTrack = await this.duplicateTrack(this, start, cueIn + offset, cueOut + offset, middleTrackOffset);
       }
 
       if (end < trackEnd) {
         cueIn = end;
         cueOut = trackEnd;
-        ee.emit("duplicateTrack", this, end, cueIn + offset, cueOut + offset, ++trackOffset);
+        endTrack = await this.duplicateTrack(this, end, cueIn + offset, cueOut + offset, endTrackOffset);
       }
     }
+    const peaks = cloneDeep(this.peaks);
+    const undo = () => {
+      self.setCues(trackStart, trackEnd);
+      self.setPeaks(peaks);
+      playlist.removeTrack(middleTrack);
+      playlist.removeTrack(endTrack);
+      playlist.setTimeSelection(0, 0);
+      playlist.adjustDuration();
+      playlist.draw(playlist.render());
+    }
+    return undo;
+  }
+
+  async duplicateTrack(track, start, cueIn, cueOut, trackOffset) {
+    return (await playlist.load([{
+      track,
+      src: track.src,
+      name: track.name,
+      start,
+      states: track.states,
+      cueIn,
+      cueOut,
+      gain: track.gain,
+      muted: track.muted,
+      soloed: track.soloed,
+      selection: track.selection,
+      peaks: track.peaks,
+      customClass: track.customClass,
+      waveOutlineColor: track.waveOutlineColor,
+      stereoPan: track.stereoPan,
+      duplicationNumber: track.duplicationNumber,
+      trackOffset,
+    }]))[0];
   }
 
   setStartTime(start) {

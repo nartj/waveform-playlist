@@ -15,6 +15,7 @@ import AnnotationList from './annotation/AnnotationList';
 
 import RecorderWorkerFunction from './utils/recorderWorker';
 import ExportWavWorkerFunction from './utils/exportWavWorker';
+import Undoer from "./Undoer";
 
 export default class {
   constructor() {
@@ -38,6 +39,7 @@ export default class {
     this.durationFormat = 'hh:mm:ss.uuu';
     this.isAutomaticScroll = false;
     this.resetDrawTimer = undefined;
+    this.undoer = new Undoer();
   }
 
   // TODO extract into a plugin
@@ -166,6 +168,20 @@ export default class {
   setUpEventEmitter() {
     const ee = this.ee;
 
+    ee.on('undo', (val) => {
+      this.undoer.pop();
+      console.log('undo');
+    });
+
+    ee.on('redo', (val) => {
+      console.log('redo');
+      // todo
+    });
+
+    ee.on('draw', (val) => {
+      this.drawRequest();
+    });
+
     ee.on('automaticscroll', (val) => {
       this.isAutomaticScroll = val;
     });
@@ -201,6 +217,19 @@ export default class {
       track.setStartTime(track.getStartTime() + deltaTime);
       this.adjustDuration();
       this.drawRequest();
+    });
+
+    ee.on('shiftbegin', (deltaTime, track) => {
+    });
+
+    ee.on('shiftend', (deltaTime, track, undo) => {
+      const startTime = track.getStartTime()
+      this.undoer.push(() => {
+        undo();
+        track.setStartTime(startTime - deltaTime);
+        this.adjustDuration();
+        this.drawRequest();
+      })
     });
 
     ee.on('record', () => {
@@ -257,11 +286,31 @@ export default class {
     });
 
     ee.on('fadein', (duration, track) => {
+      let fadeEnd = 0;
+      if (track.fades && track.fadeIn && track.fades[track.fadeIn]) {
+        fadeEnd = track.fades[track.fadeIn].end
+      }
+      const fadeType = this.fadeType;
+      const undo = () => {
+        track.setFadeIn(fadeEnd, fadeType);
+        this.drawRequest();
+      }
+      this.undoer.push(undo);
       track.setFadeIn(duration, this.fadeType);
       this.drawRequest();
     });
 
     ee.on('fadeout', (duration, track) => {
+      let fadeBegin = 0;
+      if (track.fades && track.fadeIn && track.fades[track.fadeIn]) {
+        fadeBegin = track.fades[track.fadeIn].end
+      }
+      const fadeType = this.fadeType;
+      const undo = () => {
+        track.setFadeOut(fadeBegin, fadeType);
+        this.drawRequest();
+      }
+      this.undoer.push(undo);
       track.setFadeOut(duration, this.fadeType);
       this.drawRequest();
     });
@@ -282,37 +331,20 @@ export default class {
     });
 
     ee.on('duplicateTrack', (track, start, cueIn, cueOut, trackOffset) => {
-      //track.setDuplicationNumber(track.duplicationNumber + 1);
-      this.load([{
-        track: track,
-        src: track.src,
-        name: track.name,
-        start: start,
-        states: track.states,
-        cueIn: cueIn,
-        cueOut: cueOut,
-        gain: track.gain,
-        muted: track.muted,
-        soloed: track.soloed,
-        selection: track.selection,
-        peaks: track.peaks,
-        customClass: track.customClass,
-        waveOutlineColor: track.waveOutlineColor,
-        stereoPan: track.stereoPan,
-        duplicationNumber: track.duplicationNumber,
-        trackOffset: trackOffset
-      }]);
+      // track.setDuplicationNumber(track.duplicationNumber + 1);
+      track.duplicateTrack(track, start, cueIn, cueOut, trackOffset);
     });
 
-    ee.on('trim', () => {
+    ee.on('trim', async () => {
       const track = this.getActiveTrack();
       const timeSelection = this.getTimeSelection();
 
-      track.trim(timeSelection.start, timeSelection.end);
+      const undo = await track.trim(timeSelection.start, timeSelection.end);
       track.calculatePeaks(this.samplesPerPixel, this.sampleRate);
 
       this.setTimeSelection(0, 0);
       this.drawRequest();
+      this.undoer.push(undo);
     });
 
     ee.on('zoomin', () => {
@@ -345,13 +377,17 @@ export default class {
     });
   }
 
+  removeTrack(track) {
+    this.tracks = this.tracks.filter((t) => t !== track);
+  }
+
   load(trackList) {
     const loadPromises = trackList.map((trackInfo) => {
       const loader = LoaderFactory.createLoader(trackInfo.src, this.ac, this.ee);
       return loader.load();
     });
-    let newTrack = undefined;
-    let trackOffset = undefined;
+    let newTrack;
+    let trackOffset;
     let isTrackDuplication = false;
 
     return Promise.all(loadPromises).then((audioBuffers) => {
@@ -446,8 +482,10 @@ export default class {
       this.draw(this.render());
 
       this.ee.emit('audiosourcesrendered');
+      return tracks;
     }).catch((e) => {
       this.ee.emit('audiosourceserror', e);
+      return [];
     });
   }
 

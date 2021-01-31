@@ -21,7 +21,7 @@ export default class {
 
   constructor() {
     this.name = 'Untitled';
-    this.taggedName = this.name;
+    this.taggedName = this.name; // todo replace with uuid if we rename ?
     this.customClass = undefined;
     this.waveOutlineColor = undefined;
     this.gain = 1;
@@ -439,6 +439,7 @@ export default class {
       {
         attributes: {
           style: `height: ${numChan * data.height}px; width: ${data.controls.width}px; position: absolute; left: 0; z-index: 10;`,
+          id: this.name + 'Controls'
         },
       }, [
         h('header', [this.taggedName]),
@@ -453,6 +454,13 @@ export default class {
               this.ee.emit('solo', this);
             },
           }, ['Solo']),
+          h(`span.btn.btn-default.btn-xs.btn-collapse}`, {
+            onclick: () => {
+              document.querySelector("#" + this.taggedName + 'Controls').style.display = "none";
+              document.querySelector("#" + this.taggedName + "Card").style.display = "none";
+              document.querySelector("#" + this.taggedName + "Header").style.display = "block";
+            },
+          }, ['Collapse']),
         ]),
         h('label', [
           h('input.volume-slider', {
@@ -641,14 +649,35 @@ export default class {
     const audibleClass = data.shouldPlay ? '' : '.silent';
     const customClass = (this.customClass === undefined) ? '' : `.${this.customClass}`;
 
-    return h(`div.channel-wrapper${audibleClass}${customClass}`,
-      {
-        attributes: {
-          style: `margin-left: ${channelMargin}px; height: ${data.height * numChan}px;`,
+    const full = h(`div.channel-wrapper${audibleClass}${customClass}`,
+        {
+          attributes: {
+            style: `margin-left: ${channelMargin}px; height: ${data.height * numChan}px;`,
+            id: this.name + 'Card'
+          },
         },
-      },
-      channelChildren,
+        channelChildren,
     );
+
+    const collapseButton = h(`span.btn.btn-default.btn-xs.btn-collapse}`, {
+      onclick: () => {
+        document.querySelector("#" + this.taggedName + 'Controls').style.display = "block";
+        document.querySelector("#" + this.taggedName + "Card").style.display = "block";
+        document.querySelector("#" + this.taggedName + "Header").style.display = "none";
+      },
+    }, ['Collapse']);
+
+    const collapse = h(`div.controls`,
+        {
+          attributes: {
+            style: `display: none; text-align: left;`,
+            id: this.name + 'Header',
+          },
+        },
+        [h('header',[this.taggedName, collapseButton])]
+    );
+
+    return h('', [collapse, full]);
   }
 
   getTrackDetails() {

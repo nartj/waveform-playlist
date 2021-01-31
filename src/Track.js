@@ -21,7 +21,8 @@ export default class {
 
   constructor() {
     this.name = 'Untitled';
-    this.taggedName = this.name; // todo replace with uuid if we rename ?
+    this.id = 'i' + uuid.v4(); // must start with a letter to be a valid css id
+    this.taggedName = this.name;
     this.customClass = undefined;
     this.waveOutlineColor = undefined;
     this.gain = 1;
@@ -97,8 +98,6 @@ export default class {
     const trackEnd = this.getEndTime();
     const offset = this.cueIn - trackStart;
     const self = this;
-    const middleTrackOffset = 1;
-    const endTrackOffset = 2;
     let middleTrack = null;
     let endTrack = null;
 
@@ -115,13 +114,13 @@ export default class {
       if (start > trackStart) {
         cueIn = (start < trackStart) ? trackStart : start;
         cueOut = (end > trackEnd) ? trackEnd : end;
-        middleTrack = await this.duplicateTrack(this, start, cueIn + offset, cueOut + offset, middleTrackOffset);
+        middleTrack = await this.duplicateTrack(this, start, cueIn + offset, cueOut + offset, ++this.duplicationNumber);
       }
 
       if (end < trackEnd) {
         cueIn = end;
         cueOut = trackEnd;
-        endTrack = await this.duplicateTrack(this, end, cueIn + offset, cueOut + offset, endTrackOffset);
+        endTrack = await this.duplicateTrack(this, end, cueIn + offset, cueOut + offset, ++this.duplicationNumber);
       }
     }
     const peaks = cloneDeep(this.peaks);
@@ -138,6 +137,7 @@ export default class {
   }
 
   async duplicateTrack(track, start, cueIn, cueOut, trackOffset) {
+    playlist.setActiveTrack(track); // it duplicates the current active track
     return (await playlist.load([{
       track,
       src: track.src,
@@ -440,7 +440,7 @@ export default class {
       {
         attributes: {
           style: `height: ${numChan * data.height}px; width: ${data.controls.width}px; position: absolute; left: 0; z-index: 10;`,
-          id: this.name + 'Controls'
+          id: this.id + 'Controls'
         },
       }, [
         h('header', [this.taggedName]),
@@ -455,11 +455,16 @@ export default class {
               this.ee.emit('solo', this);
             },
           }, ['Solo']),
+          h(`span.btn.btn-default.btn-xs.btn-duplicate${soloClass}`, {
+            onclick: () => {
+              this.ee.emit('duplicate', this);
+            },
+          }, ['Duplicate']),
           h(`span.btn.btn-default.btn-xs.btn-collapse}`, {
             onclick: () => {
-              document.querySelector("#" + this.taggedName + 'Controls').style.display = "none";
-              document.querySelector("#" + this.taggedName + "Card").style.display = "none";
-              document.querySelector("#" + this.taggedName + "Header").style.display = "block";
+              document.querySelector("#" + this.id + 'Controls').style.display = "none";
+              document.querySelector("#" + this.id + "Card").style.display = "none";
+              document.querySelector("#" + this.id + "Header").style.display = "block";
             },
           }, ['Collapse']),
         ]),
@@ -655,7 +660,7 @@ export default class {
         {
           attributes: {
             style: `margin-left: ${channelMargin}px; height: ${data.height * numChan}px;`,
-            id: this.name + 'Card'
+            id: this.id + 'Card'
           },
         },
         channelChildren,
@@ -663,9 +668,9 @@ export default class {
 
     const collapseButton = h(`span.btn.btn-default.btn-xs.btn-collapse}`, {
       onclick: () => {
-        document.querySelector("#" + this.taggedName + 'Controls').style.display = "block";
-        document.querySelector("#" + this.taggedName + "Card").style.display = "block";
-        document.querySelector("#" + this.taggedName + "Header").style.display = "none";
+        document.querySelector("#" + this.id + 'Controls').style.display = "block";
+        document.querySelector("#" + this.id + "Card").style.display = "block";
+        document.querySelector("#" + this.id + "Header").style.display = "none";
       },
     }, ['Collapse']);
 
@@ -673,7 +678,7 @@ export default class {
         {
           attributes: {
             style: `display: none; text-align: left;`,
-            id: this.name + 'Header',
+            id: this.id + 'Header',
           },
         },
         [h('header',[this.taggedName, collapseButton])]

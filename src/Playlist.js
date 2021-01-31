@@ -196,6 +196,16 @@ export default class {
       this.drawRequest();
     });
 
+    ee.on('duplicate', async (track) => {
+      const self = this;
+      // todo it does not duplicate ease in and out, should it do it?
+      const dupTrack = await track.duplicateTrack(track, track.startTime, track.cueIn, track.cueOut, ++track.duplicationNumber);
+      const undo = () => {
+        self.removeTrack(dupTrack);
+      }
+      this.undoer.push(undo);
+    });
+
     ee.on('automaticscroll', (val) => {
       this.isAutomaticScroll = val;
     });

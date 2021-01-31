@@ -169,6 +169,28 @@ export default class {
   setUpEventEmitter() {
     const ee = this.ee;
 
+    function arrayMove(arr, fromIndex, toIndex) {
+      var element = arr[fromIndex];
+      arr.splice(fromIndex, 1);
+      arr.splice(toIndex, 0, element);
+    }
+
+    ee.on('moveUp', (track) => {
+      const idx = this.tracks.indexOf(track);
+      if (idx > 0) {
+        arrayMove(this.tracks, idx, idx - 1);
+        this.drawRequest();
+      }
+    });
+
+    ee.on('moveDown', (track) => {
+      const idx = this.tracks.indexOf(track);
+      if (idx < this.tracks.length - 1) {
+        arrayMove(this.tracks, idx, idx + 1);
+        this.drawRequest();
+      }
+    });
+
     ee.on('undo', (val) => {
       this.undoer.pop();
       console.log('undo');

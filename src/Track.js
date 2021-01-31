@@ -445,28 +445,38 @@ export default class {
       }, [
         h('header', [this.taggedName]),
         h('div.btn-group', [
-          h(`span.btn.btn-default.btn-xs.btn-mute${muteClass}`, {
+          h(`span.btn.btn-default.i.fa.fa-volume-off`, {
             onclick: () => {
               this.ee.emit('mute', this);
             },
-          }, ['Mute']),
-          h(`span.btn.btn-default.btn-xs.btn-solo${soloClass}`, {
+          }),
+          h(`span.btn.btn-default.i.fa.fa-crosshairs`, {
             onclick: () => {
               this.ee.emit('solo', this);
             },
-          }, ['Solo']),
-          h(`span.btn.btn-default.btn-xs.btn-duplicate${soloClass}`, {
+          }),
+          h(`span.btn.btn-default.i.fa.fa-chevron-up`, {
+            onclick: () => {
+              this.ee.emit('moveUp', this);
+            },
+          }),
+          h(`span.btn.btn-default.i.fa.fa-chevron-down`, {
+            onclick: () => {
+              this.ee.emit('moveDown', this);
+            },
+          }),
+          h(`span.btn.btn-default.i.fa.fa-files-o`, {
             onclick: () => {
               this.ee.emit('duplicate', this);
             },
-          }, ['Duplicate']),
-          h(`span.btn.btn-default.btn-xs.btn-collapse}`, {
+          }),
+          h(`span.btn.btn-default.i.fa.fa-compress}`, {
             onclick: () => {
               document.querySelector("#" + this.id + 'Controls').style.display = "none";
               document.querySelector("#" + this.id + "Card").style.display = "none";
               document.querySelector("#" + this.id + "Header").style.display = "block";
             },
-          }, ['Collapse']),
+          }),
         ]),
         h('label', [
           h('input.volume-slider', {
@@ -666,13 +676,13 @@ export default class {
         channelChildren,
     );
 
-    const collapseButton = h(`span.btn.btn-default.btn-xs.btn-collapse}`, {
+    const collapseButton = h(`span.btn.btn-default.i.fa.fa-expand}`, {
       onclick: () => {
         document.querySelector("#" + this.id + 'Controls').style.display = "block";
         document.querySelector("#" + this.id + "Card").style.display = "block";
         document.querySelector("#" + this.id + "Header").style.display = "none";
       },
-    }, ['Collapse']);
+    });
 
     const collapse = h(`div.controls`,
         {

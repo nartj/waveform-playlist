@@ -9,7 +9,7 @@ var playlist = WaveformPlaylist.init({
   },
   controls: {
     show: true,
-    width: 200
+    width: 250
   },
   zoomLevels: [500, 1000, 3000, 5000],
   exclSolo: true //enabling exclusive solo

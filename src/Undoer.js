@@ -12,4 +12,8 @@ export default class Undoer {
             this.events.pop()();
         }
     }
+
+    clear() {
+        this.events.clear();
+    }
 }

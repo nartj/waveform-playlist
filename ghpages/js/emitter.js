@@ -122,6 +122,14 @@ $container.on('click', '.btn-loop', () => {
   playoutPromises = playlist.play(startTime, endTime);
 });
 
+$container.on('click', '.btn-save', () => {
+  ee.emit('save');
+});
+
+$container.on('click', '.btn-load', () => {
+  ee.emit('load');
+});
+
 $container.on('click', '.btn-undo', () => {
   ee.emit('undo');
 });

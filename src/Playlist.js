@@ -4,6 +4,7 @@ import h from 'virtual-dom/h';
 import diff from 'virtual-dom/diff';
 import patch from 'virtual-dom/patch';
 import InlineWorker from 'inline-worker';
+import FileSaver from 'file-saver';
 
 import { pixelsToSeconds } from './utils/conversions';
 import LoaderFactory from './track/loader/LoaderFactory';
@@ -175,6 +176,19 @@ export default class {
 
     ee.on('redo', (val) => {
       console.log('redo');
+      // todo
+    });
+
+    ee.on('load', (val) => {
+      this.undoer.clear();
+      console.log('load');
+      // todo
+    });
+
+    ee.on('save', async (val) => {
+      console.log('save');
+      const blob = new Blob([JSON.stringify(this.tracks, null)], {type: "text/plain;charset=utf-8"});
+      FileSaver.saveAs(blob, "playlist.json");
       // todo
     });
 

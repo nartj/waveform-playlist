@@ -125,6 +125,7 @@ export default class {
     }
     const peaks = cloneDeep(this.peaks);
     const undo = () => {
+      // todo replace with playlist.load and remove peaks
       self.setCues(trackStart, trackEnd);
       self.setPeaks(peaks);
       playlist.removeTrack(middleTrack);

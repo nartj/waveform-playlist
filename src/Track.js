@@ -2,6 +2,7 @@ import _assign from 'lodash.assign';
 import _forOwn from 'lodash.forown';
 
 import uuid from 'uuid';
+import cloneDeep from 'lodash.clonedeep';
 import h from 'virtual-dom/h';
 
 import extractPeaks from 'webaudio-peaks';
@@ -20,6 +21,7 @@ export default class {
 
   constructor() {
     this.name = 'Untitled';
+    this.id = 'i' + uuid.v4(); // must start with a letter to be a valid css id
     this.taggedName = this.name;
     this.customClass = undefined;
     this.waveOutlineColor = undefined;
@@ -39,6 +41,7 @@ export default class {
     this.src = undefined;
     this.duplicationNumber = 0;
     this.srcTrack = undefined;
+    this.scale = window.devicePixelRatio;
   }
 
   setSrc(src) {
@@ -90,14 +93,16 @@ export default class {
   /*
   *   start, end in seconds relative to the entire playlist.
   */
-  trim(start, end) {
+  async trim(start, end) {
     const trackStart = this.getStartTime();
     const trackEnd = this.getEndTime();
     const offset = this.cueIn - trackStart;
-    let trackOffset = 0;
+    const self = this;
+    let middleTrack = null;
+    let endTrack = null;
 
     if ((trackStart <= start && trackEnd >= start) ||
-      (trackStart <= end && trackEnd >= end)) {
+        (trackStart <= end && trackEnd >= end)) {
       let cueIn = trackStart;
       let cueOut = (start < trackStart) ? end : start;
 
@@ -109,15 +114,49 @@ export default class {
       if (start > trackStart) {
         cueIn = (start < trackStart) ? trackStart : start;
         cueOut = (end > trackEnd) ? trackEnd : end;
-        ee.emit("duplicateTrack", this, start, cueIn + offset, cueOut + offset, ++trackOffset);
+        middleTrack = await this.duplicateTrack(this, start, cueIn + offset, cueOut + offset, ++this.duplicationNumber);
       }
 
       if (end < trackEnd) {
         cueIn = end;
         cueOut = trackEnd;
-        ee.emit("duplicateTrack", this, end, cueIn + offset, cueOut + offset, ++trackOffset);
+        endTrack = await this.duplicateTrack(this, end, cueIn + offset, cueOut + offset, ++this.duplicationNumber);
       }
     }
+    const peaks = cloneDeep(this.peaks);
+    const undo = () => {
+      self.setCues(trackStart, trackEnd);
+      self.setPeaks(peaks);
+      playlist.removeTrack(middleTrack);
+      playlist.removeTrack(endTrack);
+      playlist.setTimeSelection(0, 0);
+      playlist.adjustDuration();
+      playlist.draw(playlist.render());
+    }
+    return undo;
+  }
+
+  async duplicateTrack(track, start, cueIn, cueOut, trackOffset) {
+    playlist.setActiveTrack(track); // it duplicates the current active track
+    return (await playlist.load([{
+      track,
+      src: track.src,
+      name: track.name,
+      start,
+      states: track.states,
+      cueIn,
+      cueOut,
+      gain: track.gain,
+      muted: track.muted,
+      soloed: track.soloed,
+      selection: track.selection,
+      peaks: track.peaks,
+      customClass: track.customClass,
+      waveOutlineColor: track.waveOutlineColor,
+      stereoPan: track.stereoPan,
+      duplicationNumber: track.duplicationNumber,
+      trackOffset,
+    }]))[0];
   }
 
   setStartTime(start) {
@@ -401,20 +440,43 @@ export default class {
       {
         attributes: {
           style: `height: ${numChan * data.height}px; width: ${data.controls.width}px; position: absolute; left: 0; z-index: 10;`,
+          id: this.id + 'Controls'
         },
       }, [
         h('header', [this.taggedName]),
         h('div.btn-group', [
-          h(`span.btn.btn-default.btn-xs.btn-mute${muteClass}`, {
+          h(`span.btn.btn-default.i.fa.fa-volume-off`, {
             onclick: () => {
               this.ee.emit('mute', this);
             },
-          }, ['Mute']),
-          h(`span.btn.btn-default.btn-xs.btn-solo${soloClass}`, {
+          }),
+          h(`span.btn.btn-default.i.fa.fa-crosshairs`, {
             onclick: () => {
               this.ee.emit('solo', this);
             },
-          }, ['Solo']),
+          }),
+          h(`span.btn.btn-default.i.fa.fa-chevron-up`, {
+            onclick: () => {
+              this.ee.emit('moveUp', this);
+            },
+          }),
+          h(`span.btn.btn-default.i.fa.fa-chevron-down`, {
+            onclick: () => {
+              this.ee.emit('moveDown', this);
+            },
+          }),
+          h(`span.btn.btn-default.i.fa.fa-files-o`, {
+            onclick: () => {
+              this.ee.emit('duplicate', this);
+            },
+          }),
+          h(`span.btn.btn-default.i.fa.fa-compress}`, {
+            onclick: () => {
+              document.querySelector("#" + this.id + 'Controls').style.display = "none";
+              document.querySelector("#" + this.id + "Card").style.display = "none";
+              document.querySelector("#" + this.id + "Header").style.display = "block";
+            },
+          }),
         ]),
         h('label', [
           h('input.volume-slider', {
@@ -441,7 +503,8 @@ export default class {
     const endX = secondsToPixels(this.endTime, data.resolution, data.sampleRate);
     let progressWidth = 0;
     const numChan = this.peaks.data.length;
-    const scale = window.devicePixelRatio;
+    const oldScale = this.scale;
+    this.scale = window.devicePixelRatio;
 
     if (playbackX > 0 && playbackX > startX) {
       if (playbackX < endX) {
@@ -479,11 +542,11 @@ export default class {
 
         channelChildren.push(h('canvas', {
           attributes: {
-            width: currentWidth * scale,
-            height: data.height * scale,
+            width: currentWidth * this.scale,
+            height: data.height * this.scale,
             style: `float: left; position: relative; margin: 0; padding: 0; z-index: 3; width: ${currentWidth}px; height: ${data.height}px;`,
           },
-          hook: new CanvasHook(peaks, offset, this.peaks.bits, canvasColor, scale),
+          hook: new CanvasHook(peaks, offset, this.peaks.bits, canvasColor, this.scale, this.scale !== oldScale),
         }));
 
         totalWidth -= currentWidth;
@@ -603,14 +666,35 @@ export default class {
     const audibleClass = data.shouldPlay ? '' : '.silent';
     const customClass = (this.customClass === undefined) ? '' : `.${this.customClass}`;
 
-    return h(`div.channel-wrapper${audibleClass}${customClass}`,
-      {
-        attributes: {
-          style: `margin-left: ${channelMargin}px; height: ${data.height * numChan}px;`,
+    const full = h(`div.channel-wrapper${audibleClass}${customClass}`,
+        {
+          attributes: {
+            style: `margin-left: ${channelMargin}px; height: ${data.height * numChan}px;`,
+            id: this.id + 'Card'
+          },
         },
-      },
-      channelChildren,
+        channelChildren,
     );
+
+    const collapseButton = h(`span.btn.btn-default.i.fa.fa-expand}`, {
+      onclick: () => {
+        document.querySelector("#" + this.id + 'Controls').style.display = "block";
+        document.querySelector("#" + this.id + "Card").style.display = "block";
+        document.querySelector("#" + this.id + "Header").style.display = "none";
+      },
+    });
+
+    const collapse = h(`div.controls`,
+        {
+          attributes: {
+            style: `display: none; text-align: left;`,
+            id: this.id + 'Header',
+          },
+        },
+        [h('header',[this.taggedName, collapseButton])]
+    );
+
+    return h('', [collapse, full]);
   }
 
   getTrackDetails() {

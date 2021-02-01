@@ -89,11 +89,13 @@ export function mastervolumechange(volume) {
 }
 
 export function fadein(duration, track) {
+  // todo check that it does not overlap with fadout
   track.setFadeIn(duration, this.fadeType);
   this.drawRequest();
 }
 
 export function fadeout(duration, track) {
+  // todo check that it does not overlap with fadin
   track.setFadeOut(duration, this.fadeType);
   this.drawRequest();
 }

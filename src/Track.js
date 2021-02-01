@@ -467,6 +467,11 @@ export default class {
               this.ee.emit('moveDown', this);
             },
           }),
+          h(`span.btn.btn-default.i.fa.fa-times`, {
+            onclick: () => {
+              this.ee.emit('delete', this);
+            },
+          }),
           h(`span.btn.btn-default.i.fa.fa-files-o`, {
             onclick: () => {
               this.ee.emit('duplicate', this);

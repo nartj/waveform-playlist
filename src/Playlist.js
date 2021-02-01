@@ -228,6 +228,30 @@ export default class {
       this.undoer.push(undo);
     });
 
+    ee.on('delete', async (track) => {
+      const self = this;
+      this.removeTrack(track);
+      const undo = () => {
+        //const dupTrack = await track.duplicateTrack(track, track.startTime, track.cueIn, track.cueOut, 1);
+        // todo
+      }
+      this.undoer.push(undo);
+      this.drawRequest();
+    });
+
+    ee.on('add', async (file) => {
+      const track = (await this.load([{
+        src: file,
+        name: file.name,
+      }]))[0];
+      const self = this;
+      const undo = () => {
+        self.removeTrack(track);
+        self.drawRequest();
+      }
+      this.undoer.push(undo);
+    });
+
     ee.on('automaticscroll', (val) => {
       this.isAutomaticScroll = val;
     });
@@ -369,13 +393,6 @@ export default class {
       this.fadeType = type;
     });
 
-    ee.on('newtrack', (file) => {
-      this.load([{
-        src: file,
-        name: file.name,
-      }]);
-    });
-
     ee.on('duplicateTrack', (track, start, cueIn, cueOut, trackOffset) => {
       track.duplicateTrack(track, start, cueIn, cueOut, trackOffset);
     });
@@ -434,6 +451,7 @@ export default class {
     let newTrack;
     let trackOffset;
     let isTrackDuplication = false;
+    const self = this;
 
     return Promise.all(loadPromises).then((audioBuffers) => {
       this.ee.emit('audiosourcesloaded');
@@ -521,6 +539,8 @@ export default class {
       } else if (isTrackDuplication) {
         this.tracks.splice(this.tracks.indexOf(this.getActiveTrack())
             + this.getActiveTrack().duplicationNumber - newTrack.duplicationNumber + trackOffset, 0, newTrack);
+      } else {
+        this.tracks.push(tracks[0]);
       }
 
       this.adjustDuration();

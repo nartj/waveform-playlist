@@ -1,6 +1,6 @@
 var playlist = WaveformPlaylist.init({
   samplesPerPixel: 1000,
-  waveHeight: 100,
+  waveHeight: 150,
   container: document.getElementById("playlist"),
   timescale: true,
   state: 'cursor',
@@ -9,7 +9,7 @@ var playlist = WaveformPlaylist.init({
   },
   controls: {
     show: true,
-    width: 250
+    width: 200
   },
   zoomLevels: [500, 1000, 3000, 5000],
   exclSolo: true //enabling exclusive solo

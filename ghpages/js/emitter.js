@@ -271,7 +271,7 @@ $container.on('drop', '.track-drop', (e) => {
   const dropEvent = e.originalEvent;
 
   for (let i = 0; i < dropEvent.dataTransfer.files.length; i++) {
-    ee.emit('newtrack', dropEvent.dataTransfer.files[i]);
+    ee.emit('add', dropEvent.dataTransfer.files[i]);
   }
 });
 

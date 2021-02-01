@@ -1,6 +1,6 @@
 var playlist = WaveformPlaylist.init({
   samplesPerPixel: 3000,
-  waveHeight: 100,
+  waveHeight: 150,
   container: document.getElementById("playlist"),
   state: 'cursor',
   colors: {
@@ -11,7 +11,7 @@ var playlist = WaveformPlaylist.init({
   timescale: true,
   controls: {
     show: true, //whether or not to include the track controls
-    width: 250 //width of controls in pixels
+    width: 200 //width of controls in pixels
   },
   seekStyle : 'line',
   zoomLevels: [500, 1000, 3000, 5000]

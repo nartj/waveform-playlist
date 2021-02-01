@@ -53,7 +53,7 @@ var playlist = WaveformPlaylist({
   },
   controls: {
     show: true,
-    width: 250
+    width: 200
   },
   zoomLevels: [500, 1000, 3000, 5000]
 });

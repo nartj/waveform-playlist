@@ -122,6 +122,21 @@ $container.on('click', '.btn-loop', () => {
   playoutPromises = playlist.play(startTime, endTime);
 });
 
+$container.on('click', '.btn-add', () => {
+    let input = document.createElement('input');
+    input.type = 'file';
+    input.multiple = true;
+    input.accept = 'audio/*';
+
+    input.onchange = _ => {
+      const files = Array.from(input.files);
+      if (files && files.length) {
+        files.forEach(f => ee.emit('add', f));
+      }
+    };
+    input.click();
+});
+
 $container.on('click', '.btn-save', () => {
   ee.emit('save');
 });

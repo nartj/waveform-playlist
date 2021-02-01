@@ -69,7 +69,7 @@
   },
   "scripts": {
     "clean": "(IF EXIST dist (rd /s /Q dist)) & (IF EXIST lib (rd /s /Q lib)) & (IF EXIST styles (rd /s /Q styles))",
-    "styles": "(IF NOT EXIST styles (mkdir styles) && copy /Y ghpages\\_sass\\_playlist.scss styles\\playlist.scss",
+    "styles": "(IF NOT EXIST styles (mkdir styles)) && copy /Y ghpages/_sass/_playlist.scss styles/playlist.scss",
     "compile": "babel src --out-dir lib",
     "jekyll": "wsl jekyll build -s ghpages -d dist/waveform-playlist",
     "jekyll:dev": "start wsl jekyll build -s ghpages -d dist/waveform-playlist --watch",

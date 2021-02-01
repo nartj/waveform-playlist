@@ -221,7 +221,7 @@ export default class {
     ee.on('duplicate', async (track) => {
       const self = this;
       // todo it does not duplicate ease in and out, should it do it?
-      const dupTrack = await track.duplicateTrack(track, track.startTime, track.cueIn, track.cueOut, ++track.duplicationNumber);
+      const dupTrack = await track.duplicateTrack(track, track.startTime, track.cueIn, track.cueOut, 1);
       const undo = () => {
         self.removeTrack(dupTrack);
       }

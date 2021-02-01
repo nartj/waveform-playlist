@@ -100,6 +100,7 @@ export default class {
     const self = this;
     let middleTrack = null;
     let endTrack = null;
+    let trackOffset = 0;
 
     if ((trackStart <= start && trackEnd >= start) ||
         (trackStart <= end && trackEnd >= end)) {
@@ -114,13 +115,13 @@ export default class {
       if (start > trackStart) {
         cueIn = (start < trackStart) ? trackStart : start;
         cueOut = (end > trackEnd) ? trackEnd : end;
-        middleTrack = await this.duplicateTrack(this, start, cueIn + offset, cueOut + offset, ++this.duplicationNumber);
+        middleTrack = await this.duplicateTrack(this, start, cueIn + offset, cueOut + offset, ++trackOffset);
       }
 
       if (end < trackEnd) {
         cueIn = end;
         cueOut = trackEnd;
-        endTrack = await this.duplicateTrack(this, end, cueIn + offset, cueOut + offset, ++this.duplicationNumber);
+        endTrack = await this.duplicateTrack(this, end, cueIn + offset, cueOut + offset, ++trackOffset);
       }
     }
     const peaks = cloneDeep(this.peaks);

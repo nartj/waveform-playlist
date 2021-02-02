@@ -7,13 +7,13 @@
 
 # Site settings
 title: Waveform Playlist
-email: naomiaro@gmail.com
+email: nartjeremy@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   Waveform Playlist: The multitrack javascript web audio editor and player.
 baseurl: "/waveform-playlist" # the subpath of your site, e.g. /blog
-url: "https://naomiaro.github.io" # the base hostname & protocol for your site
-twitter_username: naomiaro
-github_username: naomiaro
+url: "https://nartj.github.io" # the base hostname & protocol for your site
+twitter_username: nartj
+github_username: nartj
 
 # Build settings
 markdown: kramdown

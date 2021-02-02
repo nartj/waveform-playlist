@@ -4,7 +4,7 @@ var playlist = WaveformPlaylist.init({
     show: true, //whether or not to include the track controls
     width: 200 //width of controls in pixels
   },
-  waveHeight: 100
+  waveHeight: 150
 });
 
 playlist.load([

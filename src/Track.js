@@ -1,7 +1,7 @@
 import _assign from 'lodash.assign';
 import _forOwn from 'lodash.forown';
 
-import uuid from 'uuid';
+import {v4 as uuid} from 'uuid';
 import cloneDeep from 'lodash.clonedeep';
 import h from 'virtual-dom/h';
 
@@ -21,7 +21,7 @@ export default class {
 
   constructor() {
     this.name = 'Untitled';
-    this.id = 'i' + uuid.v4(); // must start with a letter to be a valid css id
+    this.id = 'i' + uuid(); // must start with a letter to be a valid css id
     this.taggedName = this.name;
     this.customClass = undefined;
     this.waveOutlineColor = undefined;
@@ -225,7 +225,7 @@ export default class {
   }
 
   saveFade(type, shape, start, end) {
-    const id = uuid.v4();
+    const id = uuid();
 
     this.fades[id] = {
       type,

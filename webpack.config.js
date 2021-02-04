@@ -8,6 +8,7 @@ module.exports = {
     filename: 'waveform-playlist.var.js',
     library: 'WaveformPlaylist',
     libraryTarget: 'var',
+    globalObject: 'this'
   },
   target: 'es2015',
   mode: "development",
@@ -26,7 +27,6 @@ module.exports = {
       }
     ],
   },
-  plugins: [],
   devServer: {
     contentBase: path.join(__dirname, 'dist/'),
     publicPath: '/waveform-playlist/js/',

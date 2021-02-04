@@ -14,7 +14,7 @@ import Track from './Track';
 import Playout from './Playout';
 import AnnotationList from './annotation/AnnotationList';
 
-import RecorderWorkerFunction from './utils/recorderWorker';
+import ExportOggWorker from 'worker-loader!./utils/exportogg.js';
 import ExportWavWorkerFunction from './utils/exportWavWorker';
 import Undoer from "./Undoer";
 
@@ -45,7 +45,8 @@ export default class {
 
   // TODO extract into a plugin
   initExporter() {
-    this.exportWorker = new InlineWorker(ExportWavWorkerFunction);
+    this.wavExportWorker = new InlineWorker(ExportWavWorkerFunction);
+    this.oggExportWorker = new ExportOggWorker();
   }
 
   // TODO extract into a plugin
@@ -236,6 +237,7 @@ export default class {
         // todo
       }
       this.undoer.push(undo);
+      // todo we should also receive the duration of the audio, the audio duration might be shorter we removed the track
       this.drawRequest();
     });
 
@@ -451,7 +453,6 @@ export default class {
     let newTrack;
     let trackOffset;
     let isTrackDuplication = false;
-    const self = this;
 
     return Promise.all(loadPromises).then((audioBuffers) => {
       this.ee.emit('audiosourcesloaded');
@@ -713,11 +714,28 @@ export default class {
       if (type === 'buffer') {
         this.ee.emit('audiorenderingfinished', type, audioBuffer);
         this.isRendering = false;
-        return;
-      }
+      } else if (type === 'ogg') {
+        // callback for `encodeOGG`
+        this.oggExportWorker.onmessage = (e) => {
+          this.ee.emit('audiorenderingfinished', type, e.data);
+          this.isRendering = false;
+        };
 
-      if (type === 'wav') {
-        this.exportWorker.postMessage({
+        // ask the worker for a OGG
+        this.oggExportWorker.postMessage({
+          command: 'encodeOGG',
+          buffer: [
+              // todo check if mono or stereo
+            audioBuffer.getChannelData(0),
+            audioBuffer.getChannelData(1),
+          ],
+          sampleRate: audioBuffer.sampleRate,
+          numberOfChannels: audioBuffer.numberOfChannels,
+          quality: 0.5,
+          tags: {}
+        });
+      } else if (type === 'wav') {
+        this.wavExportWorker.postMessage({
           command: 'init',
           config: {
             sampleRate: 44100,
@@ -725,18 +743,18 @@ export default class {
         });
 
         // callback for `exportWAV`
-        this.exportWorker.onmessage = (e) => {
+        this.wavExportWorker.onmessage = (e) => {
           this.ee.emit('audiorenderingfinished', type, e.data);
           this.isRendering = false;
 
           // clear out the buffer for next renderings.
-          this.exportWorker.postMessage({
+          this.wavExportWorker.postMessage({
             command: 'clear',
           });
         };
 
         // send the channel data from our buffer to the worker
-        this.exportWorker.postMessage({
+        this.wavExportWorker.postMessage({
           command: 'record',
           buffer: [
             audioBuffer.getChannelData(0),
@@ -745,7 +763,7 @@ export default class {
         });
 
         // ask the worker for a WAV
-        this.exportWorker.postMessage({
+        this.wavExportWorker.postMessage({
           command: 'exportWAV',
           type: 'audio/wav',
         });

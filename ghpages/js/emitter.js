@@ -252,7 +252,7 @@ $container.on('click', '.btn-info', () => {
 });
 
 $container.on('click', '.btn-download', () => {
-  ee.emit('startaudiorendering', 'wav');
+  ee.emit('startaudiorendering', 'ogg');
 });
 
 $container.on('click', '.btn-seektotime', () => {
@@ -323,11 +323,11 @@ function displayLoadingData(data) {
   $('.loading-data').append(info);
 }
 
-function displayDownloadLink(link) {
+function displayDownloadLink(link, type) {
   const dateString = (new Date()).toISOString();
   const $link = $('<a/>', {
     href: link,
-    download: `waveformplaylist${dateString}.wav`,
+    download: `waveformplaylist${dateString}.${type}`,
     text: `Download mix ${dateString}`,
     class: 'btn btn-small btn-download-link',
   });
@@ -396,13 +396,13 @@ ee.on('audiosourceserror', (e) => {
 });
 
 ee.on('audiorenderingfinished', (type, data) => {
-  if (type == 'wav') {
+  if (type == 'wav' || type == 'ogg') {
     if (downloadUrl) {
       window.URL.revokeObjectURL(downloadUrl);
     }
 
     downloadUrl = window.URL.createObjectURL(data);
-    displayDownloadLink(downloadUrl);
+    displayDownloadLink(downloadUrl, type);
   }
 });
 

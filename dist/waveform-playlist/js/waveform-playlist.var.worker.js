@@ -1,14 +1,17 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./node_modules/babel-loader/lib/index.js??ruleSet[1].rules[0].use!./src/utils/exportogg.js":
-/*!**************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib/index.js??ruleSet[1].rules[0].use!./src/utils/exportogg.js ***!
-  \**************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js??ruleSet[1].rules[0].use!./src/utils/exportogg.worker.js":
+/*!*********************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??ruleSet[1].rules[0].use!./src/utils/exportogg.worker.js ***!
+  \*********************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "encodeOGG": () => (/* binding */ encodeOGG)
+/* harmony export */ });
 /* harmony import */ var vorbis_encoder_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vorbis-encoder-js */ "./node_modules/vorbis-encoder-js/index.js");
 /* harmony import */ var vorbis_encoder_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vorbis_encoder_js__WEBPACK_IMPORTED_MODULE_0__);
  // quality between - 0.1 to 1
@@ -34127,7 +34130,7 @@ module.exports = require("path");;
 /************************************************************************/
 /******/ 	// startup
 /******/ 	// Load entry module
-/******/ 	__webpack_require__("./node_modules/babel-loader/lib/index.js??ruleSet[1].rules[0].use!./src/utils/exportogg.js");
+/******/ 	__webpack_require__("./node_modules/babel-loader/lib/index.js??ruleSet[1].rules[0].use!./src/utils/exportogg.worker.js");
 /******/ 	// This entry module used 'exports' so it can't be inlined
 /******/ })()
 ;

@@ -1,7 +1,7 @@
 import {encoder as Encoder} from 'vorbis-encoder-js';
 
 // quality between - 0.1 to 1
-function encodeOGG(buffer, numberOfChannels, sampleRate, quality, tags) {
+export function encodeOGG(buffer, numberOfChannels, sampleRate, quality, tags) {
     const audioBuffer = {
         getChannelData: (id) => {
             return buffer[id];

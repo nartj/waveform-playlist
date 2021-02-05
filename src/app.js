@@ -2,6 +2,8 @@ import _assign from 'lodash.assign';
 import createElement from 'virtual-dom/create-element';
 import EventEmitter from 'event-emitter';
 import Playlist from './Playlist';
+import "regenerator-runtime";
+import "regenerator-runtime/runtime.js";
 
 export function init(options = {}, ee = EventEmitter()) {
   if (options.container === undefined) {

@@ -14,7 +14,7 @@ import Track from './Track';
 import Playout from './Playout';
 import AnnotationList from './annotation/AnnotationList';
 
-import ExportOggWorker from 'worker-loader!./utils/exportogg.js';
+import ExportOggWorker from 'worker-loader!./utils/exportogg.worker.js';
 import ExportWavWorkerFunction from './utils/exportWavWorker';
 import Undoer from "./Undoer";
 

@@ -473,6 +473,7 @@ export default class {
         const soloed = info.soloed || false;
         const selection = info.selected;
         const peaks = info.peaks || { type: 'WebAudio', mono: this.mono };
+        const peakData = info.peakData || undefined;
         const customClass = info.customClass || undefined;
         const waveOutlineColor = info.waveOutlineColor || undefined;
         const stereoPan = info.stereoPan || 0;
@@ -511,7 +512,11 @@ export default class {
         }
 
         if (peaks !== undefined) {
-          track.setPeakData(peaks);
+          track.setPeaks(peaks);
+        }
+
+        if (peakData !== undefined) {
+          track.setPeakData(peakData);
         }
 
         track.setState(this.getState());
@@ -552,112 +557,6 @@ export default class {
     }).catch((e) => {
       this.ee.emit('audiosourceserror', e);
       return [];
-    });
-  }
-
-  virtualLoad(trackList) {
-    const loadPromises = trackList.map((trackInfo) => {
-      const loader = LoaderFactory.createLoader(trackInfo.src, this.ac, this.ee);
-      return loader.load();
-    });
-    let newTrack = undefined;
-    let trackOffset = undefined;
-    let isTrackDuplication = false;
-
-    return Promise.all(loadPromises).then((audioBuffers) => {
-      this.ee.emit('audiosourcesloaded');
-
-      const tracks = audioBuffers.map((audioBuffer, index) => {
-        const info = trackList[index];
-        const trck = info.track || undefined;
-        isTrackDuplication = trck !== undefined;
-        const name = info.name || 'Untitled';
-        const start = info.start || 0;
-        const states = info.states || {};
-        const fadeIn = info.fadeIn;
-        const fadeOut = info.fadeOut;
-        const cueIn = info.cueIn || 0;
-        const cueOut = info.cueOut || audioBuffer.duration;
-        const gain = info.gain || 1;
-        const muted = info.muted || false;
-        const soloed = info.soloed || false;
-        const selection = info.selected;
-        const peaks = info.peaks || { type: 'WebAudio', mono: this.mono };
-        const customClass = info.customClass || undefined;
-        const waveOutlineColor = info.waveOutlineColor || undefined;
-        const stereoPan = info.stereoPan || 0;
-        const duplicationNumber = info.duplicationNumber || 0;
-        trackOffset = info.trackOffset || 0;
-
-        // webaudio specific playout for now.
-        const playout = new Playout(this.ac, audioBuffer);
-
-        const track = new Track();
-
-        track.setSrc(info.src);
-        track.setBuffer(audioBuffer);
-        track.setSrcTrack(trck);
-        track.setDuplicationNumber(trck === undefined ?
-          duplicationNumber : trck.srcTrack === undefined ?
-            trck.duplicationNumber + 1 : trck.srcTrack.duplicationNumber + 1);
-        track.setName(name);
-        track.setEventEmitter(this.ee);
-        track.setEnabledStates(states);
-        track.setCues(cueIn, cueOut);
-        track.setCustomClass(customClass);
-        track.setWaveOutlineColor(waveOutlineColor);
-
-        if (fadeIn !== undefined) {
-          track.setFadeIn(fadeIn.duration, fadeIn.shape);
-        }
-
-        if (fadeOut !== undefined) {
-          track.setFadeOut(fadeOut.duration, fadeOut.shape);
-        }
-
-        if (selection !== undefined) {
-          this.setActiveTrack(track);
-          this.setTimeSelection(selection.start, selection.end);
-        }
-
-        if (peaks !== undefined) {
-          track.setPeakData(peaks);
-        }
-
-        track.setState(this.getState());
-        track.setStartTime(start);
-        track.setPlayout(playout);
-
-        track.setGainLevel(gain);
-        track.setStereoPanValue(stereoPan);
-
-        if (muted) {
-          this.muteTrack(track);
-        }
-
-        if (soloed) {
-          this.soloTrack(track);
-        }
-
-        // extract peaks with AudioContext for now.
-        track.calculatePeaks(this.samplesPerPixel, this.sampleRate);
-        newTrack = track;
-
-        return track;
-      });
-      if (tracks.length > 1) {
-        this.tracks = this.tracks.concat(tracks);
-      } else if (isTrackDuplication) {
-        this.tracks.splice(this.tracks.indexOf(this.getActiveTrack())
-          + this.getActiveTrack().duplicationNumber - newTrack.duplicationNumber + trackOffset, 0, newTrack);
-      }
-
-      this.adjustDuration();
-      this.draw(this.render());
-
-      this.ee.emit('audiosourcesrendered');
-    }).catch((e) => {
-      this.ee.emit('audiosourceserror', e);
     });
   }
 

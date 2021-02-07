@@ -19,7 +19,7 @@ export function init(options = {}, ee = EventEmitter()) {
     ac: audioContext,
     sampleRate: audioContext.sampleRate,
     samplesPerPixel: 4096,
-    mono: true,
+    mono: false,
     fadeType: 'logarithmic',
     exclSolo: false,
     timescale: false,

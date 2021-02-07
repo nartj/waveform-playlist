@@ -153,6 +153,7 @@ export default class {
       soloed: track.soloed,
       selection: track.selection,
       peaks: track.peaks,
+      peakData: track.peakData,
       customClass: track.customClass,
       waveOutlineColor: track.waveOutlineColor,
       stereoPan: track.stereoPan,
@@ -745,4 +746,5 @@ export default class {
     }
     this.duplicationNumber = duplicationNumber;
   }
+
 }

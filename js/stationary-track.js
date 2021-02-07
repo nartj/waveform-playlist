@@ -2,7 +2,7 @@ var playlist = WaveformPlaylist.init({
   samplesPerPixel: 3000,
   zoomLevels: [500, 1000, 3000, 5000],
   mono: true,
-  waveHeight: 100,
+  waveHeight: 150,
   container: document.getElementById("playlist"),
   state: 'shift',
   waveOutlineColor: '#E0EFF1',

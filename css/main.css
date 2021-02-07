@@ -98,4 +98,6 @@
 
 footer { margin-top: 2em; }
 
+.form-control { /* to fix master-gain slider overflow */ padding-right: 0; margin-right: 12px; }
+
 /*# sourceMappingURL=main.css.map */

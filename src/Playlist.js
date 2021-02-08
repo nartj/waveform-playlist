@@ -214,9 +214,9 @@ export default class {
       r.readAsBinaryString(file);
     });
 
-    ee.on('reload', async (file, trackName) => {
-      let track = this.tracks.filter((t) => t.taggedName === trackName)[0];
-      this.tracks = this.tracks.filter((t) => t.taggedName !== trackName);
+    ee.on('reload', async (file, trackId) => {
+      const track = this.tracks.find((t) => t.id === trackId);
+      this.tracks = this.tracks.filter((t) => t.id !== trackId);
       await this.load([{
         src: file,
         name: track.name,
@@ -240,7 +240,6 @@ export default class {
         duplicationNumber: track.duplicationNumber,
         trackOffset: track.trackOffset
       }]);
-      console.log(track);
     });
 
     ee.on('save', () => {

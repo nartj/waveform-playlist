@@ -455,7 +455,7 @@ export default class {
             [
               h("span", { title: 'Reload this track' }, ['Reload']),
               h(`input.btn-reload`,
-                { type: 'file', accept: 'audio/*',style: { display: 'none' }, name: `${this.taggedName}` }
+                { type: 'file', accept: 'audio/*',style: { display: 'none' }, name: `${this.taggedName}`, id: `${this.id}` }
               )
             ])
         ]

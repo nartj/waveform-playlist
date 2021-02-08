@@ -138,10 +138,10 @@ $container.on('change', '.btn-load', () => {
   ee.emit('load', files[0]);
 });
 
-$container.on('change', '.btn-reload', () => {
-  const files = $('.btn-reload').prop('files');
-  const trackName = $('.btn-reload').prop('name');
-  ee.emit('reload', files[0], trackName);
+$container.on('change', '.btn-reload', (e) => {
+  console.log('id: ' + e.target.id + ' files ' + e.target.files)
+  ee.emit('reload', e.target.files[0], e.target.id);
+  document.getElementById(e.target.id).value = null;
 });
 
 $container.on('click', '.btn-undo', () => {
@@ -247,7 +247,7 @@ $container.on('click', '.btn-trim-audio', () => {
 });
 
 $container.on('click', '.btn-info', () => {
-  console.log(playlist.getInfo());
+  //console.log(playlist.getInfo());
 });
 
 $container.on('click', '.btn-download', () => {

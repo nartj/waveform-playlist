@@ -214,6 +214,35 @@ export default class {
       r.readAsBinaryString(file);
     });
 
+    ee.on('reload', async (file, trackName) => {
+      let track = this.tracks.filter((t) => t.taggedName === trackName)[0];
+      this.tracks = this.tracks.filter((t) => t.taggedName !== trackName);
+      await this.load([{
+        src: file,
+        name: track.name,
+        taggedName: track.taggedName,
+        start: track.startTime,
+        states: track.states,
+        cueIn: track.cueIn,
+        cueOut: track.cueOut,
+        fadeIn: track.fadeIn,
+        fadeOut: track.fadeOut,
+        fades: track.fades,
+        gain: track.gain,
+        muted: track.muted,
+        soloed: track.soloed,
+        selection: track.selection,
+        peaks: track.peaks,
+        peakData: track.peakData,
+        customClass: track.customClass,
+        waveOutlineColor: track.waveOutlineColor,
+        stereoPan: track.stereoPan,
+        duplicationNumber: track.duplicationNumber,
+        trackOffset: track.trackOffset
+      }]);
+      console.log(track);
+    });
+
     ee.on('save', () => {
       const getCircularReplacer = () => {
         const seen = new WeakSet();
@@ -464,8 +493,14 @@ export default class {
 
   load(trackList) {
     const loadPromises = trackList.map((trackInfo) => {
+      if (typeof trackInfo.src !== "string" && !(trackInfo.src instanceof Blob)) {
+        trackInfo.isUnloadedTrack = true;
+      } else {
+        trackInfo.isUnloadedTrack = false;
+      }
       const loader = LoaderFactory.createLoader(trackInfo.src, this.ac, this.ee);
-      return loader.load();
+      if (loader) return loader.load();
+      else return loader;
     });
     let newTrack;
     let trackOffset;
@@ -476,6 +511,7 @@ export default class {
 
       const tracks = audioBuffers.map((audioBuffer, index) => {
         const info = trackList[index];
+        const isUnloadedTrack = info.isUnloadedTrack || false;
         const trck = info.track || undefined;
         isTrackDuplication = trck !== undefined;
         const name = info.name || 'Untitled';
@@ -499,7 +535,8 @@ export default class {
         trackOffset = info.trackOffset || 0;
 
         // webaudio specific playout for now.
-        const playout = new Playout(this.ac, audioBuffer);
+        let playout;
+        if (audioBuffer) playout = new Playout(this.ac, audioBuffer);
 
         const track = new Track();
 
@@ -516,6 +553,7 @@ export default class {
         track.setCues(cueIn, cueOut);
         track.setCustomClass(customClass);
         track.setWaveOutlineColor(waveOutlineColor);
+        track.isUnloadedTrack = isUnloadedTrack;
 
         // Transform playlist fades is loaded from Json
         if ((fadeIn !== undefined && fadeIn.duration === undefined) ||
@@ -563,10 +601,12 @@ export default class {
 
         track.setState(this.getState());
         track.setStartTime(start);
-        track.setPlayout(playout);
 
-        track.setGainLevel(gain);
-        track.setStereoPanValue(stereoPan);
+        if (playout) {
+          track.setPlayout(playout);
+          track.setGainLevel(gain);
+          track.setStereoPanValue(stereoPan);
+        }
 
         if (muted) {
           this.muteTrack(track);
@@ -577,7 +617,7 @@ export default class {
         }
 
         // extract peaks with AudioContext for now.
-        track.calculatePeaks(this.samplesPerPixel, this.sampleRate);
+        if (audioBuffer) track.calculatePeaks(this.samplesPerPixel, this.sampleRate);
         newTrack = track;
 
         return track;

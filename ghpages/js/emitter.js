@@ -138,6 +138,12 @@ $container.on('change', '.btn-load', () => {
   ee.emit('load', files[0]);
 });
 
+$container.on('change', '.btn-reload', () => {
+  const files = $('.btn-reload').prop('files');
+  const trackName = $('.btn-reload').prop('name');
+  ee.emit('reload', files[0], trackName);
+});
+
 $container.on('click', '.btn-undo', () => {
   ee.emit('undo');
 });

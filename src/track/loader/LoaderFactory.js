@@ -9,6 +9,7 @@ export default class {
       return new XHRLoader(src, audioContext, ee);
     }
 
-    throw new Error('Unsupported src type');
+    //throw new Error('Unsupported src type');
+    return undefined;
   }
 }

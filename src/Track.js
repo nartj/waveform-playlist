@@ -42,6 +42,7 @@ export default class {
     this.duplicationNumber = 0;
     this.srcTrack = undefined;
     this.scale = window.devicePixelRatio;
+    this.isUnloadedTrack = false;
   }
 
   setSrc(src) {
@@ -415,7 +416,7 @@ export default class {
 
     const config = {
       attributes: {
-        style: `position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: ${channelPixels}px; z-index: 9;`,
+        style: `position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: ${channelPixels}px; z-index: 8;`,
       },
     };
 
@@ -434,6 +435,32 @@ export default class {
     }
     // use this overlay for track event cursor position calculations.
     return h(`div.playlist-overlay${overlayClass}`, config);
+  }
+
+  renderFileInputOverlay(data) {
+    const channelPixels = secondsToPixels(data.playlistLength, data.resolution, data.sampleRate);
+
+    if (this.isUnloadedTrack) {
+      const config = {
+        attributes: {
+          style: `position: relative; display:flex; align-items: center; 
+          justify-content:center; height: 100%; width: ${channelPixels}px; 
+          z-index: 9; background-color:rgba(220, 220, 220, 0.5);`,
+        },
+      };
+
+      return h(`div.playlist-overlay-input-file`, config,
+        [
+          h('label.btn.btn-info', { for: 'reload-track' },
+            [
+              h("span", { title: 'Reload this track' }, ['Reload']),
+              h(`input.btn-reload`,
+                { type: 'file', accept: 'audio/*',style: { display: 'none' }, name: `${this.taggedName}` }
+              )
+            ])
+        ]
+      );
+    }
   }
 
   renderControls(data) {
@@ -639,6 +666,7 @@ export default class {
 
     waveformChildren.push(channels);
     waveformChildren.push(this.renderOverlay(data));
+    waveformChildren.push(this.renderFileInputOverlay(data));
 
     // draw cursor selection on active track.
     if (data.isActive === true) {
@@ -748,5 +776,7 @@ export default class {
     }
     this.duplicationNumber = duplicationNumber;
   }
+
+
 
 }

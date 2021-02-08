@@ -139,7 +139,6 @@ $container.on('change', '.btn-load', () => {
 });
 
 $container.on('change', '.btn-reload', (e) => {
-  console.log('id: ' + e.target.id + ' files ' + e.target.files)
   ee.emit('reload', e.target.files[0], e.target.id);
   document.getElementById(e.target.id).value = null;
 });

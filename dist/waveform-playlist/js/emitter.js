@@ -122,27 +122,25 @@ $container.on('click', '.btn-loop', () => {
   playoutPromises = playlist.play(startTime, endTime);
 });
 
-$container.on('click', '.btn-add', () => {
-    let input = document.createElement('input');
-    input.type = 'file';
-    input.multiple = true;
-    input.accept = 'audio/*';
-
-    input.onchange = _ => {
-      const files = Array.from(input.files);
-      if (files && files.length) {
-        files.forEach(f => ee.emit('add', f));
-      }
-    };
-    input.click();
+$container.on('change', '.btn-add', () => {
+  const files = $('.btn-add').prop('files');
+  for (let i = 0; i < files.length; i++) {
+    ee.emit('add', files[i]);
+  }
 });
 
 $container.on('click', '.btn-save', () => {
   ee.emit('save');
 });
 
-$container.on('click', '.btn-load', () => {
-  ee.emit('load');
+$container.on('change', '.btn-load', () => {
+  const files = $('.btn-load').prop('files');
+  ee.emit('load', files[0]);
+});
+
+$container.on('change', '.btn-reload', (e) => {
+  ee.emit('reload', e.target.files[0], e.target.id);
+  document.getElementById(e.target.id).value = null;
 });
 
 $container.on('click', '.btn-undo', () => {
@@ -248,7 +246,7 @@ $container.on('click', '.btn-trim-audio', () => {
 });
 
 $container.on('click', '.btn-info', () => {
-  console.log(playlist.getInfo());
+  //console.log(playlist.getInfo());
 });
 
 $container.on('click', '.btn-download', () => {

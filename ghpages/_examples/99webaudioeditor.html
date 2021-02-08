@@ -78,8 +78,10 @@ audio_artist: Muse
       <span title="Clear the playlist's tracks" class="btn btn-clear btn-danger">Clear</span>
     </div>
     <div class="btn-group">
-      <input type="file" id="load"/>
-      <span title="Load a previous work" class="btn btn-load btn-info" onclick="$('#load').click();">Load</span>
+      <label for="load-playlist-file" class="btn btn-info" >
+        <span title="Load a previous work">Load</span>
+      </label>
+      <input class="btn-load" type="file" accept="application/JSON" id="load-playlist-file" style="display: none"/>
       <span title="Save" class="btn btn-save btn-danger">Save</span>
     </div>
     <div class="btn-group">
@@ -88,9 +90,10 @@ audio_artist: Muse
       </span>
     </div>
     <div class="btn-group">
-      <span title="Add new audio" class="btn btn-add btn-success">
+      <label for="add-audio-file" class="btn btn-success" >
         <i class="fa fa-plus"></i>
-      </span>
+      </label>
+      <input class="btn-add" type="file" accept="audio/*" id="add-audio-file" style="display: none"/>
     </div>
   </div>
 </div>

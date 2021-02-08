@@ -203,14 +203,7 @@ export default class {
       // todo
     });
 
-    ee.on('load', () => {
-      const loadInput = document.getElementById('load');
-      loadInput.oninput = () => {
-        loadPlaylistFile(loadInput.files[0]);
-      }
-    });
-
-    const loadPlaylistFile = (file) => {
+    ee.on('load', (file) => {
       this.tracks = [];
       const r = new FileReader();
       const self = this;
@@ -219,10 +212,9 @@ export default class {
         self.load(playlist.tracks);
       };
       r.readAsBinaryString(file);
-    }
+    });
 
     ee.on('save', () => {
-
       const getCircularReplacer = () => {
         const seen = new WeakSet();
         return (key, value) => {

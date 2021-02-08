@@ -54,12 +54,14 @@ export default class {
     }
   }
 
-  setTaggedName() {
-    if (this.duplicationNumber !== undefined && this.duplicationNumber !== 0) {
-      this.taggedName = this.name + '#' + this.duplicationNumber;
-    } else {
-      this.taggedName = this.name;
-    }
+  setTaggedName(taggedName = undefined) {
+    if (!taggedName) {
+      if (this.duplicationNumber !== undefined && this.duplicationNumber !== 0) {
+        this.taggedName = this.name + '#' + this.duplicationNumber;
+      } else {
+        this.taggedName = this.name;
+      }
+    } else this.taggedName = taggedName;
   }
 
   setEventEmitter(ee) {

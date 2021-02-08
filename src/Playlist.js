@@ -18,7 +18,6 @@ import ExportOggWorker from 'worker-loader!./utils/exportogg.worker.js';
 import ExportWavWorkerFunction from './utils/exportWavWorker';
 import Undoer from "./Undoer";
 import { play } from './events';
-const fs = require('fs');
 
 export default class {
   constructor() {
@@ -43,7 +42,6 @@ export default class {
     this.isAutomaticScroll = false;
     this.resetDrawTimer = undefined;
     this.undoer = new Undoer();
-    this.savedFile = undefined;
   }
 
   // TODO extract into a plugin
@@ -854,8 +852,6 @@ export default class {
 
     if (!end && selected.end !== selected.start && selected.end > start) {
       end = selected.end;
-    } else {
-      end = this.duration;
     }
 
     if (this.isPlaying()) {

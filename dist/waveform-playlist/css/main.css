@@ -100,4 +100,6 @@ footer { margin-top: 2em; }
 
 .form-control { /* to fix master-gain slider overflow */ padding-right: 0; margin-right: 12px; }
 
+input[type="file"] { outline: none; cursor: pointer; position: absolute; left: 0; clip: rect(0px 215px 22px 145px); z-index: 2; opacity: 0; }
+
 /*# sourceMappingURL=main.css.map */

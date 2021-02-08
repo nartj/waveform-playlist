@@ -17,6 +17,8 @@ import AnnotationList from './annotation/AnnotationList';
 import ExportOggWorker from 'worker-loader!./utils/exportogg.worker.js';
 import ExportWavWorkerFunction from './utils/exportWavWorker';
 import Undoer from "./Undoer";
+import { play } from './events';
+const fs = require('fs');
 
 export default class {
   constructor() {
@@ -41,6 +43,7 @@ export default class {
     this.isAutomaticScroll = false;
     this.resetDrawTimer = undefined;
     this.undoer = new Undoer();
+    this.savedFile = undefined;
   }
 
   // TODO extract into a plugin
@@ -202,17 +205,41 @@ export default class {
       // todo
     });
 
-    ee.on('load', (val) => {
-      this.undoer.clear();
-      console.log('load');
-      // todo
+    ee.on('load', () => {
+      const loadInput = document.getElementById('load');
+      loadInput.oninput = () => {
+        loadPlaylistFile(loadInput.files[0]);
+      }
     });
 
-    ee.on('save', async (val) => {
-      console.log('save');
-      const blob = new Blob([JSON.stringify(this.tracks, null)], {type: "text/plain;charset=utf-8"});
+    const loadPlaylistFile = (file) => {
+      this.tracks = [];
+      const r = new FileReader();
+      const self = this;
+      r.onloadend = function() {
+        let playlist = JSON.parse(r.result);
+        self.load(playlist.tracks);
+      };
+      r.readAsBinaryString(file);
+    }
+
+    ee.on('save', () => {
+
+      const getCircularReplacer = () => {
+        const seen = new WeakSet();
+        return (key, value) => {
+          if (typeof value === "object" && value !== null) {
+            if (seen.has(value)) {
+              return;
+            }
+            seen.add(value);
+          }
+          return value;
+        };
+      };
+
+      const blob = new Blob([JSON.stringify(this, getCircularReplacer())], {type: "text/plain;charset=utf-8"});
       FileSaver.saveAs(blob, "playlist.json");
-      // todo
     });
 
     ee.on('draw', (val) => {
@@ -462,10 +489,10 @@ export default class {
         const trck = info.track || undefined;
         isTrackDuplication = trck !== undefined;
         const name = info.name || 'Untitled';
-        const start = info.start || 0;
+        const start = info.start || info.startTime || 0;
         const states = info.states || {};
-        const fadeIn = info.fadeIn;
-        const fadeOut = info.fadeOut;
+        let fadeIn = info.fadeIn;
+        let fadeOut = info.fadeOut;
         const cueIn = info.cueIn || 0;
         const cueOut = info.cueOut || audioBuffer.duration;
         const gain = info.gain || 1;
@@ -497,6 +524,29 @@ export default class {
         track.setCues(cueIn, cueOut);
         track.setCustomClass(customClass);
         track.setWaveOutlineColor(waveOutlineColor);
+
+        // Transform playlist fades is loaded from Json
+        if ((fadeIn !== undefined && fadeIn.duration === undefined) ||
+          (fadeOut !== undefined && fadeOut.duration === undefined)) {
+          let fades = [];
+          for (const value of Object.values(info.fades)) {
+            fades.push(value);
+          }
+
+          if (fadeIn) {
+            fadeIn = fades[0];
+            fadeIn.duration = fadeIn.end - fadeIn.start;
+          } else {
+            fadeIn = undefined;
+          }
+
+          if (fadeOut) {
+            fadeOut = fades[fadeIn ? 1 : 0];
+            fadeOut.duration = fadeOut.end - fadeOut.start;
+          } else {
+            fadeOut = undefined;
+          }
+        }
 
         if (fadeIn !== undefined) {
           track.setFadeIn(fadeIn.duration, fadeIn.shape);
@@ -804,6 +854,8 @@ export default class {
 
     if (!end && selected.end !== selected.start && selected.end > start) {
       end = selected.end;
+    } else {
+      end = this.duration;
     }
 
     if (this.isPlaying()) {

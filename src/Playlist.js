@@ -503,6 +503,7 @@ export default class {
         const waveOutlineColor = info.waveOutlineColor || undefined;
         const stereoPan = info.stereoPan || 0;
         const duplicationNumber = info.duplicationNumber || 0;
+        const taggedName = info.taggedName;
         trackOffset = info.trackOffset || 0;
 
         // webaudio specific playout for now.
@@ -517,6 +518,7 @@ export default class {
             duplicationNumber : trck.srcTrack === undefined ?
                 trck.duplicationNumber + 1 : trck.srcTrack.duplicationNumber + 1);
         track.setName(name);
+        track.setTaggedName(taggedName);
         track.setEventEmitter(this.ee);
         track.setEnabledStates(states);
         track.setCues(cueIn, cueOut);

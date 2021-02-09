@@ -1052,40 +1052,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ _default)
 /* harmony export */ });
-/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/typeof */ "./node_modules/@babel/runtime/helpers/typeof.js");
-/* harmony import */ var _babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js");
-/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
-/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
-/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var lodash_defaults__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lodash.defaults */ "./node_modules/lodash.defaults/index.js");
-/* harmony import */ var lodash_defaults__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(lodash_defaults__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var virtual_dom_h__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! virtual-dom/h */ "./node_modules/virtual-dom/h.js");
-/* harmony import */ var virtual_dom_h__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(virtual_dom_h__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var virtual_dom_diff__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! virtual-dom/diff */ "./node_modules/virtual-dom/diff.js");
-/* harmony import */ var virtual_dom_diff__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(virtual_dom_diff__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var virtual_dom_patch__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! virtual-dom/patch */ "./node_modules/virtual-dom/patch.js");
-/* harmony import */ var virtual_dom_patch__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(virtual_dom_patch__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var inline_worker__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! inline-worker */ "./node_modules/inline-worker/index.js");
-/* harmony import */ var inline_worker__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(inline_worker__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var file_saver__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! file-saver */ "./node_modules/file-saver/dist/FileSaver.min.js");
-/* harmony import */ var file_saver__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(file_saver__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _utils_conversions__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./utils/conversions */ "./src/utils/conversions.js");
-/* harmony import */ var _track_loader_LoaderFactory__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./track/loader/LoaderFactory */ "./src/track/loader/LoaderFactory.js");
-/* harmony import */ var _render_ScrollHook__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./render/ScrollHook */ "./src/render/ScrollHook.js");
-/* harmony import */ var _TimeScale__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./TimeScale */ "./src/TimeScale.js");
-/* harmony import */ var _Track__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./Track */ "./src/Track.js");
-/* harmony import */ var _Playout__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./Playout */ "./src/Playout.js");
-/* harmony import */ var _annotation_AnnotationList__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./annotation/AnnotationList */ "./src/annotation/AnnotationList.js");
-/* harmony import */ var worker_loader_utils_exportogg_worker_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! worker-loader!./utils/exportogg.worker.js */ "./node_modules/worker-loader/dist/cjs.js!./src/utils/exportogg.worker.js");
-/* harmony import */ var _utils_exportWavWorker__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./utils/exportWavWorker */ "./src/utils/exportWavWorker.js");
-/* harmony import */ var _Undoer__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./Undoer */ "./src/Undoer.js");
-/* harmony import */ var _events__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./events */ "./src/events.js");
-
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/asyncToGenerator.js");
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ "./node_modules/@babel/runtime/helpers/classCallCheck.js");
+/* harmony import */ var _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/createClass */ "./node_modules/@babel/runtime/helpers/createClass.js");
+/* harmony import */ var _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var lodash_defaults__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! lodash.defaults */ "./node_modules/lodash.defaults/index.js");
+/* harmony import */ var lodash_defaults__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(lodash_defaults__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var virtual_dom_h__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! virtual-dom/h */ "./node_modules/virtual-dom/h.js");
+/* harmony import */ var virtual_dom_h__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(virtual_dom_h__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var virtual_dom_diff__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! virtual-dom/diff */ "./node_modules/virtual-dom/diff.js");
+/* harmony import */ var virtual_dom_diff__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(virtual_dom_diff__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var virtual_dom_patch__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! virtual-dom/patch */ "./node_modules/virtual-dom/patch.js");
+/* harmony import */ var virtual_dom_patch__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(virtual_dom_patch__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var inline_worker__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! inline-worker */ "./node_modules/inline-worker/index.js");
+/* harmony import */ var inline_worker__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(inline_worker__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var file_saver__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! file-saver */ "./node_modules/file-saver/dist/FileSaver.min.js");
+/* harmony import */ var file_saver__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(file_saver__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _utils_conversions__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./utils/conversions */ "./src/utils/conversions.js");
+/* harmony import */ var _track_loader_LoaderFactory__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./track/loader/LoaderFactory */ "./src/track/loader/LoaderFactory.js");
+/* harmony import */ var _render_ScrollHook__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./render/ScrollHook */ "./src/render/ScrollHook.js");
+/* harmony import */ var _TimeScale__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./TimeScale */ "./src/TimeScale.js");
+/* harmony import */ var _Track__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./Track */ "./src/Track.js");
+/* harmony import */ var _Playout__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./Playout */ "./src/Playout.js");
+/* harmony import */ var _annotation_AnnotationList__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./annotation/AnnotationList */ "./src/annotation/AnnotationList.js");
+/* harmony import */ var worker_loader_utils_exportogg_worker_js__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! worker-loader!./utils/exportogg.worker.js */ "./node_modules/worker-loader/dist/cjs.js!./src/utils/exportogg.worker.js");
+/* harmony import */ var _utils_exportWavWorker__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./utils/exportWavWorker */ "./src/utils/exportWavWorker.js");
+/* harmony import */ var _Undoer__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./Undoer */ "./src/Undoer.js");
+/* harmony import */ var _events__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./events */ "./src/events.js");
 
 
 
@@ -1110,7 +1107,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var _default = /*#__PURE__*/function () {
   function _default() {
-    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_3___default()(this, _default);
+    _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2___default()(this, _default);
 
     this.tracks = [];
     this.soloedTracks = [];
@@ -1130,15 +1127,15 @@ var _default = /*#__PURE__*/function () {
     this.durationFormat = 'hh:mm:ss.uuu';
     this.isAutomaticScroll = false;
     this.resetDrawTimer = undefined;
-    this.undoer = new _Undoer__WEBPACK_IMPORTED_MODULE_20__.default();
+    this.undoer = new _Undoer__WEBPACK_IMPORTED_MODULE_19__.default();
   } // TODO extract into a plugin
 
 
-  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_4___default()(_default, [{
+  _babel_runtime_helpers_createClass__WEBPACK_IMPORTED_MODULE_3___default()(_default, [{
     key: "initExporter",
     value: function initExporter() {
-      this.wavExportWorker = new (inline_worker__WEBPACK_IMPORTED_MODULE_9___default())(_utils_exportWavWorker__WEBPACK_IMPORTED_MODULE_19__.default);
-      this.oggExportWorker = new worker_loader_utils_exportogg_worker_js__WEBPACK_IMPORTED_MODULE_18__.default();
+      this.wavExportWorker = new (inline_worker__WEBPACK_IMPORTED_MODULE_8___default())(_utils_exportWavWorker__WEBPACK_IMPORTED_MODULE_18__.default);
+      this.oggExportWorker = new worker_loader_utils_exportogg_worker_js__WEBPACK_IMPORTED_MODULE_17__.default();
     } // TODO extract into a plugin
 
   }, {
@@ -1149,7 +1146,7 @@ var _default = /*#__PURE__*/function () {
       this.mediaRecorder = new window.MediaRecorder(stream);
 
       this.mediaRecorder.onstart = function () {
-        var track = new _Track__WEBPACK_IMPORTED_MODULE_15__.default();
+        var track = new _Track__WEBPACK_IMPORTED_MODULE_14__.default();
         track.setName('Recording');
         track.setEnabledStates();
         track.setEventEmitter(_this.ee);
@@ -1169,7 +1166,7 @@ var _default = /*#__PURE__*/function () {
           var recording = new Blob(_this.chunks, {
             type: 'audio/ogg; codecs=opus'
           });
-          var loader = _track_loader_LoaderFactory__WEBPACK_IMPORTED_MODULE_12__.default.createLoader(recording, _this.ac);
+          var loader = _track_loader_LoaderFactory__WEBPACK_IMPORTED_MODULE_11__.default.createLoader(recording, _this.ac);
           loader.load().then(function (audioBuffer) {
             // ask web worker for peaks.
             _this.recorderWorker.postMessage({
@@ -1181,7 +1178,7 @@ var _default = /*#__PURE__*/function () {
 
             _this.recordingTrack.setBuffer(audioBuffer);
 
-            _this.recordingTrack.setPlayout(new _Playout__WEBPACK_IMPORTED_MODULE_16__.default(_this.ac, audioBuffer));
+            _this.recordingTrack.setPlayout(new _Playout__WEBPACK_IMPORTED_MODULE_15__.default(_this.ac, audioBuffer));
 
             _this.adjustDuration();
           })["catch"](function () {
@@ -1196,7 +1193,7 @@ var _default = /*#__PURE__*/function () {
         _this.working = false;
       };
 
-      this.recorderWorker = new (inline_worker__WEBPACK_IMPORTED_MODULE_9___default())(RecorderWorkerFunction); // use a worker for calculating recording peaks.
+      this.recorderWorker = new (inline_worker__WEBPACK_IMPORTED_MODULE_8___default())(RecorderWorkerFunction); // use a worker for calculating recording peaks.
 
       this.recorderWorker.onmessage = function (e) {
         _this.recordingTrack.setPeaks(e.data);
@@ -1264,7 +1261,7 @@ var _default = /*#__PURE__*/function () {
   }, {
     key: "setAnnotations",
     value: function setAnnotations(config) {
-      this.annotationList = new _annotation_AnnotationList__WEBPACK_IMPORTED_MODULE_17__.default(this, config.annotations, config.controls, config.editable, config.linkEndpoints, config.isContinuousPlay);
+      this.annotationList = new _annotation_AnnotationList__WEBPACK_IMPORTED_MODULE_16__.default(this, config.annotations, config.controls, config.editable, config.linkEndpoints, config.isContinuousPlay);
     }
   }, {
     key: "setEventEmitter",
@@ -1320,17 +1317,45 @@ var _default = /*#__PURE__*/function () {
         var r = new FileReader();
         var self = _this2;
 
+        var srcTrackDeserializer = function srcTrackDeserializer(playlist) {
+          var _loop = function _loop(i) {
+            if (playlist[i].srcTrack) {
+              playlist[i].srcTrack = playlist.find(function (t) {
+                return t.id === playlist[i].id;
+              });
+            }
+          };
+
+          for (var i = 0; i < playlist.length; i++) {
+            _loop(i);
+          }
+
+          return playlist;
+        };
+
+        var trackDeserializer = function trackDeserializer(key, value) {
+          switch (key) {
+            case 'fadeIn':
+            case 'fadeOut':
+              value.duration = value.end - value.start;
+              return value;
+
+            default:
+              return value;
+          }
+        };
+
         r.onloadend = function () {
-          var playlist = JSON.parse(r.result);
-          self.load(playlist.tracks);
+          var playlist = srcTrackDeserializer(JSON.parse(r.result, trackDeserializer));
+          self.load(playlist);
         };
 
         r.readAsBinaryString(file);
       });
       ee.on('reload', /*#__PURE__*/function () {
-        var _ref = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee(file, trackId) {
+        var _ref = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(file, trackId) {
           var track;
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee$(_context) {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
@@ -1378,33 +1403,52 @@ var _default = /*#__PURE__*/function () {
         };
       }());
       ee.on('save', function () {
-        var getCircularReplacer = function getCircularReplacer() {
-          var seen = new WeakSet();
-          return function (key, value) {
-            if (_babel_runtime_helpers_typeof__WEBPACK_IMPORTED_MODULE_0___default()(value) === "object" && value !== null) {
-              if (seen.has(value)) {
-                return;
-              }
+        var self = _this2;
+        var currentId;
+        var currentTrack;
 
-              seen.add(value);
-            }
+        var trackSerializer = function trackSerializer(key, value) {
+          switch (key) {
+            case 'peaks':
+            case 'buffer':
+            case 'ee':
+            case 'playout':
+            case 'ac':
+            case 'fades':
+            case 'stateObj':
+              return undefined;
 
-            return value;
-          };
+            case 'id':
+              currentId = value;
+              currentTrack = self.tracks.find(function (t) {
+                return t.id === currentId;
+              });
+              return value;
+
+            case 'fadeIn':
+            case 'fadeOut':
+              return currentTrack.fades[value];
+
+            case 'srcTrack':
+              return currentTrack.srcTrack ? currentTrack.srcTrack.id : undefined;
+
+            default:
+              return value;
+          }
         };
 
-        var blob = new Blob([JSON.stringify(_this2, getCircularReplacer())], {
+        var blob = new Blob([JSON.stringify(_this2.tracks, trackSerializer)], {
           type: "text/plain;charset=utf-8"
         });
-        file_saver__WEBPACK_IMPORTED_MODULE_10___default().saveAs(blob, "playlist.json");
+        file_saver__WEBPACK_IMPORTED_MODULE_9___default().saveAs(blob, "playlist.json");
       });
       ee.on('draw', function (val) {
         _this2.drawRequest();
       });
       ee.on('duplicate', /*#__PURE__*/function () {
-        var _ref2 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee2(track) {
+        var _ref2 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2(track) {
           var self, dupTrack, undo;
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee2$(_context2) {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
             while (1) {
               switch (_context2.prev = _context2.next) {
                 case 0:
@@ -1435,9 +1479,9 @@ var _default = /*#__PURE__*/function () {
         };
       }());
       ee.on('delete', /*#__PURE__*/function () {
-        var _ref3 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee3(track) {
+        var _ref3 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(track) {
           var self, undo;
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee3$(_context3) {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
             while (1) {
               switch (_context3.prev = _context3.next) {
                 case 0:
@@ -1467,9 +1511,9 @@ var _default = /*#__PURE__*/function () {
         };
       }());
       ee.on('add', /*#__PURE__*/function () {
-        var _ref4 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee4(file) {
+        var _ref4 = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(file) {
           var track, self, undo;
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee4$(_context4) {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
             while (1) {
               switch (_context4.prev = _context4.next) {
                 case 0:
@@ -1651,9 +1695,9 @@ var _default = /*#__PURE__*/function () {
       ee.on('duplicateTrack', function (track, start, cueIn, cueOut, trackOffset) {
         track.duplicateTrack(track, start, cueIn, cueOut, trackOffset);
       });
-      ee.on('trim', /*#__PURE__*/_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().mark(function _callee5() {
+      ee.on('trim', /*#__PURE__*/_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
         var track, timeSelection, undo;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default().wrap(function _callee5$(_context5) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
@@ -1729,7 +1773,7 @@ var _default = /*#__PURE__*/function () {
           trackInfo.isUnloadedTrack = false;
         }
 
-        var loader = _track_loader_LoaderFactory__WEBPACK_IMPORTED_MODULE_12__.default.createLoader(trackInfo.src, _this3.ac, _this3.ee);
+        var loader = _track_loader_LoaderFactory__WEBPACK_IMPORTED_MODULE_11__.default.createLoader(trackInfo.src, _this3.ac, _this3.ee);
         if (loader) return loader.load();else return loader;
       });
       var newTrack;
@@ -1754,11 +1798,11 @@ var _default = /*#__PURE__*/function () {
           var muted = info.muted || false;
           var soloed = info.soloed || false;
           var selection = info.selected;
-          var peaks = info.peaks || {
+          var peaks = info.peaks;
+          var peakData = info.peakData || {
             type: 'WebAudio',
             mono: _this3.mono
           };
-          var peakData = info.peakData || undefined;
           var customClass = info.customClass || undefined;
           var waveOutlineColor = info.waveOutlineColor || undefined;
           var stereoPan = info.stereoPan || 0;
@@ -1767,12 +1811,12 @@ var _default = /*#__PURE__*/function () {
           trackOffset = info.trackOffset || 0; // webaudio specific playout for now.
 
           var playout;
-          if (audioBuffer) playout = new _Playout__WEBPACK_IMPORTED_MODULE_16__.default(_this3.ac, audioBuffer);
-          var track = new _Track__WEBPACK_IMPORTED_MODULE_15__.default();
+          if (audioBuffer) playout = new _Playout__WEBPACK_IMPORTED_MODULE_15__.default(_this3.ac, audioBuffer);
+          var track = new _Track__WEBPACK_IMPORTED_MODULE_14__.default();
           track.setSrc(info.src);
           track.setBuffer(audioBuffer);
           track.setSrcTrack(trck);
-          track.setDuplicationNumber(trck === undefined ? duplicationNumber : trck.srcTrack === undefined ? trck.duplicationNumber + 1 : trck.srcTrack.duplicationNumber + 1);
+          track.setDuplicationNumber(!trck ? duplicationNumber : !trck.srcTrack ? trck.duplicationNumber + 1 : trck.srcTrack.duplicationNumber + 1);
           track.setName(name);
           track.setTaggedName(taggedName);
           track.setEventEmitter(_this3.ee);
@@ -1780,37 +1824,14 @@ var _default = /*#__PURE__*/function () {
           track.setCues(cueIn, cueOut);
           track.setCustomClass(customClass);
           track.setWaveOutlineColor(waveOutlineColor);
-          track.isUnloadedTrack = isUnloadedTrack; // Transform playlist fades is loaded from Json
-
-          if (fadeIn !== undefined && fadeIn.duration === undefined || fadeOut !== undefined && fadeOut.duration === undefined) {
-            var fades = [];
-
-            for (var _i = 0, _Object$values = Object.values(info.fades); _i < _Object$values.length; _i++) {
-              var value = _Object$values[_i];
-              fades.push(value);
-            }
-
-            if (fadeIn) {
-              fadeIn = fades[0];
-              fadeIn.duration = fadeIn.end - fadeIn.start;
-            } else {
-              fadeIn = undefined;
-            }
-
-            if (fadeOut) {
-              fadeOut = fades[fadeIn ? 1 : 0];
-              fadeOut.duration = fadeOut.end - fadeOut.start;
-            } else {
-              fadeOut = undefined;
-            }
-          }
+          track.isUnloadedTrack = isUnloadedTrack;
 
           if (fadeIn !== undefined) {
-            track.setFadeIn(fadeIn.duration, fadeIn.shape);
+            track.setFadeIn(fadeIn.duration ? fadeIn.duration : fadeIn.end - fadeIn.start, fadeIn.shape);
           }
 
           if (fadeOut !== undefined) {
-            track.setFadeOut(fadeOut.duration, fadeOut.shape);
+            track.setFadeOut(fadeOut.duration ? fadeOut.duration : fadeOut.end - fadeOut.start, fadeOut.shape);
           }
 
           if (selection !== undefined) {
@@ -1918,7 +1939,7 @@ var _default = /*#__PURE__*/function () {
       this.offlineAudioContext = new OfflineAudioContext(2, 44100 * this.duration, 44100);
       var currentTime = this.offlineAudioContext.currentTime;
       this.tracks.forEach(function (track) {
-        track.setOfflinePlayout(new _Playout__WEBPACK_IMPORTED_MODULE_16__.default(_this4.offlineAudioContext, track.buffer));
+        track.setOfflinePlayout(new _Playout__WEBPACK_IMPORTED_MODULE_15__.default(_this4.offlineAudioContext, track.buffer));
         track.schedulePlay(currentTime, 0, 0, {
           shouldPlay: _this4.shouldTrackPlay(track),
           masterGain: 1,
@@ -2339,11 +2360,11 @@ var _default = /*#__PURE__*/function () {
   }, {
     key: "draw",
     value: function draw(newTree) {
-      var patches = virtual_dom_diff__WEBPACK_IMPORTED_MODULE_7___default()(this.tree, newTree);
-      this.rootNode = virtual_dom_patch__WEBPACK_IMPORTED_MODULE_8___default()(this.rootNode, patches);
+      var patches = virtual_dom_diff__WEBPACK_IMPORTED_MODULE_6___default()(this.tree, newTree);
+      this.rootNode = virtual_dom_patch__WEBPACK_IMPORTED_MODULE_7___default()(this.rootNode, patches);
       this.tree = newTree; // use for fast forwarding.
 
-      this.viewDuration = (0,_utils_conversions__WEBPACK_IMPORTED_MODULE_11__.pixelsToSeconds)(this.rootNode.clientWidth - this.controls.width, this.samplesPerPixel, this.sampleRate);
+      this.viewDuration = (0,_utils_conversions__WEBPACK_IMPORTED_MODULE_10__.pixelsToSeconds)(this.rootNode.clientWidth - this.controls.width, this.samplesPerPixel, this.sampleRate);
     }
   }, {
     key: "getTrackRenderData",
@@ -2360,7 +2381,7 @@ var _default = /*#__PURE__*/function () {
         playbackSeconds: this.playbackSeconds,
         colors: this.colors
       };
-      return lodash_defaults__WEBPACK_IMPORTED_MODULE_5___default()(data, defaults);
+      return lodash_defaults__WEBPACK_IMPORTED_MODULE_4___default()(data, defaults);
     }
   }, {
     key: "isActiveTrack",
@@ -2382,7 +2403,7 @@ var _default = /*#__PURE__*/function () {
     key: "renderTimeScale",
     value: function renderTimeScale() {
       var controlWidth = this.controls.show ? this.controls.width : 0;
-      var timeScale = new _TimeScale__WEBPACK_IMPORTED_MODULE_14__.default(this.duration, this.scrollLeft, this.samplesPerPixel, this.sampleRate, controlWidth, this.colors);
+      var timeScale = new _TimeScale__WEBPACK_IMPORTED_MODULE_13__.default(this.duration, this.scrollLeft, this.samplesPerPixel, this.sampleRate, controlWidth, this.colors);
       return timeScale.render();
     }
   }, {
@@ -2398,16 +2419,16 @@ var _default = /*#__PURE__*/function () {
           muted: _this16.mutedTracks.indexOf(track) > -1
         }));
       });
-      return virtual_dom_h__WEBPACK_IMPORTED_MODULE_6___default()('div.playlist-tracks', {
+      return virtual_dom_h__WEBPACK_IMPORTED_MODULE_5___default()('div.playlist-tracks', {
         attributes: {
           style: 'overflow: auto;'
         },
         onscroll: function onscroll(e) {
-          _this16.scrollLeft = (0,_utils_conversions__WEBPACK_IMPORTED_MODULE_11__.pixelsToSeconds)(e.target.scrollLeft, _this16.samplesPerPixel, _this16.sampleRate);
+          _this16.scrollLeft = (0,_utils_conversions__WEBPACK_IMPORTED_MODULE_10__.pixelsToSeconds)(e.target.scrollLeft, _this16.samplesPerPixel, _this16.sampleRate);
 
           _this16.ee.emit('scroll', _this16.scrollLeft);
         },
-        hook: new _render_ScrollHook__WEBPACK_IMPORTED_MODULE_13__.default(this)
+        hook: new _render_ScrollHook__WEBPACK_IMPORTED_MODULE_12__.default(this)
       }, trackElements);
     }
   }, {
@@ -2425,7 +2446,7 @@ var _default = /*#__PURE__*/function () {
         containerChildren.push(this.renderAnnotations());
       }
 
-      return virtual_dom_h__WEBPACK_IMPORTED_MODULE_6___default()('div.playlist', {
+      return virtual_dom_h__WEBPACK_IMPORTED_MODULE_5___default()('div.playlist', {
         attributes: {
           style: 'overflow: hidden; position: relative;'
         }
@@ -2439,6 +2460,13 @@ var _default = /*#__PURE__*/function () {
         info.push(track.getTrackDetails());
       });
       return info;
+    }
+  }, {
+    key: "isReloadNeeded",
+    value: function isReloadNeeded() {
+      return this.tracks.find(function (t) {
+        return t.isUnloadedTrack;
+      }) !== undefined;
     }
   }]);
 
@@ -2868,14 +2896,16 @@ var _default = /*#__PURE__*/function () {
   function _default() {
     _babel_runtime_helpers_classCallCheck__WEBPACK_IMPORTED_MODULE_2___default()(this, _default);
 
-    this.name = 'Untitled';
     this.id = 'i' + (0,uuid__WEBPACK_IMPORTED_MODULE_15__.default)(); // must start with a letter to be a valid css id
 
+    this.name = 'Untitled';
     this.taggedName = this.name;
     this.customClass = undefined;
     this.waveOutlineColor = undefined;
     this.gain = 1;
     this.fades = {};
+    this.fadeIn = undefined;
+    this.fadeOut = undefined;
     this.peakData = {
       type: 'WebAudio',
       mono: false
@@ -3168,13 +3198,15 @@ var _default = /*#__PURE__*/function () {
     key: "saveFade",
     value: function saveFade(type, shape, start, end) {
       var id = (0,uuid__WEBPACK_IMPORTED_MODULE_15__.default)();
-      this.fades[id] = {
+      var fade = {
+        id: id,
         type: type,
         shape: shape,
         start: start,
         end: end
       };
-      return id;
+      this.fades[id] = fade;
+      return fade;
     }
   }, {
     key: "removeFade",
@@ -3421,7 +3453,7 @@ var _default = /*#__PURE__*/function () {
 
       var muteClass = data.muted ? '.active' : '';
       var soloClass = data.soloed ? '.active' : '';
-      var numChan = this.peaks.data.length;
+      var numChan = this.peaks ? this.peaks.data.length : this.peakData.mono ? 1 : 2;
       return virtual_dom_h__WEBPACK_IMPORTED_MODULE_7___default()('div.controls', {
         attributes: {
           style: "height: ".concat(numChan * data.height, "px; width: ").concat(data.controls.width, "px; position: absolute; left: 0; z-index: 10;"),
@@ -3475,12 +3507,12 @@ var _default = /*#__PURE__*/function () {
     value: function render(data) {
       var _this3 = this;
 
-      var width = this.peaks.length;
+      var width = this.peaks ? this.peaks.length : 0;
       var playbackX = (0,_utils_conversions__WEBPACK_IMPORTED_MODULE_10__.secondsToPixels)(data.playbackSeconds, data.resolution, data.sampleRate);
       var startX = (0,_utils_conversions__WEBPACK_IMPORTED_MODULE_10__.secondsToPixels)(this.startTime, data.resolution, data.sampleRate);
       var endX = (0,_utils_conversions__WEBPACK_IMPORTED_MODULE_10__.secondsToPixels)(this.endTime, data.resolution, data.sampleRate);
       var progressWidth = 0;
-      var numChan = this.peaks.data.length;
+      var numChan = this.peaks ? this.peaks.data.length : this.peakData.mono ? 1 : 2;
       var oldScale = this.scale;
       this.scale = window.devicePixelRatio;
 
@@ -3497,73 +3529,74 @@ var _default = /*#__PURE__*/function () {
           style: "position: absolute; width: 1px; margin: 0; padding: 0; top: 0; left: ".concat(playbackX, "px; bottom: 0; z-index: 5;")
         }
       })];
-      var channels = Object.keys(this.peaks.data).map(function (channelNum) {
-        var channelChildren = [virtual_dom_h__WEBPACK_IMPORTED_MODULE_7___default()('div.channel-progress', {
-          attributes: {
-            style: "position: absolute; width: ".concat(progressWidth, "px; height: ").concat(data.height, "px; z-index: 2;")
-          }
-        })];
-        var offset = 0;
-        var totalWidth = width;
-        var peaks = _this3.peaks.data[channelNum];
 
-        while (totalWidth > 0) {
-          var currentWidth = Math.min(totalWidth, MAX_CANVAS_WIDTH);
-          var canvasColor = _this3.waveOutlineColor ? _this3.waveOutlineColor : data.colors.waveOutlineColor;
-          channelChildren.push(virtual_dom_h__WEBPACK_IMPORTED_MODULE_7___default()('canvas', {
+      if (this.peaks) {
+        var channels = Object.keys(this.peaks.data).map(function (channelNum) {
+          var channelChildren = [virtual_dom_h__WEBPACK_IMPORTED_MODULE_7___default()('div.channel-progress', {
             attributes: {
-              width: currentWidth * _this3.scale,
-              height: data.height * _this3.scale,
-              style: "float: left; position: relative; margin: 0; padding: 0; z-index: 3; width: ".concat(currentWidth, "px; height: ").concat(data.height, "px;")
-            },
-            hook: new _render_CanvasHook__WEBPACK_IMPORTED_MODULE_12__.default(peaks, offset, _this3.peaks.bits, canvasColor, _this3.scale, _this3.scale !== oldScale)
-          }));
-          totalWidth -= currentWidth;
-          offset += MAX_CANVAS_WIDTH;
-        } // if there are fades, display them.
-
-
-        if (_this3.fadeIn) {
-          var fadeIn = _this3.fades[_this3.fadeIn];
-          var fadeWidth = (0,_utils_conversions__WEBPACK_IMPORTED_MODULE_10__.secondsToPixels)(fadeIn.end - fadeIn.start, data.resolution, data.sampleRate);
-          channelChildren.push(virtual_dom_h__WEBPACK_IMPORTED_MODULE_7___default()('div.wp-fade.wp-fadein', {
-            attributes: {
-              style: "position: absolute; height: ".concat(data.height, "px; width: ").concat(fadeWidth, "px; top: 0; left: 0; z-index: 4;")
+              style: "position: absolute; width: ".concat(progressWidth, "px; height: ").concat(data.height, "px; z-index: 2;")
             }
-          }, [virtual_dom_h__WEBPACK_IMPORTED_MODULE_7___default()('canvas', {
-            attributes: {
-              width: fadeWidth,
-              height: data.height
-            },
-            hook: new _render_FadeCanvasHook__WEBPACK_IMPORTED_MODULE_13__.default(fadeIn.type, fadeIn.shape, fadeIn.end - fadeIn.start, data.resolution)
-          })]));
-        }
+          })];
+          var offset = 0;
+          var totalWidth = width;
+          var peaks = _this3.peaks.data[channelNum];
 
-        if (_this3.fadeOut) {
-          var fadeOut = _this3.fades[_this3.fadeOut];
+          while (totalWidth > 0) {
+            var currentWidth = Math.min(totalWidth, MAX_CANVAS_WIDTH);
+            var canvasColor = _this3.waveOutlineColor ? _this3.waveOutlineColor : data.colors.waveOutlineColor;
+            channelChildren.push(virtual_dom_h__WEBPACK_IMPORTED_MODULE_7___default()('canvas', {
+              attributes: {
+                width: currentWidth * _this3.scale,
+                height: data.height * _this3.scale,
+                style: "float: left; position: relative; margin: 0; padding: 0; z-index: 3; width: ".concat(currentWidth, "px; height: ").concat(data.height, "px;")
+              },
+              hook: new _render_CanvasHook__WEBPACK_IMPORTED_MODULE_12__.default(peaks, offset, _this3.peaks.bits, canvasColor, _this3.scale, _this3.scale !== oldScale)
+            }));
+            totalWidth -= currentWidth;
+            offset += MAX_CANVAS_WIDTH;
+          } // if there are fades, display them.
 
-          var _fadeWidth = (0,_utils_conversions__WEBPACK_IMPORTED_MODULE_10__.secondsToPixels)(fadeOut.end - fadeOut.start, data.resolution, data.sampleRate);
 
-          channelChildren.push(virtual_dom_h__WEBPACK_IMPORTED_MODULE_7___default()('div.wp-fade.wp-fadeout', {
-            attributes: {
-              style: "position: absolute; height: ".concat(data.height, "px; width: ").concat(_fadeWidth, "px; top: 0; right: 0; z-index: 4;")
-            }
-          }, [virtual_dom_h__WEBPACK_IMPORTED_MODULE_7___default()('canvas', {
-            attributes: {
-              width: _fadeWidth,
-              height: data.height
-            },
-            hook: new _render_FadeCanvasHook__WEBPACK_IMPORTED_MODULE_13__.default(fadeOut.type, fadeOut.shape, fadeOut.end - fadeOut.start, data.resolution)
-          })]));
-        }
-
-        return virtual_dom_h__WEBPACK_IMPORTED_MODULE_7___default()("div.channel.channel-".concat(channelNum), {
-          attributes: {
-            style: "height: ".concat(data.height, "px; width: ").concat(width, "px; top: ").concat(channelNum * data.height, "px; left: ").concat(startX, "px; position: absolute; margin: 0; padding: 0; z-index: 1;")
+          if (_this3.fadeIn) {
+            var fadeWidth = (0,_utils_conversions__WEBPACK_IMPORTED_MODULE_10__.secondsToPixels)(_this3.fadeIn.end - _this3.fadeIn.start, data.resolution, data.sampleRate);
+            channelChildren.push(virtual_dom_h__WEBPACK_IMPORTED_MODULE_7___default()('div.wp-fade.wp-fadein', {
+              attributes: {
+                style: "position: absolute; height: ".concat(data.height, "px; width: ").concat(fadeWidth, "px; top: 0; left: 0; z-index: 4;")
+              }
+            }, [virtual_dom_h__WEBPACK_IMPORTED_MODULE_7___default()('canvas', {
+              attributes: {
+                width: fadeWidth,
+                height: data.height
+              },
+              hook: new _render_FadeCanvasHook__WEBPACK_IMPORTED_MODULE_13__.default(_this3.fadeIn.type, _this3.fadeIn.shape, _this3.fadeIn.end - _this3.fadeIn.start, data.resolution)
+            })]));
           }
-        }, channelChildren);
-      });
-      waveformChildren.push(channels);
+
+          if (_this3.fadeOut) {
+            var _fadeWidth = (0,_utils_conversions__WEBPACK_IMPORTED_MODULE_10__.secondsToPixels)(_this3.fadeOut.end - _this3.fadeOut.start, data.resolution, data.sampleRate);
+
+            channelChildren.push(virtual_dom_h__WEBPACK_IMPORTED_MODULE_7___default()('div.wp-fade.wp-fadeout', {
+              attributes: {
+                style: "position: absolute; height: ".concat(data.height, "px; width: ").concat(_fadeWidth, "px; top: 0; right: 0; z-index: 4;")
+              }
+            }, [virtual_dom_h__WEBPACK_IMPORTED_MODULE_7___default()('canvas', {
+              attributes: {
+                width: _fadeWidth,
+                height: data.height
+              },
+              hook: new _render_FadeCanvasHook__WEBPACK_IMPORTED_MODULE_13__.default(_this3.fadeOut.type, _this3.fadeOut.shape, _this3.fadeOut.end - _this3.fadeOut.start, data.resolution)
+            })]));
+          }
+
+          return virtual_dom_h__WEBPACK_IMPORTED_MODULE_7___default()("div.channel.channel-".concat(channelNum), {
+            attributes: {
+              style: "height: ".concat(data.height, "px; width: ").concat(width, "px; top: ").concat(channelNum * data.height, "px; left: ").concat(startX, "px; position: absolute; margin: 0; padding: 0; z-index: 1;")
+            }
+          }, channelChildren);
+        });
+        waveformChildren.push(channels);
+      }
+
       waveformChildren.push(this.renderOverlay(data));
       waveformChildren.push(this.renderFileInputOverlay(data)); // draw cursor selection on active track.
 

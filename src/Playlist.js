@@ -849,6 +849,10 @@ export default class {
       }
     }
 
+    if (track.isUnloadedTrack) {
+      shouldPlay = false;
+    }
+
     return shouldPlay;
   }
 

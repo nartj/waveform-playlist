@@ -290,7 +290,7 @@ export default class {
   }
 
   isPlaying() {
-    return this.playout.isPlaying();
+    return this.playout ? this.playout.isPlaying() : false;
   }
 
   setShouldPlay(bool) {
@@ -319,6 +319,10 @@ export default class {
     is either stopped or plays out naturally.
   */
   schedulePlay(now, startTime, endTime, config) {
+    if (this.isUnloadedTrack) {
+      return null;
+    }
+
     let start;
     let duration;
     let when = now;
@@ -410,7 +414,7 @@ export default class {
   }
 
   scheduleStop(when = 0) {
-    this.playout.stop(when);
+    if (this.playout) this.playout.stop(when);
   }
 
   renderOverlay(data) {

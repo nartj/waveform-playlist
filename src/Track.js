@@ -447,21 +447,12 @@ export default class {
         attributes: {
           style: `position: relative; display:flex; align-items: center; 
           justify-content:center; height: 100%; width: ${channelPixels}px; 
-          z-index: 9; background-color:rgba(220, 220, 220, 0.5);`,
+          z-index: 9;`,
         },
       };
 
-      return h(`div.playlist-overlay-input-file`, config,
-        [
-          h('label.btn.btn-info', { for: 'reload-track' },
-            [
-              h("span", { title: 'Reload this track' }, ['Reload']),
-              h(`input.btn-reload`,
-                { type: 'file', accept: 'audio/*',style: { display: 'none' }, name: `${this.taggedName}`, id: `${this.id}` }
-              )
-            ])
-        ]
-      );
+      return h(`div.playlist-overlay-unloaded-track.greyed-out`, config,
+        [h("i.gg-danger", {attributes: { title: 'Reload the track'}}, [])]);
     }
   }
 
@@ -469,8 +460,10 @@ export default class {
     const muteClass = data.muted ? '.active' : '';
     const soloClass = data.soloed ? '.active' : '';
     const numChan = this.peaks ? this.peaks.data.length : this.peakData.mono ? 1 : 2;
+    const displayReloadBtn = this.isUnloadedTrack ? '' : '.hide';
+    const greyedOut = this.isUnloadedTrack ? '.greyed-out' : '';
 
-    return h('div.controls',
+    return h(`div.controls${greyedOut}`,
       {
         attributes: {
           style: `height: ${numChan * data.height}px; width: ${data.controls.width}px; position: absolute; left: 0; z-index: 10;`,
@@ -517,7 +510,7 @@ export default class {
             },
           }),
         ]),
-        h('label', [
+        h('label.slider', [
           h('input.volume-slider', {
             attributes: {
               type: 'range',
@@ -532,6 +525,14 @@ export default class {
           }),
         ],
         ),
+        h(`label.btn.btn-danger${displayReloadBtn}`,
+          {attributes: { style: "width: 50%;"} }, [
+            h("span", { title: 'Reload this track' }, ['Reload']),
+            h(`input.btn-reload`,
+              { type: 'file', accept: 'audio/*',style: { display: 'none' },
+                name: `${this.taggedName}`, id: `${this.id}` }
+            )
+          ]),
       ],
     );
   }

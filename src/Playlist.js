@@ -207,9 +207,30 @@ export default class {
       this.tracks = [];
       const r = new FileReader();
       const self = this;
+
+      const srcTrackDeserializer = function(playlist) {
+        for (let i = 0; i < playlist.length; i++) {
+          if (playlist[i].srcTrack) {
+            playlist[i].srcTrack = playlist.find((t) => t.id === playlist[i].id);
+          }
+        }
+        return playlist;
+      }
+
+      const trackDeserializer = function(key, value) {
+        switch (key) {
+          case 'fadeIn':
+          case 'fadeOut':
+            value.duration = value.end - value.start;
+            return value;
+          default:
+            return value;
+        }
+      }
+
       r.onloadend = function() {
-        let playlist = JSON.parse(r.result);
-        self.load(playlist.tracks);
+        let playlist = srcTrackDeserializer(JSON.parse(r.result, trackDeserializer));
+        self.load(playlist);
       };
       r.readAsBinaryString(file);
     });
@@ -243,20 +264,36 @@ export default class {
     });
 
     ee.on('save', () => {
-      const getCircularReplacer = () => {
-        const seen = new WeakSet();
-        return (key, value) => {
-          if (typeof value === "object" && value !== null) {
-            if (seen.has(value)) {
-              return;
-            }
-            seen.add(value);
-          }
-          return value;
-        };
-      };
+      const self = this;
+      let currentId;
+      let currentTrack;
 
-      const blob = new Blob([JSON.stringify(this, getCircularReplacer())], {type: "text/plain;charset=utf-8"});
+      const trackSerializer = function(key, value) {
+        switch (key) {
+          case 'peaks':
+          case 'buffer':
+          case 'ee':
+          case 'playout':
+          case 'ac':
+          case 'fades':
+          case 'stateObj':
+            return undefined;
+          case 'id':
+            currentId = value;
+            currentTrack = self.tracks.find((t) => t.id === currentId);
+            return value;
+          case 'fadeIn':
+          case 'fadeOut':
+            return currentTrack.fades[value];
+          case 'srcTrack':
+            return currentTrack.srcTrack ? currentTrack.srcTrack.id : undefined;
+          default:
+            return value;
+        }
+      }
+
+      const blob = new Blob([JSON.stringify(this.tracks,
+        trackSerializer)], {type: "text/plain;charset=utf-8"});
       FileSaver.saveAs(blob, "playlist.json");
     });
 
@@ -524,8 +561,8 @@ export default class {
         const muted = info.muted || false;
         const soloed = info.soloed || false;
         const selection = info.selected;
-        const peaks = info.peaks || { type: 'WebAudio', mono: this.mono };
-        const peakData = info.peakData || undefined;
+        const peaks = info.peaks;
+        const peakData = info.peakData || { type: 'WebAudio', mono: this.mono };
         const customClass = info.customClass || undefined;
         const waveOutlineColor = info.waveOutlineColor || undefined;
         const stereoPan = info.stereoPan || 0;
@@ -542,8 +579,7 @@ export default class {
         track.setSrc(info.src);
         track.setBuffer(audioBuffer);
         track.setSrcTrack(trck);
-        track.setDuplicationNumber(trck === undefined ?
-            duplicationNumber : trck.srcTrack === undefined ?
+        track.setDuplicationNumber(!trck ? duplicationNumber : !trck.srcTrack ?
                 trck.duplicationNumber + 1 : trck.srcTrack.duplicationNumber + 1);
         track.setName(name);
         track.setTaggedName(taggedName);
@@ -554,35 +590,12 @@ export default class {
         track.setWaveOutlineColor(waveOutlineColor);
         track.isUnloadedTrack = isUnloadedTrack;
 
-        // Transform playlist fades is loaded from Json
-        if ((fadeIn !== undefined && fadeIn.duration === undefined) ||
-          (fadeOut !== undefined && fadeOut.duration === undefined)) {
-          let fades = [];
-          for (const value of Object.values(info.fades)) {
-            fades.push(value);
-          }
-
-          if (fadeIn) {
-            fadeIn = fades[0];
-            fadeIn.duration = fadeIn.end - fadeIn.start;
-          } else {
-            fadeIn = undefined;
-          }
-
-          if (fadeOut) {
-            fadeOut = fades[fadeIn ? 1 : 0];
-            fadeOut.duration = fadeOut.end - fadeOut.start;
-          } else {
-            fadeOut = undefined;
-          }
-        }
-
         if (fadeIn !== undefined) {
-          track.setFadeIn(fadeIn.duration, fadeIn.shape);
+          track.setFadeIn(fadeIn.duration ? fadeIn.duration : fadeIn.end - fadeIn.start, fadeIn.shape);
         }
 
         if (fadeOut !== undefined) {
-          track.setFadeOut(fadeOut.duration, fadeOut.shape);
+          track.setFadeOut(fadeOut.duration ? fadeOut.duration : fadeOut.end - fadeOut.start, fadeOut.shape);
         }
 
         if (selection !== undefined) {
@@ -1173,5 +1186,9 @@ export default class {
     });
 
     return info;
+  }
+
+  isReloadNeeded() {
+    return this.tracks.find((t) => t.isUnloadedTrack) !== undefined;
   }
 }

@@ -20,13 +20,15 @@ const MAX_CANVAS_WIDTH = 1000;
 export default class {
 
   constructor() {
-    this.name = 'Untitled';
     this.id = 'i' + uuid(); // must start with a letter to be a valid css id
+    this.name = 'Untitled';
     this.taggedName = this.name;
     this.customClass = undefined;
     this.waveOutlineColor = undefined;
     this.gain = 1;
     this.fades = {};
+    this.fadeIn = undefined;
+    this.fadeOut = undefined;
     this.peakData = {
       type: 'WebAudio',
       mono: false,
@@ -230,15 +232,15 @@ export default class {
 
   saveFade(type, shape, start, end) {
     const id = uuid();
-
-    this.fades[id] = {
+    const fade = {
+      id,
       type,
       shape,
       start,
       end,
-    };
-
-    return id;
+    }
+    this.fades[id] = fade;
+    return fade;
   }
 
   removeFade(id) {
@@ -466,7 +468,7 @@ export default class {
   renderControls(data) {
     const muteClass = data.muted ? '.active' : '';
     const soloClass = data.soloed ? '.active' : '';
-    const numChan = this.peaks.data.length;
+    const numChan = this.peaks ? this.peaks.data.length : this.peakData.mono ? 1 : 2;
 
     return h('div.controls',
       {
@@ -528,18 +530,19 @@ export default class {
               this.ee.emit('volumechange', e.target.value, this);
             },
           }),
-        ]),
+        ],
+        ),
       ],
     );
   }
 
   render(data) {
-    const width = this.peaks.length;
+    const width = this.peaks ? this.peaks.length : 0;
     const playbackX = secondsToPixels(data.playbackSeconds, data.resolution, data.sampleRate);
     const startX = secondsToPixels(this.startTime, data.resolution, data.sampleRate);
     const endX = secondsToPixels(this.endTime, data.resolution, data.sampleRate);
     let progressWidth = 0;
-    const numChan = this.peaks.data.length;
+    const numChan = this.peaks ? this.peaks.data.length : this.peakData.mono ? 1 : 2;
     const oldScale = this.scale;
     this.scale = window.devicePixelRatio;
 
@@ -559,112 +562,113 @@ export default class {
       }),
     ];
 
-    const channels = Object.keys(this.peaks.data).map((channelNum) => {
-      const channelChildren = [
-        h('div.channel-progress', {
-          attributes: {
-            style: `position: absolute; width: ${progressWidth}px; height: ${data.height}px; z-index: 2;`,
-          },
-        }),
-      ];
-      let offset = 0;
-      let totalWidth = width;
-      const peaks = this.peaks.data[channelNum];
-
-      while (totalWidth > 0) {
-        const currentWidth = Math.min(totalWidth, MAX_CANVAS_WIDTH);
-        const canvasColor = this.waveOutlineColor
-          ? this.waveOutlineColor
-          : data.colors.waveOutlineColor;
-
-        channelChildren.push(h('canvas', {
-          attributes: {
-            width: currentWidth * this.scale,
-            height: data.height * this.scale,
-            style: `float: left; position: relative; margin: 0; padding: 0; z-index: 3; width: ${currentWidth}px; height: ${data.height}px;`,
-          },
-          hook: new CanvasHook(peaks, offset, this.peaks.bits, canvasColor, this.scale, this.scale !== oldScale),
-        }));
-
-        totalWidth -= currentWidth;
-        offset += MAX_CANVAS_WIDTH;
-      }
-
-      // if there are fades, display them.
-      if (this.fadeIn) {
-        const fadeIn = this.fades[this.fadeIn];
-        const fadeWidth = secondsToPixels(
-          fadeIn.end - fadeIn.start,
-          data.resolution,
-          data.sampleRate,
-        );
-
-        channelChildren.push(h('div.wp-fade.wp-fadein',
-          {
+    if (this.peaks) {
+      const channels = Object.keys(this.peaks.data).map((channelNum) => {
+        const channelChildren = [
+          h('div.channel-progress', {
             attributes: {
-              style: `position: absolute; height: ${data.height}px; width: ${fadeWidth}px; top: 0; left: 0; z-index: 4;`,
+              style: `position: absolute; width: ${progressWidth}px; height: ${data.height}px; z-index: 2;`,
             },
-          }, [
-            h('canvas',
-              {
+          }),
+        ];
+        let offset = 0;
+        let totalWidth = width;
+        const peaks = this.peaks.data[channelNum];
+
+        while (totalWidth > 0) {
+          const currentWidth = Math.min(totalWidth, MAX_CANVAS_WIDTH);
+          const canvasColor = this.waveOutlineColor
+            ? this.waveOutlineColor
+            : data.colors.waveOutlineColor;
+
+          channelChildren.push(h('canvas', {
+            attributes: {
+              width: currentWidth * this.scale,
+              height: data.height * this.scale,
+              style: `float: left; position: relative; margin: 0; padding: 0; z-index: 3; width: ${currentWidth}px; height: ${data.height}px;`,
+            },
+            hook: new CanvasHook(peaks, offset, this.peaks.bits, canvasColor, this.scale, this.scale !== oldScale),
+          }));
+
+          totalWidth -= currentWidth;
+          offset += MAX_CANVAS_WIDTH;
+        }
+
+        // if there are fades, display them.
+        if (this.fadeIn) {
+          const fadeWidth = secondsToPixels(
+            this.fadeIn.end - this.fadeIn.start,
+            data.resolution,
+            data.sampleRate,
+          );
+
+          channelChildren.push(h('div.wp-fade.wp-fadein',
+            {
+              attributes: {
+                style: `position: absolute; height: ${data.height}px; width: ${fadeWidth}px; top: 0; left: 0; z-index: 4;`,
+              },
+            }, [
+              h('canvas',
+                {
+                  attributes: {
+                    width: fadeWidth,
+                    height: data.height,
+                  },
+                  hook: new FadeCanvasHook(
+                    this.fadeIn.type,
+                    this.fadeIn.shape,
+                    this.fadeIn.end - this.fadeIn.start,
+                    data.resolution,
+                  ),
+                },
+              ),
+            ],
+          ));
+        }
+
+        if (this.fadeOut) {
+          const fadeWidth = secondsToPixels(
+            this.fadeOut.end - this.fadeOut.start,
+            data.resolution,
+            data.sampleRate,
+          );
+
+          channelChildren.push(h('div.wp-fade.wp-fadeout',
+            {
+              attributes: {
+                style: `position: absolute; height: ${data.height}px; width: ${fadeWidth}px; top: 0; right: 0; z-index: 4;`,
+              },
+            },
+            [
+              h('canvas', {
                 attributes: {
                   width: fadeWidth,
                   height: data.height,
                 },
                 hook: new FadeCanvasHook(
-                  fadeIn.type,
-                  fadeIn.shape,
-                  fadeIn.end - fadeIn.start,
+                  this.fadeOut.type,
+                  this.fadeOut.shape,
+                  this.fadeOut.end - this.fadeOut.start,
                   data.resolution,
                 ),
-              },
-            ),
-          ],
-        ));
-      }
+              }),
+            ],
+          ));
+        }
 
-      if (this.fadeOut) {
-        const fadeOut = this.fades[this.fadeOut];
-        const fadeWidth = secondsToPixels(
-          fadeOut.end - fadeOut.start,
-          data.resolution,
-          data.sampleRate,
-        );
-
-        channelChildren.push(h('div.wp-fade.wp-fadeout',
+        return h(`div.channel.channel-${channelNum}`,
           {
             attributes: {
-              style: `position: absolute; height: ${data.height}px; width: ${fadeWidth}px; top: 0; right: 0; z-index: 4;`,
+              style: `height: ${data.height}px; width: ${width}px; top: ${channelNum * data.height}px; left: ${startX}px; position: absolute; margin: 0; padding: 0; z-index: 1;`,
             },
           },
-          [
-            h('canvas', {
-              attributes: {
-                width: fadeWidth,
-                height: data.height,
-              },
-              hook: new FadeCanvasHook(
-                fadeOut.type,
-                fadeOut.shape,
-                fadeOut.end - fadeOut.start,
-                data.resolution,
-              ),
-            }),
-          ],
-        ));
-      }
+          channelChildren,
+        );
+      });
 
-      return h(`div.channel.channel-${channelNum}`,
-        {
-          attributes: {
-            style: `height: ${data.height}px; width: ${width}px; top: ${channelNum * data.height}px; left: ${startX}px; position: absolute; margin: 0; padding: 0; z-index: 1;`,
-          },
-        },
-        channelChildren,
-      );
-    });
+      waveformChildren.push(channels);
+    }
 
-    waveformChildren.push(channels);
     waveformChildren.push(this.renderOverlay(data));
     waveformChildren.push(this.renderFileInputOverlay(data));
 

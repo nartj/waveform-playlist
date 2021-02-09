@@ -133,9 +133,10 @@ $container.on('click', '.btn-save', () => {
   ee.emit('save');
 });
 
-$container.on('change', '.btn-load', () => {
+$container.on('change', '.btn-load', (e) => {
   const files = $('.btn-load').prop('files');
   ee.emit('load', files[0]);
+  document.getElementById(e.target.id).value = null;
 });
 
 $container.on('change', '.btn-reload', (e) => {

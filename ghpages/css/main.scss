@@ -42,10 +42,15 @@ footer {
   display: none !important;
 }
 
-//.greyed-out {
-//  background-color:rgba(220, 220, 220, 1) !important;
-//  z-index: -1;
-//}
+.greyed-out {
+  background-color: #d4d4d4 !important;
+  z-index: -1;
+}
+
+.light-greyed-out {
+  background-color:rgba(220, 220, 220, 0.5) !important;
+  z-index: -1;
+}
 
 .gg-danger {
   box-sizing: border-box;

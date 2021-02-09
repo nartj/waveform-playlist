@@ -455,7 +455,7 @@ export default class {
         },
       };
 
-      return h(`div.playlist-overlay-unloaded-track.greyed-out`, config,
+      return h(`div.playlist-overlay-unloaded-track.light-greyed-out`, config,
         [h("i.gg-danger", {attributes: { title: 'Reload the track'}}, [])]);
     }
   }
